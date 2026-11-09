@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 """
 Genera cancionero_web_precise.html interactivo y autónomo (sin dependencias).
-Reproduce con fidelidad visual idéntica la tipografía y posición del PDF:
-- Fuente Google DM Sans (la misma tipografía del cancionero original).
-- Color de acordes verde #285628 idéntico al PDF.
-- Cada acorde anclado sobre su carácter con offset sub-carácter exacto (em) y sin alterar el kerning de las palabras.
-- Líneas de solo letra sin fila vacía de acordes (espaciado vertical idéntico al PDF).
+Estructura de categorías tradicional MJP:
+- Cantos Litúrgicos: Entradas, Penitenciales, Gloria, Aleluya, Ofertorio, Santo, Padre Nuestro, Cordero, Comunión, Meditación, Salida
+- Varios
+- Movimiento
+- Bajadas (Agrupadas por año, próximamente a definir)
 """
 
 import json
@@ -15,6 +15,11 @@ from pathlib import Path
 
 DATA_PATH = Path("cancionero_vite.json")
 OUT_HTML = Path("cancionero_web_precise.html")
+
+LITURGICAS = [
+    "Entradas", "Penitenciales", "Gloria", "Aleluya", "Ofertorio",
+    "Santo", "Padre Nuestro", "Cordero", "Comunión", "Meditación", "Salida"
+]
 
 
 def escape(s):
@@ -26,23 +31,6 @@ def main():
     canciones = data["canciones"]
     total = data["total_canciones"]
     total_acordes = data["total_acordes"]
-
-    orden_liturgico = [
-        "Todas", "Entradas", "Penitenciales", "Gloria", "Aleluya",
-        "Ofertorio", "Santo", "Padre nuestro", "Cordero",
-        "Comunión", "Meditación", "Salida", "Varios", "Bajadas"
-    ]
-
-    cats_presentes = set(c["categoria"] for c in canciones)
-    cats_ordenadas = [c for c in orden_liturgico if c == "Todas" or c in cats_presentes]
-    for c in sorted(cats_presentes):
-        if c not in cats_ordenadas:
-            cats_ordenadas.append(c)
-
-    chips_html = "".join(
-        f'<button class="chip {"activo" if cat == "Todas" else ""}" data-cat="{escape(cat)}">{escape(cat)}</button>'
-        for cat in cats_ordenadas
-    )
 
     canciones_html = []
     for c in canciones:
@@ -88,19 +76,34 @@ def main():
 
             lineas_html.append('<div class="renglon con-acordes">' + "".join(segs_html) + '</div>')
 
-        badge_bajada = 'bajada' if c['categoria'] == 'Bajadas' or c.get('codigo_oasis') else ''
-        oasis_badge = f'<span class="badge oasis">{escape(c["codigo_oasis"])}</span>' if c.get('codigo_oasis') else ''
-        subtitulo_html = f'<div class="subtitulo">{escape(c["subtitulo"])}</div>' if c.get('subtitulo') else ''
+        seccion = c.get("seccion", "Varios")
+        categoria = c.get("categoria", "Varios")
+
+        badge_class = "liturgico"
+        badge_label = f"Litúrgico · {categoria}"
+        if seccion == "Movimiento":
+            badge_class = "movimiento"
+            badge_label = "Movimiento"
+        elif seccion == "Bajadas":
+            badge_class = "bajada"
+            badge_label = "Bajada"
+        elif seccion == "Varios":
+            badge_class = "varios"
+            badge_label = "Varios"
+
+        badge_cat = f'<span class="badge {badge_class}">{escape(badge_label)}</span>'
+        oasis_badge = f'<span class="badge oasis">{escape(c["codigo_oasis"])}</span>' if c.get("codigo_oasis") else ''
+        subtitulo_html = f'<div class="subtitulo">{escape(c["subtitulo"])}</div>' if c.get("subtitulo") else ''
 
         canciones_html.append(f'''
-        <article class="cancion" data-id="{c['id']}" data-cat="{escape(c['categoria'])}" data-tit="{escape(c['titulo'].lower())}" data-oasis="{escape((c.get('codigo_oasis') or '').lower())}">
+        <article class="cancion" data-id="{c['id']}" data-sec="{escape(seccion)}" data-cat="{escape(categoria)}" data-tit="{escape(c['titulo'].lower())}" data-oasis="{escape((c.get('codigo_oasis') or '').lower())}">
           <header class="cancion-head">
             <div>
               <h2 class="cancion-titulo">{escape(c['titulo'])}</h2>
               {subtitulo_html}
             </div>
             <div class="cancion-badges">
-              <span class="badge {badge_bajada}">{escape(c['categoria'])}</span>
+              {badge_cat}
               {oasis_badge}
               <span class="badge pag">pág. {c['pagina_origen']}</span>
             </div>
@@ -120,12 +123,17 @@ def main():
         </article>
         ''')
 
+    subchips_liturgia = "".join(
+        f'<button class="chip chip-sub" data-subcat="{escape(cat)}">{escape(cat)}</button>'
+        for cat in LITURGICAS
+    )
+
     html_content = f'''<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cancionero MJP ({total} canciones) — Acordes de Alta Precisión</title>
+  <title>Cancionero MJP ({total} canciones) — Categorías Tradicionales</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
@@ -153,7 +161,7 @@ def main():
       margin: 0 auto 1.5rem;
     }}
     .header-main h1 {{
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 700;
       color: #0f172a;
       letter-spacing: -0.02em;
@@ -165,11 +173,11 @@ def main():
     }}
     .stats-bar {{
       display: inline-flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       background: #eff6ff;
       border: 1px solid #bfdbfe;
       color: #1e40af;
-      padding: 0.35rem 1rem;
+      padding: 0.35rem 1.1rem;
       border-radius: 999px;
       font-size: 0.82rem;
       font-weight: 600;
@@ -177,16 +185,16 @@ def main():
     }}
 
     .controls {{
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.85rem;
       align-items: center;
     }}
     .search-box {{
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       padding: 0.7rem 1.1rem;
       border-radius: 0.75rem;
       border: 1px solid #cbd5e1;
@@ -200,32 +208,83 @@ def main():
       border-color: #2563eb;
       box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
     }}
-    .filtros {{
+
+    /* Filtros por Secciones Principales */
+    .filtros-secciones {{
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.5rem;
       justify-content: center;
     }}
-    .chip {{
+    .tab-sec {{
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      font-family: var(--font-family);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.45rem 1rem;
+      border-radius: 0.6rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }}
+    .tab-sec:hover {{
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }}
+    .tab-sec.activo {{
+      background: #1e3a8a;
+      color: #ffffff;
+      border-color: #1e3a8a;
+    }}
+
+    /* Subfiltros Litúrgicos */
+    .filtros-subliturgia {{
+      display: none;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      justify-content: center;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.6rem;
+      max-width: 820px;
+    }}
+    .filtros-subliturgia.visible {{
+      display: flex;
+    }}
+    .chip-sub {{
       background: #ffffff;
       border: 1px solid #cbd5e1;
       color: #475569;
       font-family: var(--font-family);
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      padding: 0.35rem 0.85rem;
+      padding: 0.25rem 0.65rem;
       border-radius: 999px;
       cursor: pointer;
-      transition: all 0.15s ease;
     }}
-    .chip:hover {{
-      background: #f1f5f9;
-      border-color: #94a3b8;
+    .chip-sub:hover {{
+      background: #e2e8f0;
     }}
-    .chip.activo {{
-      background: #1e3a8a;
+    .chip-sub.activo {{
+      background: #2563eb;
       color: #ffffff;
-      border-color: #1e3a8a;
+      border-color: #2563eb;
+    }}
+
+    .bajada-nota {{
+      display: none;
+      font-size: 0.8rem;
+      color: #701a75;
+      background: #fdf4ff;
+      border: 1px solid #f5d0fe;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }}
+    .bajada-nota.visible {{
+      display: inline-block;
     }}
 
     .grid {{
@@ -277,15 +336,31 @@ def main():
       background: #f1f5f9;
       color: #475569;
     }}
+    .badge.liturgico {{
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }}
+    .badge.movimiento {{
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }}
     .badge.bajada {{
       background: #fdf4ff;
       color: #86198f;
       border: 1px solid #f5d0fe;
     }}
+    .badge.varios {{
+      background: #f8fafc;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }}
     .badge.oasis {{
       background: #f0fdf4;
       color: #166534;
       border: 1px solid #bbf7d0;
+      font-weight: 700;
     }}
     .badge.pag {{
       color: #94a3b8;
@@ -326,7 +401,6 @@ def main():
       text-align: center;
     }}
 
-    /* Cuerpo musical con proporción 1:1 respecto al PDF (DM Sans 12pt) */
     .cancion-cuerpo {{
       font-family: var(--font-family);
       font-size: 16px;
@@ -385,23 +459,43 @@ def main():
       line-height: 1.35;
       white-space: pre;
     }}
+    .vacio {{
+      text-align: center;
+      padding: 3rem;
+      color: #64748b;
+      font-size: 1.1rem;
+    }}
   </style>
 </head>
 <body>
   <header class="header-main">
     <h1>Cancionero MJP</h1>
-    <p>Visualización idéntica al cancionero impreso · Tipografía DM Sans y acordes alineados por coordenadas</p>
+    <p>Categorías tradicionales · Tipografía DM Sans y acordes con alineación milimétrica</p>
     <div class="stats-bar">
       <span>{total} canciones</span>
       <span>{total_acordes} acordes</span>
-      <span>13 categorías</span>
+      <span>Cantos Litúrgicos (82) · Varios (128) · Movimiento (14) · Bajadas (64)</span>
     </div>
   </header>
 
   <div class="controls">
     <input type="text" id="buscador" class="search-box" placeholder="Buscar por título, letra o código Oasis (ej: O.308, Cristo joven, pan)...">
-    <div class="filtros" id="filtros-container">
-      {chips_html}
+    
+    <div class="filtros-secciones" id="filtros-secciones">
+      <button class="tab-sec activo" data-sec="Todas">Todas (288)</button>
+      <button class="tab-sec" data-sec="Cantos Litúrgicos">Cantos Litúrgicos (82)</button>
+      <button class="tab-sec" data-sec="Varios">Varios (128)</button>
+      <button class="tab-sec" data-sec="Movimiento">Movimiento (14)</button>
+      <button class="tab-sec" data-sec="Bajadas">Bajadas (64)</button>
+    </div>
+
+    <div class="filtros-subliturgia" id="filtros-subliturgia">
+      <button class="chip-sub activo" data-subcat="Todas">Todas las litúrgicas</button>
+      {subchips_liturgia}
+    </div>
+
+    <div class="bajada-nota" id="bajada-nota">
+      Bajadas: agrupadas por año, próximamente a definir
     </div>
   </div>
 
@@ -461,32 +555,67 @@ def main():
       }});
     }}
 
-    const chips = document.querySelectorAll('.chip');
+    const secTabs = document.querySelectorAll('.tab-sec');
+    const subChips = document.querySelectorAll('.chip-sub');
+    const subLiturgiaBox = document.getElementById('filtros-subliturgia');
+    const bajadaNota = document.getElementById('bajada-nota');
     const cards = document.querySelectorAll('.cancion');
     const buscador = document.getElementById('buscador');
 
+    let currentSec = 'Todas';
+    let currentSub = 'Todas';
+
     function applyFilter() {{
-      const activeChip = document.querySelector('.chip.activo');
-      const cat = activeChip ? activeChip.getAttribute('data-cat') : 'Todas';
       const q = buscador.value.trim().toLowerCase();
 
       cards.forEach(card => {{
+        const cardSec = card.getAttribute('data-sec');
         const cardCat = card.getAttribute('data-cat');
         const cardTit = card.getAttribute('data-tit');
         const cardOasis = card.getAttribute('data-oasis');
         const textContent = card.querySelector('.cancion-cuerpo').textContent.toLowerCase();
 
-        const matchCat = (cat === 'Todas') || (cardCat === cat) || (cat === 'Bajadas' && cardOasis);
+        let matchSec = (currentSec === 'Todas') || (cardSec === currentSec);
+        if (currentSec === 'Cantos Litúrgicos' && currentSub !== 'Todas') {{
+          matchSec = (cardCat === currentSub);
+        }}
+
         const matchSearch = !q || cardTit.includes(q) || cardOasis.includes(q) || textContent.includes(q);
 
-        card.style.display = (matchCat && matchSearch) ? '' : 'none';
+        card.style.display = (matchSec && matchSearch) ? '' : 'none';
       }});
     }}
 
-    chips.forEach(chip => {{
+    secTabs.forEach(tab => {{
+      tab.addEventListener('click', () => {{
+        secTabs.forEach(t => t.classList.remove('activo'));
+        tab.classList.add('activo');
+        currentSec = tab.getAttribute('data-sec');
+
+        if (currentSec === 'Cantos Litúrgicos') {{
+          subLiturgiaBox.classList.add('visible');
+        }} else {{
+          subLiturgiaBox.classList.remove('visible');
+          currentSub = 'Todas';
+          subChips.forEach(c => c.classList.remove('activo'));
+          if (subChips[0]) subChips[0].classList.add('activo');
+        }}
+
+        if (currentSec === 'Bajadas') {{
+          bajadaNota.classList.add('visible');
+        }} else {{
+          bajadaNota.classList.remove('visible');
+        }}
+
+        applyFilter();
+      }});
+    }});
+
+    subChips.forEach(chip => {{
       chip.addEventListener('click', () => {{
-        chips.forEach(c => c.classList.remove('activo'));
+        subChips.forEach(c => c.classList.remove('activo'));
         chip.classList.add('activo');
+        currentSub = chip.getAttribute('data-subcat');
         applyFilter();
       }});
     }});

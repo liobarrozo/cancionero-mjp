@@ -4,11 +4,22 @@
 Extracción geométrica determinista de alta fidelidad:
 PDF "CANCIONERO MJP - final imprimir.pdf" -> JSON estructurado y ChordPro.
 
-Garantiza:
-1. Fusión de fragmentos de la misma línea horizontal (separados por TABs en el PDF).
-2. Reconstrucción de espacios reales por coordenada X (resolviendo tabulaciones internas e indentaciones).
-3. Anclaje milimétrico de cada acorde al carácter inferior + offset sub-carácter en em.
-4. Manejo de líneas de acordes partidas por salto de línea automático o cambio de columna.
+Estructura de categorías tradicional MJP:
+1. Cantos Litúrgicos:
+   - Entradas
+   - Penitenciales
+   - Gloria
+   - Aleluya
+   - Ofertorio
+   - Santo
+   - Padre Nuestro
+   - Cordero
+   - Comunión
+   - Meditación
+   - Salida
+2. Varios
+3. Movimiento
+4. Bajadas (con códigos O.xxx, agrupadas por año próximamente a definir)
 """
 
 import fitz
@@ -23,6 +34,11 @@ OUT_VITE = Path("cancionero_vite.json")
 OUT_VITE_SRC = Path("src/data/cancionero.json")
 
 SPACE_W = 3.05  # Ancho de espacio en DM Sans 12pt (puntos PDF)
+
+LITURGICAS = [
+    "Entradas", "Penitenciales", "Gloria", "Aleluya", "Ofertorio",
+    "Santo", "Padre Nuestro", "Cordero", "Comunión", "Meditación", "Salida"
+]
 
 
 def span_text(s):
@@ -276,6 +292,9 @@ def parse_index(doc):
             line = line.strip()
             if not line or line == 'ÍNDICE':
                 continue
+            if line == 'Movimiento':
+                current_cat = 'Movimiento'
+                continue
             m = re.match(r'^(.*?)\s*[\.\s\u2008]+\s*(\d+)$', line)
             if m:
                 t = m.group(1).strip()
@@ -291,21 +310,38 @@ def parse_index(doc):
                         ]
                     )
                 ):
-                    current_cat = t
+                    current_cat = "Padre Nuestro" if t.lower() == "padre nuestro" else t
                 else:
                     clean_t = re.sub(r'\s+', ' ', t).strip()
                     categories[clean_t.upper()] = current_cat
     return categories
 
 
-def find_category(title, index_categories, page_cat):
+def find_category_and_section(title, index_categories, page_cat, oasis_code):
+    if oasis_code:
+        return "Bajadas", "Bajadas"
+
     norm = re.sub(r'\s+', ' ', title).strip().upper()
+    cat = None
     if norm in index_categories:
-        return index_categories[norm]
-    for k, v in index_categories.items():
-        if k in norm or norm in k:
-            return v
-    return page_cat or "Varios"
+        cat = index_categories[norm]
+    else:
+        for k, v in index_categories.items():
+            if k in norm or norm in k:
+                cat = v
+                break
+
+    if not cat:
+        cat = page_cat or "Varios"
+
+    if cat in LITURGICAS:
+        return cat, "Cantos Litúrgicos"
+    elif cat == "Movimiento":
+        return "Movimiento", "Movimiento"
+    elif cat == "Bajadas":
+        return "Bajadas", "Bajadas"
+    else:
+        return "Varios", "Varios"
 
 
 def main():
@@ -401,6 +437,8 @@ def main():
                     current_song['subtitulo'] = text
                     if re.match(r'^[O0]\.\d+', text):
                         current_song['codigo_oasis'] = text.split()[0].replace('0.', 'O.')
+                        current_song['categoria'] = "Bajadas"
+                        current_song['seccion'] = "Bajadas"
                     idx += 1
                     continue
 
@@ -428,9 +466,7 @@ def main():
                     oasis = m.group(1).replace('0.', 'O.')
                     clean_title = full_title[:m.start()].strip()
 
-                cat = find_category(clean_title, index_categories, current_page_cat)
-                if oasis:
-                    cat = "Bajadas"
+                cat, seccion = find_category_and_section(clean_title, index_categories, current_page_cat, oasis)
 
                 current_song = {
                     'id': len(songs) + 1,
@@ -438,6 +474,7 @@ def main():
                     'subtitulo': None,
                     'codigo_oasis': oasis,
                     'categoria': cat,
+                    'seccion': seccion,
                     'pagina_origen': p_idx + 1,
                     'raw_lines': [],
                 }
@@ -472,7 +509,6 @@ def main():
                 chords = extract_chord_tokens(line)
                 total_chords += len(chords)
 
-                # Caso 1: Línea de acordes seguida de línea de letra en la misma columna (o al cambiar de columna)
                 next_is_paired_lyric = (
                     i + 1 < len(raw)
                     and not line_is_chords(raw[i + 1])
@@ -495,8 +531,6 @@ def main():
                     i += 2
                     continue
 
-                # Caso 2: Dos líneas de acordes consecutivas (ej. salto de línea automático del acorde final)
-                # seguidas de 1 o 2 líneas de letra
                 if (
                     i + 2 < len(raw)
                     and line_is_chords(raw[i + 1])
@@ -508,7 +542,6 @@ def main():
                     chords2 = extract_chord_tokens(raw[i + 1])
                     total_chords += len(chords2)
                     lyr1 = raw[i + 2]
-                    # Si hay una segunda línea de letra debajo de lyr1, emparejar chords1->lyr1 y chords2->lyr2
                     if (
                         i + 3 < len(raw)
                         and not line_is_chords(raw[i + 3])
@@ -524,7 +557,6 @@ def main():
                         i += 4
                         continue
                     else:
-                        # Unir chords2 al final de chords1 sobre lyr1
                         last_x = max(c['x1'] for c in chords)
                         for idx_c, c2 in enumerate(chords2):
                             c2['x0'] = max(c2['x0'], last_x + 12.0 * (idx_c + 1))
@@ -536,7 +568,6 @@ def main():
                         i += 3
                         continue
 
-                # Caso 3: Línea instrumental o de solo acordes (INTRO, interludio, etc.)
                 c_str = " ".join(f"[{c['text']}]" for c in chords)
                 chordpro_lines.append(c_str)
                 structured_lines.append({
@@ -564,6 +595,25 @@ def main():
     consolidado = {
         'total_canciones': len(songs),
         'total_acordes': total_chords,
+        'secciones': [
+            {
+                'nombre': 'Cantos Litúrgicos',
+                'categorias': LITURGICAS,
+            },
+            {
+                'nombre': 'Varios',
+                'categorias': ['Varios'],
+            },
+            {
+                'nombre': 'Movimiento',
+                'categorias': ['Movimiento'],
+            },
+            {
+                'nombre': 'Bajadas',
+                'categorias': ['Bajadas'],
+                'nota': 'Agrupadas por año, próximamente a definir',
+            },
+        ],
         'canciones': songs,
     }
 
@@ -571,7 +621,7 @@ def main():
     OUT_VITE.write_text(json.dumps(consolidado, ensure_ascii=False, indent=2), encoding="utf-8")
     OUT_VITE_SRC.parent.mkdir(parents=True, exist_ok=True)
     OUT_VITE_SRC.write_text(json.dumps(consolidado, ensure_ascii=False, indent=2), encoding="utf-8")
-    print("Archivos JSON actualizados correctamente.")
+    print("Archivos JSON actualizados con la taxonomía MJP.")
 
 
 if __name__ == "__main__":

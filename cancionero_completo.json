@@ -1,6 +1,43 @@
 {
   "total_canciones": 288,
   "total_acordes": 8553,
+  "secciones": [
+    {
+      "nombre": "Cantos Litúrgicos",
+      "categorias": [
+        "Entradas",
+        "Penitenciales",
+        "Gloria",
+        "Aleluya",
+        "Ofertorio",
+        "Santo",
+        "Padre Nuestro",
+        "Cordero",
+        "Comunión",
+        "Meditación",
+        "Salida"
+      ]
+    },
+    {
+      "nombre": "Varios",
+      "categorias": [
+        "Varios"
+      ]
+    },
+    {
+      "nombre": "Movimiento",
+      "categorias": [
+        "Movimiento"
+      ]
+    },
+    {
+      "nombre": "Bajadas",
+      "categorias": [
+        "Bajadas"
+      ],
+      "nota": "Agrupadas por año, próximamente a definir"
+    }
+  ],
   "canciones": [
     {
       "id": 1,
@@ -8,6 +45,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Entradas",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 11,
       "letra_chordpro": [
         "[DO]Alabaré, alabaré, ala[LAm]baré, alabaré",
@@ -62,6 +100,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Entradas",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 11,
       "letra_chordpro": [
         "[SOL]Ven hermano y cántale a Cr[SIm]isto,",
@@ -341,6 +380,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Entradas",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 11,
       "letra_chordpro": [
         "[SOL]En siete días creó [MIm]Dios al mundo.",
@@ -651,6 +691,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Entradas",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 12,
       "letra_chordpro": [
         "Aquí es[LA]tamos Señor, en tu ca[FA#m]sa otra vez,",
@@ -869,6 +910,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Entradas",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 12,
       "letra_chordpro": [
         "[RE]Bendeciré al S[RE7]eñor en to[SOL]do tiempo,",
@@ -1170,6 +1212,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Entradas",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 13,
       "letra_chordpro": [
         "Ren[MI]did a Yahvé santos d[LA]el señor",
@@ -1613,6 +1656,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Entradas",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 13,
       "letra_chordpro": [
         "VENIMOS [LAm]A TI, OH SE[RE]ÑOR",
@@ -1905,6 +1949,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Entradas",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 14,
       "letra_chordpro": [
         "[RE]VIENEN CON ALEGRÍA SEÑOR",
@@ -2094,6 +2139,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Entradas",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 14,
       "letra_chordpro": [
         "[SOL]VINE A ALA[RE]BAR A [Mim]DIOS,",
@@ -2316,6 +2362,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Penitenciales",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 15,
       "letra_chordpro": [
         "[DO]Tú conoces la du[FA]reza en mi s[DO]entir",
@@ -2667,6 +2714,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Penitenciales",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 15,
       "letra_chordpro": [
         "[SOL]Oh Señor, [RE]ten piedad,",
@@ -2820,6 +2868,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Penitenciales",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 15,
       "letra_chordpro": [
         "[RE]Señor, [SIm]Señor,[SOL] Señor [LA]ten pie[RE]dad (x2)",
@@ -2925,6 +2974,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Penitenciales",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 15,
       "letra_chordpro": [
         "[MIm]Señor, ten [RE]piedad de nos[MIm]otros (x2)",
@@ -3000,6 +3050,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Gloria",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 16,
       "letra_chordpro": [
         "[REm]GLORIA, [FA]GLORIA",
@@ -3553,6 +3604,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Gloria",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 17,
       "letra_chordpro": [
         "[INTRO:]GLORI[Mim]A A DI[–]O[RE]S E[–]N [SOL]LAS [–]AL[SI7]TUR[-Mim]AS",
@@ -4281,6 +4333,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Aleluya",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 18,
       "letra_chordpro": [
         "[LA]Ale [MI]ale alelu[LA]ya (x2)",
@@ -4335,6 +4388,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Aleluya",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 18,
       "letra_chordpro": [
         "[RE]ALELUYA GLORIA ALELUYA,",
@@ -4467,6 +4521,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Aleluya",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 18,
       "letra_chordpro": [
         "[DO]Alel[SOL]uya al[LAm]elu alel[MIm]uya,",
@@ -4547,6 +4602,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Aleluya",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 18,
       "letra_chordpro": [
         "[INTRO:]A --- l[MIm]eluya[–] ([RE]Alel[–]uy[MIm]a)        [MIm]    [RE]",
@@ -4658,6 +4714,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Aleluya",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 18,
       "letra_chordpro": [
         "[RE]ALEL[SOL]UYA, [MIm]ALELUY[LA]A,",
@@ -4775,6 +4832,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Aleluya",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 19,
       "letra_chordpro": [
         "Los que [SOL]tienen y nunca se o[DO]lvidan",
@@ -5024,6 +5082,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Aleluya",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 19,
       "letra_chordpro": [
         "[DO]Tu palabra m[FA]e da vida",
@@ -5105,6 +5164,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 20,
       "letra_chordpro": [
         "[RE]AL ALTAR[SOL] DEL SEÑOR",
@@ -5384,6 +5444,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 20,
       "letra_chordpro": [
         "[LA]Yo soy un mendigo de tu [MI]gracia,",
@@ -5641,6 +5702,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 21,
       "letra_chordpro": [
         "[LAm]Señor que nuestra vida[FA] sea",
@@ -6044,6 +6106,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 21,
       "letra_chordpro": [
         "[SIm]Mira [FA#7]nuestra of[SIm]renda,",
@@ -6247,6 +6310,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 22,
       "letra_chordpro": [
         "Una [LAm]noche de sudor,",
@@ -6676,6 +6740,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 22,
       "letra_chordpro": [
         "Por los [LA]niños que empiezan la [MI]vida",
@@ -6961,6 +7026,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 23,
       "letra_chordpro": [
         "[RE]Oh Padre que creaste [SOL]todo,",
@@ -7235,6 +7301,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 23,
       "letra_chordpro": [
         "[DO]Este es el momento[LAm] de alegrar la mesa",
@@ -7589,6 +7656,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 24,
       "letra_chordpro": [
         "[FA#m]Quiero caer en tierra y m[LA]orir,",
@@ -7845,6 +7913,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 24,
       "letra_chordpro": [
         "[LA]SÉ CÓMO EL GRANO DE [DO#m]TRIGO",
@@ -8251,6 +8320,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 25,
       "letra_chordpro": [
         "[REm]Te ofrecemos, Señor, el [DO7]pan,",
@@ -8457,6 +8527,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 25,
       "letra_chordpro": [
         "[RE]Te prese[FA#]ntamos el [SOL]vino y el [RE]pan,",
@@ -8659,6 +8730,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 25,
       "letra_chordpro": [
         "[LA]Toma que tu c[MI]uerpo sea mi [FA#m]cuerpo,",
@@ -8928,6 +9000,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Ofertorio",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 26,
       "letra_chordpro": [
         "[SOL]Ya el [RE]altar se [DO]viste de ale[RE]gría",
@@ -9163,6 +9236,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Santo",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 27,
       "letra_chordpro": [
         "[REm]Santo, Santo, Santo,",
@@ -9387,6 +9461,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Santo",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 27,
       "letra_chordpro": [
         "[SOL]Santo, [MIm]Santo,[DO] es el Se[RE]ñor",
@@ -9491,6 +9566,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Santo",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 27,
       "letra_chordpro": [
         "[LAm]Santo, [LA7]Santo, [REm]Santo",
@@ -9657,6 +9733,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Santo",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 27,
       "letra_chordpro": [
         "[INTRO:]SANTO[RE], S[–]AN[DO]TO, [–]S[SOL]ANTO[–], [RE]SANT[RE]O [DO](x[SOL]2).[RE]",
@@ -9835,6 +9912,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Santo",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 28,
       "letra_chordpro": [
         "[INTRO:]Santo [MIm]es el [–]Se[RE]ño[–]r [DO]mi Di[–]o[SI7]s         [MIm]    [RE]",
@@ -10065,6 +10143,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Santo",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 28,
       "letra_chordpro": [
         "[DO]Santo, Santo [DO7]Santo",
@@ -10276,7 +10355,8 @@
       "titulo": "PADRE NUESTRO dolores",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Padre nuestro",
+      "categoria": "Padre Nuestro",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 29,
       "letra_chordpro": [
         "[INTRO:]Padre [LAm]Nuest[–]ro[SOL], Tú [–]qu[LAm]e est[–]ás[SOL]            [LAm]    [SOL]",
@@ -10634,7 +10714,8 @@
       "titulo": "PADRE NUESTRO litúrgico",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Padre nuestro",
+      "categoria": "Padre Nuestro",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 29,
       "letra_chordpro": [
         "Padre n[RE]uestro,",
@@ -11124,6 +11205,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Cordero",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 30,
       "letra_chordpro": [
         "[DO]Cordero de [LAm]Dios",
@@ -11288,6 +11370,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Cordero",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 30,
       "letra_chordpro": [
         "[REm]Cord[DO]ero de [REm]Dios",
@@ -11406,6 +11489,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Cordero",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 30,
       "letra_chordpro": [
         "[DO]Cordero de [SOL]Dios que q[LAm]uitas",
@@ -11730,6 +11814,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 31,
       "letra_chordpro": [
         "[MI]El Señ[SI]or est[LA]á aquí  [MI]     para il[SI]umina[LA]r,",
@@ -12002,6 +12087,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 31,
       "letra_chordpro": [
         "[MI]Seño[SI7]r,     toma mi vi[DO#m]da nuev[LA]a",
@@ -12601,6 +12687,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 32,
       "letra_chordpro": [
         "Como [DO]Cristo nos a[DO7]mó",
@@ -13144,6 +13231,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 33,
       "letra_chordpro": [
         "[MIm]Antes que te fo[SOL]rmaras",
@@ -13573,6 +13661,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 33,
       "letra_chordpro": [
         "Pon tus [DO]manos en las manos",
@@ -13855,6 +13944,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 34,
       "letra_chordpro": [
         "[LA]Llegada la [SIm]hora [MI7]del retorno al[DO#m] Padre,",
@@ -14307,6 +14397,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 34,
       "letra_chordpro": [
         "[LAm]Comenzaste a hacerte [DO]pan en B[SOL]elén,",
@@ -14772,6 +14863,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 35,
       "letra_chordpro": [
         "[DO]JES[RE]UC[SOL]RISTO,[DO] DANO[RE]S DE ESTE [SOL]PAN",
@@ -15273,6 +15365,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 35,
       "letra_chordpro": [
         "[LAm]El Se[SOL]ñor e[LAm]ligió a sus discípulos,",
@@ -15566,6 +15659,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 36,
       "letra_chordpro": [
         "[DO]JESÚS [MI7]TE SEG[LAm]UIRÉ",
@@ -15959,6 +16053,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 36,
       "letra_chordpro": [
         "[LAm]Mis manos, esas manos y Tus [FA]manos",
@@ -16241,6 +16336,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 37,
       "letra_chordpro": [
         "Tú, Se[DO]ñor, que te quedaste,",
@@ -16762,6 +16858,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 37,
       "letra_chordpro": [
         "[LAm]No,      [SOL] ya no puedo [LAm]ser,",
@@ -17042,6 +17139,7 @@
       "subtitulo": "(Jueves Santo)",
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 38,
       "letra_chordpro": [
         "[DO]Sabiendo que se ace[MIm]rcaba",
@@ -17499,6 +17597,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 38,
       "letra_chordpro": [
         "Es j[RE]oven el que es[LA7]pera,",
@@ -17897,6 +17996,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 39,
       "letra_chordpro": [
         "[RE]TAN [LA7]CERCA DE[SIm] MÍ,",
@@ -18212,6 +18312,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 39,
       "letra_chordpro": [
         "[DO]Tú    [SOL]        has venido a la[LAm] orilla",
@@ -18575,6 +18676,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Comunión",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 40,
       "letra_chordpro": [
         "[LAm]Yo soy la l[REm]uz del m[LAm]undo,",
@@ -18989,6 +19091,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Meditación",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 41,
       "letra_chordpro": [
         "[SOL]Llamas y me [RE]ofreces con [MIm]amor",
@@ -19305,6 +19408,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Meditación",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 41,
       "letra_chordpro": [
         "[MIm]Espíritu de Dios toma mi v[RE]ida,",
@@ -19634,6 +19738,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Meditación",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 42,
       "letra_chordpro": [
         "[DO]Consolad a mi pueblo [SOL]dice el Señor",
@@ -19904,6 +20009,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Meditación",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 42,
       "letra_chordpro": [
         "[DO]Dios [SOL]está a[LAm]quí",
@@ -20031,6 +20137,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Meditación",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 42,
       "letra_chordpro": [
         "[MI]Aun en las tor[SI]mentas,",
@@ -20235,6 +20342,7 @@
       "subtitulo": "(Tito Velazquez)",
       "codigo_oasis": null,
       "categoria": "Meditación",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 43,
       "letra_chordpro": [
         "[INTRO:] [LA] [SI] [SIm] [RE] [LA] [–] [SI7] [FAm] [LA]",
@@ -20826,6 +20934,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Meditación",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 43,
       "letra_chordpro": [
         "Yo te [SOL]amo, Señor, mi forta[LAm]leza,",
@@ -21079,6 +21188,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Meditación",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 44,
       "letra_chordpro": [
         "Quedate con no[DO]sotros,",
@@ -21582,6 +21692,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Salida",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 45,
       "letra_chordpro": [
         "[RE]Si sentís un murmullo muy cerca de[LA] ti",
@@ -21933,6 +22044,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Salida",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 45,
       "letra_chordpro": [
         "[SOL]Hijo tengo que irme,",
@@ -22163,6 +22275,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Salida",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 46,
       "letra_chordpro": [
         "[DO]Estamos [MI7]vivos y v[LAm]ivimos,",
@@ -22479,6 +22592,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Salida",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 46,
       "letra_chordpro": [
         "[DO]El ángel vino de los cielos",
@@ -22727,6 +22841,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Salida",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 47,
       "letra_chordpro": [
         "[RE]Junto a ti [LA7]María",
@@ -23100,6 +23215,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Salida",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 47,
       "letra_chordpro": [
         "[LA]Mi alma canta[MI] el amor de D[LA]ios",
@@ -23353,6 +23469,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Salida",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 48,
       "letra_chordpro": [
         "[SOL]Dulce muchacha humilde",
@@ -23612,6 +23729,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Salida",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 48,
       "letra_chordpro": [
         "[RE]MARÍA [LA]MÍRAM[MI]E, MARÍA [FA#m]MÍRAM[DO#m]E,",
@@ -23972,6 +24090,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Salida",
+      "seccion": "Cantos Litúrgicos",
       "pagina_origen": 49,
       "letra_chordpro": [
         "[LA]Mientras re[RE]corres la [LA]vida,",
@@ -24247,6 +24366,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 53,
       "letra_chordpro": [
         "[DO]Fueron treinta m[SOL]onedas",
@@ -24550,6 +24670,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 53,
       "letra_chordpro": [
         "[RE]Alabado sea el Sa[LA7]ntísimo",
@@ -24755,6 +24876,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 53,
       "letra_chordpro": [
         "Esta es la[DO] luz que brilla et[FAmaj7]ernamente.",
@@ -24935,6 +25057,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 54,
       "letra_chordpro": [
         "Te[SOL] adoro con fer[RE]vor. Deidad [MIm]oculta,",
@@ -25455,6 +25578,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 54,
       "letra_chordpro": [
         "Te pide [RE]luz mi mente, te pi[FA#m]de luz mi",
@@ -25692,6 +25816,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 55,
       "letra_chordpro": [
         "[DO]Como la aurora tu ser, se ha c[MIm]onvertido en",
@@ -26181,6 +26306,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 56,
       "letra_chordpro": [
         "[RE]Alma de C[SIm]risto, s[SOL]antifíca[RE]me.",
@@ -26542,6 +26668,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 57,
       "letra_chordpro": [
         "[MI]Hecha un [DO#m]mar de lágrimas al verlo allí en la",
@@ -27161,6 +27288,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 58,
       "letra_chordpro": [
         "[DO]Que el Señor te b[SOL]endiga,",
@@ -27521,6 +27649,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 58,
       "letra_chordpro": [
         "Bienve[RE]nida tu [SOL]miseri[RE]cordia",
@@ -27865,6 +27994,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 59,
       "letra_chordpro": [
         "[INTRO:] [SOL] [–] [DO] [–] [LAm] [–] [RE] [–] [RE7]",
@@ -28515,6 +28645,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 60,
       "letra_chordpro": [
         "[DO]Difícil h[SOL]ermano es [LAm,]caer,",
@@ -28960,6 +29091,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 60,
       "letra_chordpro": [
         "Muy de[LA]spacio te acercaste",
@@ -29381,6 +29513,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 61,
       "letra_chordpro": [
         "Sola[SOL]mente una p[MIm]alabra,",
@@ -30117,6 +30250,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 62,
       "letra_chordpro": [
         "[MI]Quiero hablar [LA]de un[SIsus4] amor infi[MI]nito,",
@@ -30714,6 +30848,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 62,
       "letra_chordpro": [
         "E[MI]stoy a la puerta de tu cora[SI]zón",
@@ -30959,6 +31094,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 63,
       "letra_chordpro": [
         "Si yo ha[SOL]blara todas las lenguas de l[SIm]a Tierra",
@@ -31311,6 +31447,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 63,
       "letra_chordpro": [
         "[LA9]Confiados en tu miser[LA7]icordia",
@@ -31848,6 +31985,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 64,
       "letra_chordpro": [
         "[DO]Jesús, aquí me tienes a tu[SOL] lado",
@@ -32252,6 +32390,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 65,
       "letra_chordpro": [
         "[RE]Te alejaste de[LA] mí, estás pe[SIm]rdido,",
@@ -32677,6 +32816,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 65,
       "letra_chordpro": [
         "[RE]Quiero caminar contigo [SOL]María",
@@ -33049,6 +33189,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 66,
       "letra_chordpro": [
         "[LA]Si pudiera pregu[RE]ntarte tantas [LA]cosas,[LA7]",
@@ -33534,6 +33675,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 66,
       "letra_chordpro": [
         "[RE]Dame tus ojos quiero[SOL] ver",
@@ -33945,6 +34087,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 67,
       "letra_chordpro": [
         "[MI]Venía[FA#m]s por aquel ca[LA]mino hacia [MI]mí.",
@@ -34356,6 +34499,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 67,
       "letra_chordpro": [
         "[LA]De tal manera me am[MI]ó",
@@ -34677,6 +34821,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 68,
       "letra_chordpro": [
         "Hace ya tiempo que c[DO]omprendí",
@@ -35220,6 +35365,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 69,
       "letra_chordpro": [
         "T[LAm]e miro a los ojos, y [REm]entre tanto llanto,",
@@ -35744,6 +35890,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 69,
       "letra_chordpro": [
         "Des[MI]piértame, Señor, cada m[LA]añana",
@@ -36066,6 +36213,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 70,
       "letra_chordpro": [
         "[SOL]Hoy miraba señor tus[RE] heridas",
@@ -36593,6 +36741,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 71,
       "letra_chordpro": [
         "[MIm]     Que de tu sueño brotó la [LAm]vida,",
@@ -36905,6 +37054,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 71,
       "letra_chordpro": [
         "[LA]Desperté[DO#m] de un aye[FA#m]r, tuve un [FA#m7]sueño oscuro",
@@ -37297,6 +37447,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 72,
       "letra_chordpro": [
         "Dios te hizo tan[SOL] bien no se equiv[SIm]ocó",
@@ -37755,6 +37906,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 73,
       "letra_chordpro": [
         "[SOL]Dios te salve María,[SOLmaj7] sagrada María,",
@@ -38480,6 +38632,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 74,
       "letra_chordpro": [
         "[INTRO:] [LAm] [–] [SOL7] [–] [FA]",
@@ -39231,6 +39384,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 75,
       "letra_chordpro": [
         "[DO]Somos un nuevo p[SOL]ueblo,",
@@ -39886,6 +40040,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 76,
       "letra_chordpro": [
         "[RE]Todo era [SIm]como si me taparan los [SOL]ojos,",
@@ -40094,6 +40249,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 76,
       "letra_chordpro": [
         "El E[DO]spíritu de Dios e[FA]stá en este lu[DO]gar",
@@ -40348,6 +40504,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 76,
       "letra_chordpro": [
         "[FA#]Ella te dio la vida, te dijo[SI] Sí",
@@ -40613,6 +40770,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 77,
       "letra_chordpro": [
         "[RE]Todo empezó en una[SOL] cruz",
@@ -41287,6 +41445,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 78,
       "letra_chordpro": [
         "[SOL]Aquí vamos J[MIm]esús, caminando con [DO]Vos,",
@@ -41645,6 +41804,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 79,
       "letra_chordpro": [
         "[CAPO]Que el[1°] c[TRASTE]amino ven[RE]g[SOL]a siempre a tu",
@@ -42019,6 +42179,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 79,
       "letra_chordpro": [
         "[SOL]No sé qué pr[RE]etende o qué se [MIm7]propone.",
@@ -42331,6 +42492,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 80,
       "letra_chordpro": [
         "[DO]Para que mi [SOL]amor no sea un s[LAm]entimiento",
@@ -42827,6 +42989,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 80,
       "letra_chordpro": [
         "[RE]Eres tu Se[LA]ñor, acércate,  [SIm]",
@@ -43138,6 +43301,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 81,
       "letra_chordpro": [
         "[DO]Quiero escuchar tu [SOL]dulce voz,",
@@ -43437,6 +43601,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 81,
       "letra_chordpro": [
         "A [MI]veces te pregunto “¿por qué yo?”",
@@ -43898,6 +44063,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 82,
       "letra_chordpro": [
         "[SOL]Hoy al[SIm] fin te[MIm]nemos que s[SIm]eguir",
@@ -44212,6 +44378,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 82,
       "letra_chordpro": [
         "[MIm]Háblame ya [DO]amigo al [RE]cor[MIm]azón.",
@@ -44467,6 +44634,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 83,
       "letra_chordpro": [
         "[SOL]Me puede faltar todo en la [DO]vida,",
@@ -44703,6 +44871,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 83,
       "letra_chordpro": [
         "[REm]Tanto espero una palabra de ti",
@@ -45150,6 +45319,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 84,
       "letra_chordpro": [
         "HAZME [RE]POBRE, SIEMPRE [SOL]POBRE.",
@@ -45654,6 +45824,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 84,
       "letra_chordpro": [
         "[DO]Señor, aquí e[SOL]stoy",
@@ -45985,6 +46156,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 85,
       "letra_chordpro": [
         "[LA]Mucho en mi cabeza",
@@ -46397,6 +46569,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 86,
       "letra_chordpro": [
         "[CAPO]Nuest[1°]ro[TRASTE]s corazon[MIm]es [DO]    [SOL] in[MIm]sa[DO]ciables[SOL] son",
@@ -46961,6 +47134,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 87,
       "letra_chordpro": [
         "Je[DO]sús, estoy aquí.",
@@ -47405,6 +47579,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 88,
       "letra_chordpro": [
         "[CAPO]Aunqu[3°TRASTE]e pase por l[SOL]as turbias[DO] aguas",
@@ -47765,6 +47940,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 88,
       "letra_chordpro": [
         "Oh J[SOL]esús de [LAm7]dulcísi-[RE7]-ma m[SOL]emoria,",
@@ -48121,6 +48297,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 89,
       "letra_chordpro": [
         "Cuando[DO] el corazón te [FA]duela,",
@@ -48657,6 +48834,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 90,
       "letra_chordpro": [
         "[DO]Te cuento que en un[SOL] invierno",
@@ -49225,6 +49403,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 91,
       "letra_chordpro": [
         "[SOL]En esta tard[DO]e, Jesús amigo,",
@@ -49627,6 +49806,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 91,
       "letra_chordpro": [
         "Tú, a[LA]mada y favor[RE]ecida por el S[MI]eñor[SOL7],",
@@ -49956,6 +50136,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 92,
       "letra_chordpro": [
         "[MI]Es hora [LA]de partir",
@@ -50318,6 +50499,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 92,
       "letra_chordpro": [
         "[RE]No escondas tu miseria, no calles tu",
@@ -50709,6 +50891,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 93,
       "letra_chordpro": [
         "[SOL]Me dice que me ama",
@@ -51053,6 +51236,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 93,
       "letra_chordpro": [
         "Me quieres [DO]amar, no me puedo n[REm]egar.",
@@ -51262,6 +51446,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 94,
       "letra_chordpro": [
         "[LAm]Todo para [FA]vos",
@@ -51743,6 +51928,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 95,
       "letra_chordpro": [
         "Q[MI]uisiera escuchar tus pasos",
@@ -52184,6 +52370,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 95,
       "letra_chordpro": [
         "[SOL]Jesús[RE], aquí presente en [MIm]forma r[MIm7]eal",
@@ -52560,6 +52747,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 96,
       "letra_chordpro": [
         "[DO#m]Mirarte a ti es [FA#]sentir",
@@ -53109,6 +53297,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 97,
       "letra_chordpro": [
         "[DO]Deja de herirte,",
@@ -53800,6 +53989,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 98,
       "letra_chordpro": [
         "[DO]Cuánto he es[SOL]perado este m[LAm]omento,",
@@ -54259,6 +54449,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 98,
       "letra_chordpro": [
         "[SOL]Nada te [DO]turb[SOL]e,   que nada te es[RE]pante.",
@@ -54518,6 +54709,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 99,
       "letra_chordpro": [
         "[SOLm]Necesito ta[MIb]nto, ne[SOLm]cesito tan[MIb]to, neces[SIb]ito de",
@@ -55146,6 +55338,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 100,
       "letra_chordpro": [
         "[LA]Todo lo que necesito,",
@@ -55488,6 +55681,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 100,
       "letra_chordpro": [
         "No te inq[RE]uietes, no te [SIm]inquietes,",
@@ -55796,6 +55990,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 101,
       "letra_chordpro": [
         "Ahí está[FA]s Tú, esp[FA]erando la sentencia en",
@@ -56290,6 +56485,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 102,
       "letra_chordpro": [
         "[LA]Mi cielo se [DO#m]nubla de miedo,",
@@ -56665,6 +56861,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 102,
       "letra_chordpro": [
         "[LA]Padre me [FA#m]pongo en tus manos,",
@@ -57033,6 +57230,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 103,
       "letra_chordpro": [
         "[[SIm]Tu vo[LA]z m[RE]e lla[LA]ma [SOL]]a las ag[SIm]u[LA]as [RE]",
@@ -57437,6 +57635,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 103,
       "letra_chordpro": [
         "[LA]Será una paz ar[RE]mada, compa[LA]ñeros,",
@@ -57788,6 +57987,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 104,
       "letra_chordpro": [
         "[MI]Cuando pienso en tu a[SI]mor",
@@ -58217,6 +58417,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 105,
       "letra_chordpro": [
         "[DO]Señor que perdido e[SOL]stoy",
@@ -58800,6 +59001,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 106,
       "letra_chordpro": [
         "[DO]Quiero hablarte en estas notas,",
@@ -59289,6 +59491,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 106,
       "letra_chordpro": [
         "[SOL]Cuando creo que m[MIm]i fe se agotó",
@@ -59589,6 +59792,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 107,
       "letra_chordpro": [
         "No sé [SOL]cómo, pero tengo espe[FA#m]ranza.",
@@ -60172,6 +60376,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 108,
       "letra_chordpro": [
         "[SOL]Jesús quiero hablarte,",
@@ -60577,6 +60782,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 108,
       "letra_chordpro": [
         "Ni[MIm]nguno de no[RE]sotros vive [MIm]para sí",
@@ -60852,6 +61058,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 109,
       "letra_chordpro": [
         "[SI]Luz d[DO#m7]el mundo,",
@@ -61340,6 +61547,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 110,
       "letra_chordpro": [
         "[RE]Saliendo del pr[SOL]etorio,",
@@ -61695,6 +61903,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 110,
       "letra_chordpro": [
         "Mi [DO]Dios, tú me co[SOL]noces,",
@@ -62061,6 +62270,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 111,
       "letra_chordpro": [
         "Oh oh oh oh oh oh oh oh oh oh oh oh",
@@ -62405,6 +62615,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 111,
       "letra_chordpro": [
         "Cuando me en[RE]cuentro solo",
@@ -62682,6 +62893,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 112,
       "letra_chordpro": [
         "[SOL]Tantas veces me[DO] he sentido[SOL] mal.   [DO]",
@@ -63133,6 +63345,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 112,
       "letra_chordpro": [
         "[LA7]Señor, a quién[RE] iremos",
@@ -63495,6 +63708,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 113,
       "letra_chordpro": [
         "[MI]Señor tú conoces mi [LA]mal,",
@@ -63945,6 +64159,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 113,
       "letra_chordpro": [
         "Si con[DO]ocieras como te amo,",
@@ -64296,6 +64511,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 114,
       "letra_chordpro": [
         "[SOL]Me aco[LAm]mpaña es[SOL/SI]te día t[DO]u risa [SOL]Seño[LAm]r.           [SOL/SI]    [DO*]",
@@ -65217,6 +65433,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 115,
       "letra_chordpro": [
         "[DO]Puedo const[FA]ruir un muro impo[DO]nente",
@@ -65500,6 +65717,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 115,
       "letra_chordpro": [
         "[SOL#m]Brilla en los ojos un[FA#] fuego que arde",
@@ -65947,6 +66165,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 116,
       "letra_chordpro": [
         "[DO]Tienes que encender un[SOL]a luz",
@@ -66514,6 +66733,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 117,
       "letra_chordpro": [
         "Para [RE]esc[SOL]uchar, pa[RE]ra e[SOL]scucharte,",
@@ -66980,6 +67200,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 118,
       "letra_chordpro": [
         "[RE]SOLO A TI, SOLO A[LA] TI MI AMOR,",
@@ -67420,6 +67641,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 118,
       "letra_chordpro": [
         "Desde el pri[RE]ncipio cuando te nece[LA]sité",
@@ -67779,6 +68001,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 119,
       "letra_chordpro": [
         "[MI]Sopla Señor, te lo pido,",
@@ -68317,6 +68540,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 120,
       "letra_chordpro": [
         "[RE]Dicen que Dios tiene sueños",
@@ -68843,6 +69067,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 121,
       "letra_chordpro": [
         "[REm]Cómo imaginar la hi[LA#]storia",
@@ -69192,6 +69417,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 121,
       "letra_chordpro": [
         "[MIm]Hoy acepto s[DO]eguirte",
@@ -69597,6 +69823,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 122,
       "letra_chordpro": [
         "[SOL]No he v[RE]enido a [DOadd9]pedirte",
@@ -69994,6 +70221,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 122,
       "letra_chordpro": [
         "[LA]Yo me lanzaba hacia cosas her[FA#m]mosas,",
@@ -70337,6 +70565,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 123,
       "letra_chordpro": [
         "[LA]Torrentes de vida [SOL]haz brotar en[RE] mí,",
@@ -70553,6 +70782,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 123,
       "letra_chordpro": [
         "Aunque mis [DO]ojos, no te pueda[LAm]n ver,",
@@ -70759,6 +70989,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 123,
       "letra_chordpro": [
         "[Las]Qu[estrofas]é trama m[se]i S[recitan]eñor       [sobre]           [estos]",
@@ -71154,6 +71385,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 124,
       "letra_chordpro": [
         "[LA]Tu fideli[LA7]dad es g[RE]rande,",
@@ -71257,6 +71489,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 124,
       "letra_chordpro": [
         "[LA]Jesús, al conte[MI]mplar en tu [RE]vida   [MI]",
@@ -71764,6 +71997,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 125,
       "letra_chordpro": [
         "[MIb]SE ALEGR[SIb/RE]A MI ALMA",
@@ -72143,6 +72377,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 125,
       "letra_chordpro": [
         "[LA]Sólo quiero d[MI]arte esta pobre [FA#m]vida,",
@@ -72533,6 +72768,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 126,
       "letra_chordpro": [
         "Una [DO]tierra que [FA]no tiene fron[DO]teras",
@@ -73173,6 +73409,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 127,
       "letra_chordpro": [
         "Una [RE]vez más rezaré,",
@@ -73487,6 +73724,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 127,
       "letra_chordpro": [
         "[LA]Ven y sígueme, [RE]",
@@ -73778,6 +74016,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 128,
       "letra_chordpro": [
         "[MI]Hoy vengo ante[LA] Ti a agrade[MI]cert[LA]e",
@@ -74320,6 +74559,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 129,
       "letra_chordpro": [
         "[[MI9] [LA] [MI9] [LA]]",
@@ -74779,6 +75019,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 130,
       "letra_chordpro": [
         "Los l[MI]irios del campo[LA]",
@@ -75198,6 +75439,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 130,
       "letra_chordpro": [
         "[DO]Tú eres la [SOL]luz",
@@ -75446,6 +75688,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 131,
       "letra_chordpro": [
         "[LA]   Apareces cuando no te espero",
@@ -75907,6 +76150,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 131,
       "letra_chordpro": [
         "Volver a[SOL] vos vol[SIm]ver a ser,",
@@ -76163,6 +76407,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 132,
       "letra_chordpro": [
         "[[LA–DO#m–RE–LA–FA#m–DO#m–RE–]",
@@ -76457,6 +76702,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 132,
       "letra_chordpro": [
         "[SOL]Más allá de lo que me di[RE]gan",
@@ -76708,6 +76954,7 @@
       "subtitulo": null,
       "codigo_oasis": null,
       "categoria": "Varios",
+      "seccion": "Varios",
       "pagina_origen": 133,
       "letra_chordpro": [
         "Para que estés s[SOL]iempre",
@@ -77045,7 +77292,8 @@
       "titulo": "INVOCACIÓN MARANATHA",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 137,
       "letra_chordpro": [
         "[INTRO:]Ven Es[SOL]pírit[–]u d[RE]e [–]Dio[MIm]s       [–]   [DO]       [–]    [RE]         [SOL]    [RE]    [MIm]",
@@ -77466,7 +77714,8 @@
       "titulo": "HAY QUIEN PIENSA",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 137,
       "letra_chordpro": [
         "[INTRO:]Hace [(CAPO]mucho t[1)]ie[DO7]mpo  [-]   [SOL]        [-]    [RE-]        [LA]         [DO]",
@@ -77835,7 +78084,8 @@
       "titulo": "ALIVIO EN TU AMOR",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 138,
       "letra_chordpro": [
         "Cuantas cosas te rodean,",
@@ -78284,7 +78534,8 @@
       "titulo": "UN NUEVO OASIS",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 138,
       "letra_chordpro": [
         "[RE]    Es tiempo[DO] de pen[SOL]sar,",
@@ -78626,7 +78877,8 @@
       "titulo": "EN MOVIMIENTO",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 139,
       "letra_chordpro": [
         "Dios v[DO]iene y ll[SOL]ega",
@@ -79404,7 +79656,8 @@
       "titulo": "CON FE",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 140,
       "letra_chordpro": [
         "[LA]Y si alimento mi Fe,[FA#m] todo será lo mejor,",
@@ -79918,7 +80171,8 @@
       "titulo": "EL DESCANSO",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 141,
       "letra_chordpro": [
         "J[DO]esús me he equivocado [RE7]hasta el",
@@ -80435,7 +80689,8 @@
       "titulo": "EXPRESIÓN DE AMOR",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 142,
       "letra_chordpro": [
         "[LAmaj7]Pensá en la prime[RE]ra vez que alguien te",
@@ -80949,7 +81204,8 @@
       "titulo": "JESUCRISTO",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 143,
       "letra_chordpro": [
         "[DO]Vi gente sonriendo, al[LAm] bajar de la colina,",
@@ -81746,7 +82002,8 @@
       "titulo": "JÓVEN IDEAL",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 144,
       "letra_chordpro": [
         "[MI]Quiero ser una joven ideal",
@@ -82202,7 +82459,8 @@
       "titulo": "MOMENTOS BAJO EL SOL MANANTIAL 80 (Ecles 3, 1-11)",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 145,
       "letra_chordpro": [
         "[(Solo]Te es[Cajón)]pero en el silencio,",
@@ -82507,7 +82765,8 @@
       "titulo": "EL CIELO EN LA TIERRA JDV ‘25",
       "subtitulo": "(Rom 12, 1-8)",
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 145,
       "letra_chordpro": [
         "[RE]Somos tanto[DO]s ofreciéndon[SOL]os por el mismo",
@@ -82866,7 +83125,8 @@
       "titulo": "SEI TU",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 146,
       "letra_chordpro": [
         "Llegaste un [MI]día de verano [LA6]",
@@ -83272,7 +83532,8 @@
       "titulo": "UN OASIS",
       "subtitulo": null,
       "codigo_oasis": null,
-      "categoria": "Varios",
+      "categoria": "Movimiento",
+      "seccion": "Movimiento",
       "pagina_origen": 147,
       "letra_chordpro": [
         "[REm7]Encontre un oasis entre",
@@ -83825,6 +84086,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.308",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 151,
       "letra_chordpro": [
         "[RE]Se[SOL]rá que otros no te conocen,",
@@ -84166,6 +84428,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.309",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 151,
       "letra_chordpro": [
         "[DO9]Sola [SOL]esta[DO9]ba si[SOL]n vos, tratando de encontrar",
@@ -84473,6 +84736,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.313",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 152,
       "letra_chordpro": [
         "[RE]Ho[LA]y me estas llamando a seguir",
@@ -84861,6 +85125,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.316",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 152,
       "letra_chordpro": [
         "[RE]Sentirse [SOL]bien, en esto[MIm]s días es difícil",
@@ -85218,6 +85483,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.319",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 153,
       "letra_chordpro": [
         "[SOL]Mad[DO]re s[SOL]iemp[DO]re e[SOL]stás aquí, queriéndome",
@@ -85582,6 +85848,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.320",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 153,
       "letra_chordpro": [
         "[DO]Sabes a veces yo he sido [SOL]malo,",
@@ -86098,6 +86365,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.321",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 154,
       "letra_chordpro": [
         "[SOL]Glor[RE]ia a Dios en el cielo",
@@ -86383,6 +86651,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.322",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 154,
       "letra_chordpro": [
         "[MI]Estaba al lado del cam[LA]ino,",
@@ -86753,6 +87022,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.325",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 155,
       "letra_chordpro": [
         "[MI]Puedo, puedo vivir en tu r[SI]eino",
@@ -87201,6 +87471,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.326",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 156,
       "letra_chordpro": [
         "[MI]En momentos de miedo,",
@@ -87632,6 +87903,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.327",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 156,
       "letra_chordpro": [
         "[INTRO:]No me [DO]da[–]ba [SOL]cue[–]nt[REm]a, cua[–]n[SOL]do to[(x2)]dos me",
@@ -88071,6 +88343,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.328",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 157,
       "letra_chordpro": [
         "[INTRO:]Estoy [RE]per[LA]did[SOL]o, co[(x2)]nfundi[RE]do[LA]    [SOL]",
@@ -88616,6 +88889,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.331",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 158,
       "letra_chordpro": [
         "Andaba [SOL]sola, por el ca[RE]mino",
@@ -89125,6 +89399,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.332",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 158,
       "letra_chordpro": [
         "S[SOL]eñor me siento pe[RE]queño ante ti",
@@ -89511,6 +89786,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.333",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 159,
       "letra_chordpro": [
         "[RE]Canta una vez más María,",
@@ -89914,6 +90190,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.334",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 160,
       "letra_chordpro": [
         "[RE]Escuche una voz, [SOL]escuche una [RE]voz",
@@ -90404,6 +90681,7 @@
       "subtitulo": "O.337",
       "codigo_oasis": "O.337",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 161,
       "letra_chordpro": [
         "[INTRO:]Naveg[DO]aba [–]p[FA]or e[(x2)]l mun[DO]do [FA]",
@@ -90792,6 +91070,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.338",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 162,
       "letra_chordpro": [
         "[INTRO:]Por qu[LA-]é mi [MI-]vida[FA#m] se der[–]ru[RE]mb[(x2)]a hoy [LA]    [MI]",
@@ -91215,6 +91494,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.339",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 162,
       "letra_chordpro": [
         "Bus[RE]cando el agradarte",
@@ -91641,6 +91921,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.340",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 163,
       "letra_chordpro": [
         "[LA]Re[RE]cor[LA]dan[LA7]do que",
@@ -92133,6 +92414,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.343",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 163,
       "letra_chordpro": [
         "[INTRO:]No enc[MIm]ontr[–]ab[DO]a e[–]n n[SOL]ingú[–]n l[RE]ado  [MIm]    [DO]",
@@ -92574,6 +92856,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.344",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 164,
       "letra_chordpro": [
         "De [LA6]pie comienza mi [DO#m]salvación",
@@ -92891,6 +93174,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.345",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 164,
       "letra_chordpro": [
         "[SIm] [RE] [LA] [SOL] [(x3)] [FA#]",
@@ -93471,6 +93755,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.346",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 165,
       "letra_chordpro": [
         "[RE]Quién es Je[MI]sús, por qué todos h[FA]ablan",
@@ -93735,6 +94020,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.349",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 165,
       "letra_chordpro": [
         "[INTRO:] [DO#m] [MI] [SI#] [MI] [(x3)] [LA6]",
@@ -94114,6 +94400,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.350",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 166,
       "letra_chordpro": [
         "[INTRO:]Escon[RE]did[–]o, [MI]gua[–]rd[FA#m]ado     [–]    [RE]      [–]   [MI]         [RE]    [MI]",
@@ -94631,6 +94918,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.351",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 166,
       "letra_chordpro": [
         "Hundida [DO]entre mis[FAmaj7] metas",
@@ -95099,6 +95387,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.352",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 167,
       "letra_chordpro": [
         "[INTRO:]Vivien[MI]do [SOL(A)]según tu[FA#m(A)]s manda[LA5]mient[(x2)]os    [LA]      [MI]         [SOL(A)]",
@@ -95557,6 +95846,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.355",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 167,
       "letra_chordpro": [
         "[CAPO]Al lad[6°]o d[TRASTE]el camino [DO]    [SOL]",
@@ -96000,6 +96290,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.356",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 168,
       "letra_chordpro": [
         "[DO]   Vivía oc[SOL]upado",
@@ -96378,6 +96669,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.357",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 168,
       "letra_chordpro": [
         "[DO]Se hacía tarde y no apar[SOL]ecía",
@@ -96787,6 +97079,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.358",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 169,
       "letra_chordpro": [
         "[RE]En la orilla yo e[SOL]staba",
@@ -97238,6 +97531,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.361",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 169,
       "letra_chordpro": [
         "[REm]Te encontré[LA#] allí,   [FA] no sabía quién [DO]eras",
@@ -97686,6 +97980,7 @@
       "subtitulo": "O.362",
       "codigo_oasis": "O.362",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 170,
       "letra_chordpro": [
         "[INTRO:] [DO9] [–] [SOL] [(x3)] [–] [RE] [–] [RE9]",
@@ -98249,6 +98544,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.363",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 170,
       "letra_chordpro": [
         "[INTRO:] [DO] [-] [FA] [(x2)] [FA] [-] [LAm] [-] [DO]",
@@ -98753,6 +99049,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.364",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 171,
       "letra_chordpro": [
         "[MI]   Otra vez a[SI]quí",
@@ -99149,6 +99446,7 @@
       "subtitulo": null,
       "codigo_oasis": "O.367",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 171,
       "letra_chordpro": [
         "[INTRO:]En nec[SOL-DO9]esidad te [(x2)]vi,         [SOL]    [DO9]",
@@ -99607,6 +99905,7 @@
       "subtitulo": "(Mt 5, 43-48)",
       "codigo_oasis": "O.368",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 172,
       "letra_chordpro": [
         "[SIm-SOL-RE-LA] [(x2)]",
@@ -100033,6 +100332,7 @@
       "subtitulo": "(Jn 20, 11-18)",
       "codigo_oasis": "O.369",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 172,
       "letra_chordpro": [
         "[MI]Fui a bus[SI]carte y tú no [DO#m]estabas [LA]allí",
@@ -100517,6 +100817,7 @@
       "subtitulo": "(Lc 15, 11-32)",
       "codigo_oasis": "O.370",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 173,
       "letra_chordpro": [
         "[SOL]Buscando el camino, d[RE]ecidí alejarme",
@@ -101049,6 +101350,7 @@
       "subtitulo": "(Lc 24, 13-35)",
       "codigo_oasis": "O.373",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 174,
       "letra_chordpro": [
         "[INTRO:]Camin[SOL-]ando [RE-LA-MI]sin parar,       [SOL]    [RE]",
@@ -101460,6 +101762,7 @@
       "subtitulo": "(Jn 14, 1-7)",
       "codigo_oasis": "O.374",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 175,
       "letra_chordpro": [
         "[LAm]Confien en [FA]mí, [DO]con cor[SOL]azón inquieto",
@@ -101709,6 +102012,7 @@
       "subtitulo": "(Mt 13, 1-9)",
       "codigo_oasis": "O.375",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 175,
       "letra_chordpro": [
         "[INTRO:]Al bor[LA]de d[–]el[MI] ca[–]m[FA#m]ino       [–]    [RE]     [(x2)]            [LA]    [MI]    [FA#m]    [RE]",
@@ -102246,6 +102550,7 @@
       "subtitulo": "(Lc 5, 1-11)",
       "codigo_oasis": "O.376",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 176,
       "letra_chordpro": [
         "[LAm]Ellos [SOL]        e[FA]staban",
@@ -102663,6 +102968,7 @@
       "subtitulo": "(Lc 1, 39-50)",
       "codigo_oasis": "O.379",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 176,
       "letra_chordpro": [
         "[INTRO:]Sin es[LAm]perart[–]e l[FA]leg[–]a[DO]ste,  [–]    [SOL]        [(x2)]            [LAm]    [FA]",
@@ -103238,6 +103544,7 @@
       "subtitulo": "(Mc 9, 33-37)",
       "codigo_oasis": "O.380",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 177,
       "letra_chordpro": [
         "[MIm]      Encerrado yo [DO]te vi,",
@@ -103622,6 +103929,7 @@
       "subtitulo": "(Jn 15, 7-11)",
       "codigo_oasis": "O.381",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 177,
       "letra_chordpro": [
         "[INTRO:] [DO#m] [–] [LA] [–] [MI] [–] [SI]",
@@ -104064,6 +104372,7 @@
       "subtitulo": "(Mt 7, 24-27)",
       "codigo_oasis": "O.382",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 178,
       "letra_chordpro": [
         "[INTRO:] [DO] [–] [SOL] [–] [FA] [–] [REm]",
@@ -104480,6 +104789,7 @@
       "subtitulo": "(Lc 10, 21-24)",
       "codigo_oasis": "O.385",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 179,
       "letra_chordpro": [
         "[INTRO:] [MIm] [-] [DO] [-] [SOL] [–] [RE] [(x2)]",
@@ -105161,6 +105471,7 @@
       "subtitulo": "0.386 (Mc 9, 33-37)",
       "codigo_oasis": "O.386",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 180,
       "letra_chordpro": [
         "[INTRO:]Estaba[DO#m] perdid[–]o, [LA]no [–]te[MI]nía [–]v[SI]oz     [DO#m]    [LA]",
@@ -105574,6 +105885,7 @@
       "subtitulo": "(Jn 9, 1-25)",
       "codigo_oasis": "O.387",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 181,
       "letra_chordpro": [
         "[RE] [SIm] [SOL] [RE] [LA] [SOL]",
@@ -106115,6 +106427,7 @@
       "subtitulo": "(Mt 25, 14-30)",
       "codigo_oasis": "O.388",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 182,
       "letra_chordpro": [
         "En un mundo de trabas yo estaba",
@@ -106380,6 +106693,7 @@
       "subtitulo": "(Mc 5, 25-34)",
       "codigo_oasis": "O.393",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 182,
       "letra_chordpro": [
         "[REm]A lo lejos te v[LA#]i, entre la multitu[FA]d",
@@ -106807,6 +107121,7 @@
       "subtitulo": "(Mt 10, 24-33)",
       "codigo_oasis": "O.394",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 183,
       "letra_chordpro": [
         "[SIm] [LA] [RE] [LA] [MIm] [LA]",
@@ -107248,6 +107563,7 @@
       "subtitulo": "(Mc 12, 41-44)",
       "codigo_oasis": "O.395",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 184,
       "letra_chordpro": [
         "[FA]   Te busco en lo grande y no te enc[Do]uentro",
@@ -107797,6 +108113,7 @@
       "subtitulo": "(Lc 10, 25-37)",
       "codigo_oasis": "O.396",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 185,
       "letra_chordpro": [
         "[SOL] [RE] [LA] [SIm]",
@@ -108337,6 +108654,7 @@
       "subtitulo": "0.401",
       "codigo_oasis": "O.401",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 186,
       "letra_chordpro": [
         "[RE-LA-SIm-SOL]",
@@ -108817,6 +109135,7 @@
       "subtitulo": "(Jn 13, 33-38)",
       "codigo_oasis": "O.402",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 187,
       "letra_chordpro": [
         "[FA]Se [LAm]preg[MIm]untar[MI7]on      [FA]    [LAm]",
@@ -109536,6 +109855,7 @@
       "subtitulo": "(Lc 1, 26-38)",
       "codigo_oasis": "O.403",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 188,
       "letra_chordpro": [
         "[LAm] [–] [DO] [–] [SOL] [–] [RE]",
@@ -110039,6 +110359,7 @@
       "subtitulo": "(Mt 28, 16-20)",
       "codigo_oasis": "O.404",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 189,
       "letra_chordpro": [
         "[LA]  De mil f[MI]ormas te mostra[RE]ste,  [REsus2]",
@@ -110410,6 +110731,7 @@
       "subtitulo": "(Mt 8, 1-13)",
       "codigo_oasis": "O.409",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 190,
       "letra_chordpro": [
         "[LAmaj7]Te vi caminando,[MIm] esa maña[SOL]na un poc[RE]o gris",
@@ -111009,6 +111331,7 @@
       "subtitulo": "(Lc 14, 15-24)",
       "codigo_oasis": "O.410",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 191,
       "letra_chordpro": [
         "[SOL]Negado est[MI7]aba",
@@ -111515,6 +111838,7 @@
       "subtitulo": "(Jn 19, 25-27)",
       "codigo_oasis": "O.411",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 192,
       "letra_chordpro": [
         "[SOL]En tanta oscuridad p[RE]erdida me siento,",
@@ -112179,6 +112503,7 @@
       "subtitulo": "(Mc 2, 13-17)",
       "codigo_oasis": "O.412",
       "categoria": "Bajadas",
+      "seccion": "Bajadas",
       "pagina_origen": 193,
       "letra_chordpro": [
         "[MI]Vos me viste[LAmaj7], sabías quién era.",

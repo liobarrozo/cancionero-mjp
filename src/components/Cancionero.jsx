@@ -6,6 +6,11 @@ const CHORDS_SHARP = ['DO', 'DO#', 'RE', 'RE#', 'MI', 'FA', 'FA#', 'SOL', 'SOL#'
 const CHORDS_FLAT  = ['DO', 'REb', 'RE', 'MIb', 'MI', 'FA', 'SOLb', 'SOL', 'LAb', 'LA', 'SIb', 'SI'];
 const CHORDS_ENG   = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'];
 
+const LITURGICAS = [
+  'Entradas', 'Penitenciales', 'Gloria', 'Aleluya', 'Ofertorio',
+  'Santo', 'Padre Nuestro', 'Cordero', 'Comunión', 'Meditación', 'Salida'
+];
+
 function transposeSingleChord(chord, steps) {
   if (!chord || steps === 0) return chord;
   const m = chord.match(/^(DO#?|RE#?|MI#?|FA#?|SOL#?|LA#?|SI#?|REb|MIb|SOLb|LAb|SIb|[A-G][#b]?)(.*)$/i);
@@ -32,37 +37,43 @@ function transposeChordGroup(group, steps) {
 }
 
 export default function Cancionero() {
-  const [filtro, setFiltro] = useState('Todas');
+  const [seccionActiva, setSeccionActiva] = useState('Todas');
+  const [subLiturgia, setSubLiturgia] = useState('Todas');
   const [busqueda, setBusqueda] = useState('');
   const [transpositions, setTranspositions] = useState({});
 
-  const ordenLiturgico = [
-    'Todas', 'Entradas', 'Penitenciales', 'Gloria', 'Aleluya',
-    'Ofertorio', 'Santo', 'Padre nuestro', 'Cordero',
-    'Comunión', 'Meditación', 'Salida', 'Varios', 'Bajadas'
-  ];
-
-  const categorias = useMemo(() => {
-    const presentCats = new Set(datos.canciones.map(c => c.categoria));
-    const ordered = ordenLiturgico.filter(c => c === 'Todas' || presentCats.has(c));
-    Array.from(presentCats).sort().forEach(c => {
-      if (!ordered.includes(c)) ordered.push(c);
+  const conteos = useMemo(() => {
+    const counts = {
+      Todas: datos.canciones.length,
+      'Cantos Litúrgicos': 0,
+      Varios: 0,
+      Movimiento: 0,
+      Bajadas: 0,
+    };
+    datos.canciones.forEach(c => {
+      if (counts[c.seccion] !== undefined) {
+        counts[c.seccion]++;
+      }
     });
-    return ordered;
+    return counts;
   }, []);
 
   const cancionesFiltradas = useMemo(() => {
     const q = busqueda.trim().toLowerCase();
     return datos.canciones.filter(c => {
-      const matchCat = filtro === 'Todas' || c.categoria === filtro || (filtro === 'Bajadas' && c.codigo_oasis);
-      if (!matchCat) return false;
+      let matchSec = (seccionActiva === 'Todas') || (c.seccion === seccionActiva);
+      if (seccionActiva === 'Cantos Litúrgicos' && subLiturgia !== 'Todas') {
+        matchSec = (c.categoria === subLiturgia);
+      }
+      if (!matchSec) return false;
+
       if (!q) return true;
       const tit = c.titulo.toLowerCase();
       const oasis = (c.codigo_oasis || '').toLowerCase();
       const lyrics = c.letra_chordpro.join(' ').toLowerCase();
       return tit.includes(q) || oasis.includes(q) || lyrics.includes(q);
     });
-  }, [filtro, busqueda]);
+  }, [seccionActiva, subLiturgia, busqueda]);
 
   const handleTranspose = (id, delta) => {
     setTranspositions(prev => ({
@@ -79,15 +90,22 @@ export default function Cancionero() {
     });
   };
 
+  const handleSeccionClick = (sec) => {
+    setSeccionActiva(sec);
+    if (sec !== 'Cantos Litúrgicos') {
+      setSubLiturgia('Todas');
+    }
+  };
+
   return (
     <div className="cancionero-app">
       <header className="cancionero-header">
         <h1>Cancionero MJP</h1>
-        <p>Posicionamiento de acordes idéntico al PDF original · Tipografía DM Sans</p>
+        <p>Categorías tradicionales · Tipografía DM Sans y acordes con alineación milimétrica</p>
         <div className="stats-pill">
           <span>{datos.total_canciones} canciones</span>
           <span>{datos.total_acordes} acordes</span>
-          <span>13 categorías</span>
+          <span>Cantos Litúrgicos ({conteos['Cantos Litúrgicos']}) · Varios ({conteos['Varios']}) · Movimiento ({conteos['Movimiento']}) · Bajadas ({conteos['Bajadas']})</span>
         </div>
       </header>
 
@@ -99,17 +117,65 @@ export default function Cancionero() {
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
-        <div className="filtros">
-          {categorias.map((cat) => (
-            <button
-              key={cat}
-              className={`chip ${filtro === cat ? 'activo' : ''}`}
-              onClick={() => setFiltro(cat)}
-            >
-              {cat}
-            </button>
-          ))}
+
+        <div className="filtros-secciones">
+          <button
+            className={`tab-sec ${seccionActiva === 'Todas' ? 'activo' : ''}`}
+            onClick={() => handleSeccionClick('Todas')}
+          >
+            Todas ({conteos.Todas})
+          </button>
+          <button
+            className={`tab-sec ${seccionActiva === 'Cantos Litúrgicos' ? 'activo' : ''}`}
+            onClick={() => handleSeccionClick('Cantos Litúrgicos')}
+          >
+            Cantos Litúrgicos ({conteos['Cantos Litúrgicos']})
+          </button>
+          <button
+            className={`tab-sec ${seccionActiva === 'Varios' ? 'activo' : ''}`}
+            onClick={() => handleSeccionClick('Varios')}
+          >
+            Varios ({conteos['Varios']})
+          </button>
+          <button
+            className={`tab-sec ${seccionActiva === 'Movimiento' ? 'activo' : ''}`}
+            onClick={() => handleSeccionClick('Movimiento')}
+          >
+            Movimiento ({conteos['Movimiento']})
+          </button>
+          <button
+            className={`tab-sec ${seccionActiva === 'Bajadas' ? 'activo' : ''}`}
+            onClick={() => handleSeccionClick('Bajadas')}
+          >
+            Bajadas ({conteos['Bajadas']})
+          </button>
         </div>
+
+        {seccionActiva === 'Cantos Litúrgicos' && (
+          <div className="filtros-subliturgia">
+            <button
+              className={`chip-sub ${subLiturgia === 'Todas' ? 'activo' : ''}`}
+              onClick={() => setSubLiturgia('Todas')}
+            >
+              Todas las litúrgicas
+            </button>
+            {LITURGICAS.map(cat => (
+              <button
+                key={cat}
+                className={`chip-sub ${subLiturgia === cat ? 'activo' : ''}`}
+                onClick={() => setSubLiturgia(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {seccionActiva === 'Bajadas' && (
+          <div className="bajada-nota">
+            Bajadas: agrupadas por año, próximamente a definir
+          </div>
+        )}
       </div>
 
       <main className="grid">
@@ -118,6 +184,20 @@ export default function Cancionero() {
         ) : (
           cancionesFiltradas.map((cancion) => {
             const shift = transpositions[cancion.id] || 0;
+
+            let badgeClass = 'liturgico';
+            let badgeLabel = `Litúrgico · ${cancion.categoria}`;
+            if (cancion.seccion === 'Movimiento') {
+              badgeClass = 'movimiento';
+              badgeLabel = 'Movimiento';
+            } else if (cancion.seccion === 'Bajadas') {
+              badgeClass = 'bajada';
+              badgeLabel = 'Bajada';
+            } else if (cancion.seccion === 'Varios') {
+              badgeClass = 'varios';
+              badgeLabel = 'Varios';
+            }
+
             return (
               <article key={cancion.id} className="cancion-card">
                 <header className="cancion-head">
@@ -128,8 +208,8 @@ export default function Cancionero() {
                     )}
                   </div>
                   <div className="cancion-badges">
-                    <span className={`badge ${cancion.categoria === 'Bajadas' || cancion.codigo_oasis ? 'bajada' : ''}`}>
-                      {cancion.categoria}
+                    <span className={`badge ${badgeClass}`}>
+                      {badgeLabel}
                     </span>
                     {cancion.codigo_oasis && (
                       <span className="badge oasis">{cancion.codigo_oasis}</span>
