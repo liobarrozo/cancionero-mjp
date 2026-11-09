@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { SunIcon, MoonIcon, PlayIcon, PauseIcon, FullscreenIcon, CloseIcon } from './Icons';
+import SongLyrics from './SongLyrics';
 
 export default function LiveScrollModal({
   isOpen,
@@ -171,71 +172,7 @@ export default function LiveScrollModal({
         onMouseDown={() => { userInteractingRef.current = true; }}
         onMouseUp={() => { setTimeout(() => { userInteractingRef.current = false; }, 400); }}
       >
-        <div className="flex flex-col">
-          {cancion.lineas.map((linea, lIdx) => {
-            const textOnly = linea.segmentos.map(s => s.letra).join('').trim();
-            const hasChords = linea.segmentos.some(s => (s.acorde || '').trim() !== '');
-            const isMarker = !hasChords && (textOnly === '[ESTRIBILLO]' || textOnly === 'ESTRIBILLO' || textOnly === 'CORO');
-
-            const stanzaClass = linea.salto_previo ? 'mt-6' : '';
-
-            if (isMarker) {
-              return (
-                <div key={lIdx} className={`font-bold text-xs tracking-wider text-[#26A62F] my-3 ${stanzaClass}`}>
-                  {textOnly}
-                </div>
-              );
-            }
-
-            if (!hasChords) {
-              return (
-                <div key={lIdx} className={`leading-relaxed text-base-content whitespace-pre ${stanzaClass}`}>
-                  {textOnly}
-                </div>
-              );
-            }
-
-            if (linea.tipo === 'acordes') {
-              return (
-                <div key={lIdx} className={`flex gap-4 my-1 text-[#26A62F] font-bold ${stanzaClass}`}>
-                  {linea.segmentos
-                    .filter(s => (s.acorde || '').trim() !== '')
-                    .map((s, sIdx) => (
-                      <span key={sIdx}>
-                        {transposeChordFn ? transposeChordFn(s.acorde.trim(), transposeShift) : s.acorde.trim()}
-                      </span>
-                    ))}
-                </div>
-              );
-            }
-
-            return (
-              <div key={lIdx} className={`block leading-relaxed whitespace-pre my-0.5 ${stanzaClass}`}>
-                {linea.segmentos.map((s, sIdx) => {
-                  const chord = s.acorde
-                    ? (transposeChordFn ? transposeChordFn(s.acorde.trim(), transposeShift) : s.acorde.trim())
-                    : '';
-                  const offset = s.offset || 0;
-                  return (
-                    <span key={sIdx} className="inline-block relative pt-5 align-bottom">
-                      {chord && (
-                        <span
-                          className="absolute top-0 font-bold text-[#26A62F] text-[0.88em] leading-tight select-none"
-                          style={offset ? { left: `${offset}em` } : { left: 0 }}
-                        >
-                          {chord}
-                        </span>
-                      )}
-                      <span className="font-normal text-base-content text-[1em]">
-                        {s.letra || '\u00A0'}
-                      </span>
-                    </span>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
+        <SongLyrics lineas={cancion.lineas} shift={transposeShift} isLiveMode={true} />
 
         {/* Espacio final para que la última estrofa pueda subir hasta el centro de pantalla */}
         <div className="h-96"></div>
