@@ -119,7 +119,7 @@ export function GuitarChordSVG({ chordName, size = 120 }) {
                   cx={x}
                   cy={y}
                   r="6"
-                  fill="#285628"
+                  fill="var(--color-chord, #285628)"
                   stroke="#ffffff"
                   strokeWidth="1.5"
                 />

@@ -39,6 +39,24 @@ export function transposeChordGroup(group, steps) {
 }
 
 export default function Cancionero() {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('cancionero_theme') ||
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('cancionero_theme', theme);
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+      metaTheme.setAttribute('content', theme === 'dark' ? '#1d232a' : '#285628');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(t => (t === 'dark' ? 'light' : 'dark'));
+  };
+
   const [seccionActiva, setSeccionActiva] = useState('Todas');
   const [subLiturgia, setSubLiturgia] = useState('Todas');
   const [busqueda, setBusqueda] = useState('');
@@ -120,14 +138,28 @@ export default function Cancionero() {
             </div>
           </div>
 
-          <div className="w-full sm:w-80">
-            <input
-              type="text"
-              className="input input-sm sm:input-md input-bordered w-full rounded-xl bg-base-200/50 focus:bg-base-100"
-              placeholder="Buscar por título, letra, código O.xxx..."
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-            />
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <div className="flex-1 sm:w-72">
+              <input
+                type="text"
+                className="input input-sm sm:input-md input-bordered w-full rounded-xl bg-base-200/50 focus:bg-base-100"
+                placeholder="Buscar por título, letra, código O.xxx..."
+                value={busqueda}
+                onChange={(e) => setBusqueda(e.target.value)}
+              />
+            </div>
+            <button
+              onClick={toggleTheme}
+              className="btn btn-sm sm:btn-md btn-ghost btn-circle"
+              title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+              aria-label="Alternar modo oscuro o claro"
+            >
+              {theme === 'dark' ? (
+                <span className="text-lg">☀️</span>
+              ) : (
+                <span className="text-lg">🌙</span>
+              )}
+            </button>
           </div>
         </div>
 
@@ -257,7 +289,7 @@ export default function Cancionero() {
                       <button
                         key={chIdx}
                         onClick={() => setModalChordsSong({ titulo: cancion.titulo, acordes: transposedChords })}
-                        className="badge badge-sm badge-outline font-bold text-[#285628] hover:badge-primary transition-all cursor-pointer"
+                        className="badge badge-sm badge-outline font-bold text-[var(--color-chord)] hover:badge-primary transition-all cursor-pointer"
                         title="Ver diagrama de digitación"
                       >
                         {ch}
@@ -346,7 +378,7 @@ export default function Cancionero() {
 
                     if (linea.tipo === 'acordes') {
                       return (
-                        <div key={lIdx} className={`flex gap-3 my-0.5 text-[#285628] font-bold text-[0.9em] ${stanzaClass}`}>
+                        <div key={lIdx} className={`flex gap-3 my-0.5 text-[var(--color-chord)] font-bold text-[0.9em] ${stanzaClass}`}>
                           {linea.segmentos
                             .filter(s => (s.acorde || '').trim() !== '')
                             .map((s, sIdx) => (
@@ -367,7 +399,7 @@ export default function Cancionero() {
                             <span key={sIdx} className="inline-block relative pt-4.5 align-bottom">
                               {chord && (
                                 <span
-                                  className="absolute top-0.5 font-bold text-[#285628] text-[0.84em] leading-none select-none"
+                                  className="absolute top-0.5 font-bold text-[var(--color-chord)] text-[0.84em] leading-none select-none"
                                   style={offset ? { left: `${offset}em` } : { left: 0 }}
                                 >
                                   {chord}

@@ -168,11 +168,18 @@ def main():
     )
 
     html_content = f'''<!DOCTYPE html>
-<html lang="es" data-theme="emerald">
+<html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Cancionero MJP ({total} canciones) — DaisyUI 5 & PWA</title>
+  <script>
+    (function() {{
+      var saved = localStorage.getItem('cancionero_theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    }})();
+  </script>
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#285628" />
@@ -186,8 +193,17 @@ def main():
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
+    :root, [data-theme="light"] {{
+      --color-chord: #285628;
+    }}
+    [data-theme="dark"] {{
+      --color-chord: #4ade80;
+    }}
     body {{
       font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    }}
+    .inline-chord, .chord-top-btn {{
+      color: var(--color-chord) !important;
     }}
     .no-scrollbar::-webkit-scrollbar {{ display: none; }}
     .no-scrollbar {{ -ms-overflow-style: none; scrollbar-width: none; }}
@@ -205,13 +221,18 @@ def main():
         </div>
       </div>
 
-      <div class="w-full sm:w-80">
-        <input
-          type="text"
-          id="buscador"
-          class="input input-sm sm:input-md input-bordered w-full rounded-xl bg-base-200/50 focus:bg-base-100"
-          placeholder="Buscar por título, letra, código O.xxx..."
-        />
+      <div class="flex items-center gap-2 w-full sm:w-auto">
+        <div class="flex-1 sm:w-72">
+          <input
+            type="text"
+            id="buscador"
+            class="input input-sm sm:input-md input-bordered w-full rounded-xl bg-base-200/50 focus:bg-base-100"
+            placeholder="Buscar por título, letra, código O.xxx..."
+          />
+        </div>
+        <button id="theme-btn" onclick="toggleTheme()" class="btn btn-sm sm:btn-md btn-ghost btn-circle" title="Alternar modo oscuro / claro" aria-label="Alternar modo claro u oscuro">
+          <span id="theme-icon" class="text-lg">🌙</span>
+        </button>
       </div>
     </div>
 
@@ -575,6 +596,25 @@ def main():
     }});
 
     buscador.addEventListener('input', applyFilter);
+
+    // Modo oscuro / claro
+    function updateThemeIcon(t) {{
+      const icon = document.getElementById('theme-icon');
+      if (icon) icon.textContent = t === 'dark' ? '☀️' : '🌙';
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', t === 'dark' ? '#1d232a' : '#285628');
+    }}
+
+    function toggleTheme() {{
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('cancionero_theme', next);
+      updateThemeIcon(next);
+    }}
+
+    // Sincronizar icono inicial
+    updateThemeIcon(document.documentElement.getAttribute('data-theme') || 'light');
   </script>
 </body>
 </html>'''

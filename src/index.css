@@ -1,13 +1,23 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-:root {
+:root, [data-theme="light"] {
   --font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
   --color-chord: #285628;
   --color-lyric: #231f20;
+}
+
+[data-theme="dark"] {
+  --color-chord: #4ade80;
+  --color-lyric: #f1f5f9;
 }
 
 body {
   font-family: var(--font-family);
   color: var(--color-lyric);
 }
+
+.chord-color {
+  color: var(--color-chord);
+}
+

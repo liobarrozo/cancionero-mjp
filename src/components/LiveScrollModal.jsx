@@ -12,6 +12,16 @@ export default function LiveScrollModal({
   const [speed, setSpeed] = useState(3); // 1 a 10
   const [fontSize, setFontSize] = useState(20); // px
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isDark, setIsDark] = useState(() => (typeof document !== 'undefined' ? document.documentElement.getAttribute('data-theme') === 'dark' : false));
+
+  const toggleTheme = () => {
+    const next = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('cancionero_theme', next);
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) metaTheme.setAttribute('content', next === 'dark' ? '#1d232a' : '#285628');
+    setIsDark(!isDark);
+  };
 
   const scrollContainerRef = useRef(null);
   const animFrameIdRef = useRef(null);
@@ -121,7 +131,15 @@ export default function LiveScrollModal({
           )}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <button
+            onClick={toggleTheme}
+            className="btn btn-sm btn-ghost btn-circle"
+            title={isDark ? 'Modo claro' : 'Modo oscuro'}
+            aria-label="Alternar modo oscuro"
+          >
+            {isDark ? '☀️' : '🌙'}
+          </button>
           <button
             onClick={toggleNativeFullscreen}
             className="btn btn-sm btn-ghost btn-circle"
