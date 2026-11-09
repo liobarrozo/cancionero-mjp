@@ -157,7 +157,7 @@ export default function ChordModal({ isOpen, onClose, songTitle, chords = [] }) 
         </div>
 
         <div className="modal-action mt-5 pt-3 border-t border-base-200 flex justify-end">
-          <button className="btn btn-sm px-6 bg-[#26A62F] hover:bg-[#1f8726] text-white border-none font-medium rounded-lg" onClick={onClose}>
+          <button className="btn btn-sm px-6 bg-[#0066AD] hover:bg-[#00528c] text-white border-none font-medium rounded-lg" onClick={onClose}>
             Entendido
           </button>
         </div>

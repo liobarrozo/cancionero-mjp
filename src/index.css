@@ -3,11 +3,11 @@
 
 :root, [data-theme="light"] {
   --font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --color-primary: #26A62F;
+  --color-primary: #0066AD;
   --color-primary-content: #ffffff;
   --color-secondary: #26A62F;
   --color-secondary-content: #ffffff;
-  --color-accent: #26A62F;
+  --color-accent: #0066AD;
   --color-accent-content: #ffffff;
   --color-success: #26A62F;
   --color-success-content: #ffffff;
@@ -20,11 +20,11 @@
 }
 
 [data-theme="dark"] {
-  --color-primary: #26A62F;
+  --color-primary: #0066AD;
   --color-primary-content: #ffffff;
   --color-secondary: #26A62F;
   --color-secondary-content: #ffffff;
-  --color-accent: #26A62F;
+  --color-accent: #0066AD;
   --color-accent-content: #ffffff;
   --color-success: #26A62F;
   --color-success-content: #ffffff;

@@ -50,7 +50,7 @@ export default function Cancionero() {
     localStorage.setItem('cancionero_theme', theme);
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
-      metaTheme.setAttribute('content', theme === 'dark' ? '#1d232a' : '#285628');
+      metaTheme.setAttribute('content', theme === 'dark' ? '#1d232a' : '#0066AD');
     }
   }, [theme]);
 
@@ -136,7 +136,7 @@ export default function Cancionero() {
               />
               <div className="border-l border-base-300/80 pl-3">
                 <h1 className="text-base sm:text-lg font-bold tracking-tight text-base-content leading-tight">
-                  Cancionero <span className="text-[#26A62F]">MJP</span>
+                  Cancionero <span className="text-[#0066AD]">MJP</span>
                 </h1>
                 <p className="text-[11px] text-base-content/50 font-medium hidden sm:block">
                   {datos.total_canciones} cantos · {datos.total_acordes} acordes
@@ -152,7 +152,7 @@ export default function Cancionero() {
             <div className="flex-1 sm:w-72">
               <input
                 type="text"
-                className="input input-sm sm:input-md w-full rounded-xl bg-base-200/50 hover:bg-base-200/80 focus:bg-base-100 border border-base-300/80 focus:border-[#26A62F] focus:outline-none focus:ring-1 focus:ring-[#26A62F] transition-all text-xs sm:text-sm"
+                className="input input-sm sm:input-md w-full rounded-xl bg-base-200/50 hover:bg-base-200/80 focus:bg-base-100 border border-base-300/80 focus:border-[#0066AD] focus:outline-none focus:ring-1 focus:ring-[#0066AD] transition-all text-xs sm:text-sm"
                 placeholder="Buscar por título, letra, O.xxx..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
@@ -160,12 +160,12 @@ export default function Cancionero() {
             </div>
             <button
               onClick={toggleTheme}
-              className="btn btn-sm sm:btn-md btn-ghost btn-circle text-base-content/70 hover:text-[#26A62F] transition-colors"
+              className="btn btn-sm sm:btn-md btn-ghost btn-circle text-base-content/70 hover:text-[#0066AD] transition-colors"
               title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
               aria-label="Alternar modo oscuro o claro"
             >
               {theme === 'dark' ? (
-                <SunIcon className="w-5 h-5 text-[#26A62F]" />
+                <SunIcon className="w-5 h-5 text-[#0066AD]" />
               ) : (
                 <MoonIcon className="w-5 h-5" />
               )}
@@ -181,7 +181,7 @@ export default function Cancionero() {
                 key={sec}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   seccionActiva === sec
-                    ? 'bg-[#26A62F] text-white font-semibold shadow-xs'
+                    ? 'bg-[#0066AD] text-white font-semibold shadow-xs'
                     : 'text-base-content/70 hover:text-base-content hover:bg-base-200/60'
                 }`}
                 onClick={() => handleSeccionClick(sec)}
@@ -197,7 +197,7 @@ export default function Cancionero() {
               <button
                 className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-all cursor-pointer ${
                   subLiturgia === 'Todas'
-                    ? 'bg-[#26A62F] text-white font-semibold'
+                    ? 'bg-[#0066AD] text-white font-semibold'
                     : 'bg-base-200/60 text-base-content/70 hover:text-base-content'
                 }`}
                 onClick={() => setSubLiturgia('Todas')}
@@ -209,7 +209,7 @@ export default function Cancionero() {
                   key={cat}
                   className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-all cursor-pointer ${
                     subLiturgia === cat
-                      ? 'bg-[#26A62F] text-white font-semibold'
+                      ? 'bg-[#0066AD] text-white font-semibold'
                       : 'bg-base-200/60 text-base-content/70 hover:text-base-content'
                   }`}
                   onClick={() => setSubLiturgia(cat)}
@@ -222,7 +222,7 @@ export default function Cancionero() {
 
           {/* Nota de Bajadas */}
           {seccionActiva === 'Bajadas' && (
-            <div className="text-xs text-[#26A62F] font-medium mt-2 pt-1 border-t border-base-200/70">
+            <div className="text-xs text-[#0066AD] font-medium mt-2 pt-1 border-t border-base-200/70">
               Bajadas: agrupadas por año, próximamente a definir
             </div>
           )}
@@ -255,7 +255,7 @@ export default function Cancionero() {
             return (
               <article
                 key={cancion.id}
-                className="bg-base-100 border border-base-200/90 rounded-2xl p-5 sm:p-7 shadow-none hover:border-[#26A62F]/30 transition-colors"
+                className="bg-base-100 border border-base-200/90 rounded-2xl p-5 sm:p-7 shadow-none hover:border-[#0066AD]/30 transition-colors"
               >
                 {/* Cabecera de la canción */}
                 <div className="flex flex-wrap items-start justify-between gap-3 border-b border-base-200/70 pb-3">
@@ -274,7 +274,7 @@ export default function Cancionero() {
                       {badgeLabel}
                     </span>
                     {cancion.codigo_oasis && (
-                      <span className="text-[11px] font-bold text-[#26A62F] bg-[#26A62F]/10 border border-[#26A62F]/25 px-2.5 py-0.5 rounded-full">
+                      <span className="text-[11px] font-bold text-[#0066AD] bg-[#0066AD]/10 border border-[#0066AD]/25 px-2.5 py-0.5 rounded-full">
                         {cancion.codigo_oasis}
                       </span>
                     )}
@@ -305,17 +305,17 @@ export default function Cancionero() {
                     <span className="text-xs font-medium text-base-content/50 mr-1">Tono:</span>
                     <button
                       onClick={() => handleTranspose(cancion.id, -1)}
-                      className="w-6 h-6 flex items-center justify-center rounded border border-base-300 text-base-content hover:border-[#26A62F] transition-colors"
+                      className="w-6 h-6 flex items-center justify-center rounded border border-base-300 text-base-content hover:border-[#0066AD] transition-colors"
                       title="Bajar medio tono"
                     >
                       -1
                     </button>
-                    <span className="font-bold text-xs w-5 text-center text-[#26A62F]">
+                    <span className="font-bold text-xs w-5 text-center text-[#0066AD]">
                       {shift > 0 ? `+${shift}` : shift}
                     </span>
                     <button
                       onClick={() => handleTranspose(cancion.id, 1)}
-                      className="w-6 h-6 flex items-center justify-center rounded border border-base-300 text-base-content hover:border-[#26A62F] transition-colors"
+                      className="w-6 h-6 flex items-center justify-center rounded border border-base-300 text-base-content hover:border-[#0066AD] transition-colors"
                       title="Subir medio tono"
                     >
                       +1
@@ -323,7 +323,7 @@ export default function Cancionero() {
                     {shift !== 0 && (
                       <button
                         onClick={() => handleResetTranspose(cancion.id)}
-                        className="text-xs text-base-content/50 hover:text-[#26A62F] transition-colors ml-1"
+                        className="text-xs text-base-content/50 hover:text-[#0066AD] transition-colors ml-1"
                       >
                         Reset
                       </button>
@@ -335,7 +335,7 @@ export default function Cancionero() {
                     {uniqueChords.length > 0 && (
                       <button
                         onClick={() => setModalChordsSong({ titulo: cancion.titulo, acordes: transposedChords })}
-                        className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium text-base-content/75 hover:text-[#26A62F] hover:bg-[#26A62F]/10 transition-colors cursor-pointer"
+                        className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium text-base-content/75 hover:text-[#0066AD] hover:bg-[#0066AD]/10 transition-colors cursor-pointer"
                         title="Ver digitación de acordes"
                       >
                         <GuitarIcon className="w-3.5 h-3.5" />
@@ -344,7 +344,7 @@ export default function Cancionero() {
                     )}
                     <button
                       onClick={() => setLiveScrollSong(cancion)}
-                      className="flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold bg-[#26A62F] hover:bg-[#1f8726] text-white transition-colors cursor-pointer"
+                      className="flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold bg-[#0066AD] hover:bg-[#00528c] text-white transition-colors cursor-pointer"
                       title="Abrir en pantalla completa con deslizamiento automático"
                     >
                       <PlayIcon className="w-3 h-3" />

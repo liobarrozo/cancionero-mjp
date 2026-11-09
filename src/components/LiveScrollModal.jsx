@@ -124,7 +124,7 @@ export default function LiveScrollModal({
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-bold tracking-tight text-base-content">{cancion.titulo}</h2>
             {cancion.codigo_oasis && (
-              <span className="text-xs font-semibold text-[#26A62F] bg-[#26A62F]/10 border border-[#26A62F]/30 px-2 py-0.5 rounded-full">
+              <span className="text-xs font-semibold text-[#0066AD] bg-[#0066AD]/10 border border-[#0066AD]/30 px-2 py-0.5 rounded-full">
                 {cancion.codigo_oasis}
               </span>
             )}
@@ -247,7 +247,7 @@ export default function LiveScrollModal({
           {/* Botón Play / Pause */}
           <button
             onClick={() => setIsPlaying(p => !p)}
-            className={`btn btn-sm btn-circle text-white border-none ${isPlaying ? 'bg-[#1f8726]' : 'bg-[#26A62F] hover:bg-[#1f8726]'}`}
+            className={`btn btn-sm btn-circle text-white border-none ${isPlaying ? 'bg-[#00528c]' : 'bg-[#0066AD] hover:bg-[#00528c]'}`}
             title={isPlaying ? 'Pausar (Espacio)' : 'Deslizar (Espacio)'}
             aria-label={isPlaying ? 'Pausar' : 'Deslizar'}
           >
@@ -267,9 +267,9 @@ export default function LiveScrollModal({
               max="10"
               value={speed}
               onChange={(e) => setSpeed(Number(e.target.value))}
-              className="range range-xs accent-[#26A62F] w-24 sm:w-32"
+              className="range range-xs accent-[#0066AD] w-24 sm:w-32"
             />
-            <span className="text-xs font-bold w-4 text-center text-[#26A62F]">{speed}x</span>
+            <span className="text-xs font-bold w-4 text-center text-[#0066AD]">{speed}x</span>
           </div>
         </div>
 
@@ -284,7 +284,7 @@ export default function LiveScrollModal({
             >
               -1
             </button>
-            <span className="btn btn-xs join-item pointer-events-none font-bold text-[#26A62F]">
+            <span className="btn btn-xs join-item pointer-events-none font-bold text-[#0066AD]">
               {transposeShift > 0 ? `+${transposeShift}` : transposeShift}
             </span>
             <button

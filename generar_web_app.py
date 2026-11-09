@@ -102,7 +102,7 @@ def main():
             badge_label = "Varios"
 
         badge_cat = f'<span class="text-[11px] font-medium text-base-content/60 border border-base-300/80 px-2.5 py-0.5 rounded-full">{escape(badge_label)}</span>'
-        oasis_badge = f'<span class="text-[11px] font-bold text-[#26A62F] bg-[#26A62F]/10 border border-[#26A62F]/25 px-2.5 py-0.5 rounded-full">{escape(c["codigo_oasis"])}</span>' if c.get("codigo_oasis") else ''
+        oasis_badge = f'<span class="text-[11px] font-bold text-[#0066AD] bg-[#0066AD]/10 border border-[#0066AD]/25 px-2.5 py-0.5 rounded-full">{escape(c["codigo_oasis"])}</span>' if c.get("codigo_oasis") else ''
         subtitulo_html = f'<p class="text-xs sm:text-sm text-base-content/60 font-medium mt-0.5">{escape(c["subtitulo"])}</p>' if c.get("subtitulo") else ''
 
         # Acordes al inicio de la canción
@@ -123,7 +123,7 @@ def main():
         chords_json_attr = escape(json.dumps(unique_chords))
 
         canciones_html.append(f'''
-        <article class="bg-base-100 border border-base-200/90 rounded-2xl p-5 sm:p-7 transition-colors hover:border-[#26A62F]/30 cancion" data-id="{c['id']}" data-sec="{escape(seccion)}" data-cat="{escape(categoria)}" data-tit="{escape(c['titulo'].lower())}" data-oasis="{escape((c.get('codigo_oasis') or '').lower())}" data-chords="{chords_json_attr}">
+        <article class="bg-base-100 border border-base-200/90 rounded-2xl p-5 sm:p-7 transition-colors hover:border-[#0066AD]/30 cancion" data-id="{c['id']}" data-sec="{escape(seccion)}" data-cat="{escape(categoria)}" data-tit="{escape(c['titulo'].lower())}" data-oasis="{escape((c.get('codigo_oasis') or '').lower())}" data-chords="{chords_json_attr}">
           <div class="flex flex-wrap items-start justify-between gap-3 border-b border-base-200/70 pb-3">
             <div>
               <h2 class="text-xl sm:text-2xl font-bold text-base-content tracking-tight">{escape(c['titulo'])}</h2>
@@ -140,18 +140,18 @@ def main():
           <div class="flex flex-wrap items-center justify-between gap-2 my-4 py-2 border-y border-base-200/70 text-xs">
             <div class="flex items-center gap-1.5">
               <span class="text-xs font-medium text-base-content/50 mr-1">Tono:</span>
-              <button class="w-6 h-6 flex items-center justify-center rounded border border-base-300 text-base-content hover:border-[#26A62F] transition-colors" onclick="transposeSong({c['id']}, -1)">-1</button>
-              <span class="font-bold text-xs w-5 text-center text-[#26A62F]" id="trans-{c['id']}">0</span>
-              <button class="w-6 h-6 flex items-center justify-center rounded border border-base-300 text-base-content hover:border-[#26A62F] transition-colors" onclick="transposeSong({c['id']}, 1)">+1</button>
-              <button class="text-xs text-base-content/50 hover:text-[#26A62F] transition-colors ml-1" onclick="resetTranspose({c['id']})">Reset</button>
+              <button class="w-6 h-6 flex items-center justify-center rounded border border-base-300 text-base-content hover:border-[#0066AD] transition-colors" onclick="transposeSong({c['id']}, -1)">-1</button>
+              <span class="font-bold text-xs w-5 text-center text-[#0066AD]" id="trans-{c['id']}">0</span>
+              <button class="w-6 h-6 flex items-center justify-center rounded border border-base-300 text-base-content hover:border-[#0066AD] transition-colors" onclick="transposeSong({c['id']}, 1)">+1</button>
+              <button class="text-xs text-base-content/50 hover:text-[#0066AD] transition-colors ml-1" onclick="resetTranspose({c['id']})">Reset</button>
             </div>
 
             <div class="flex items-center gap-2">
-              <button class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium text-base-content/75 hover:text-[#26A62F] hover:bg-[#26A62F]/10 transition-colors cursor-pointer" onclick="openSongChordsModal({c['id']})">
+              <button class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium text-base-content/75 hover:text-[#0066AD] hover:bg-[#0066AD]/10 transition-colors cursor-pointer" onclick="openSongChordsModal({c['id']})">
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="17" r="4"/><path d="M12 13V3M10 6h4M10 9h4"/></svg>
                 <span>Diagramas</span>
               </button>
-              <button class="flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold bg-[#26A62F] hover:bg-[#1f8726] text-white transition-colors cursor-pointer" onclick="openLiveScrollModal({c['id']})">
+              <button class="flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold bg-[#0066AD] hover:bg-[#00528c] text-white transition-colors cursor-pointer" onclick="openLiveScrollModal({c['id']})">
                 <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 <span>En vivo</span>
               </button>
@@ -196,11 +196,11 @@ def main():
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
     :root, [data-theme="light"] {{
-      --color-primary: #26A62F;
+      --color-primary: #0066AD;
       --color-chord: #26A62F;
     }}
     [data-theme="dark"] {{
-      --color-primary: #26A62F;
+      --color-primary: #0066AD;
       --color-chord: #26A62F;
     }}
     body {{
@@ -221,7 +221,7 @@ def main():
           <img id="header-logo" src="/logos/mjp-black.png" alt="Logo MJP" class="h-8 w-auto object-contain select-none" />
           <div class="border-l border-base-300/80 pl-3">
             <h1 class="text-base sm:text-lg font-bold tracking-tight text-base-content leading-tight">
-              Cancionero <span class="text-[#26A62F]">MJP</span>
+              Cancionero <span class="text-[#0066AD]">MJP</span>
             </h1>
             <p class="text-[11px] text-base-content/50 font-medium hidden sm:block">
               {total} cantos · {total_acordes} acordes
@@ -235,11 +235,11 @@ def main():
           <input
             type="text"
             id="buscador"
-            class="input input-sm sm:input-md w-full rounded-xl bg-base-200/50 hover:bg-base-200/80 focus:bg-base-100 border border-base-300/80 focus:border-[#26A62F] focus:outline-none focus:ring-1 focus:ring-[#26A62F] transition-all text-xs sm:text-sm"
+            class="input input-sm sm:input-md w-full rounded-xl bg-base-200/50 hover:bg-base-200/80 focus:bg-base-100 border border-base-300/80 focus:border-[#0066AD] focus:outline-none focus:ring-1 focus:ring-[#0066AD] transition-all text-xs sm:text-sm"
             placeholder="Buscar por título, letra, O.xxx..."
           />
         </div>
-        <button id="theme-btn" onclick="toggleTheme()" class="btn btn-sm sm:btn-md btn-ghost btn-circle text-base-content/70 hover:text-[#26A62F] transition-colors" title="Alternar modo oscuro / claro" aria-label="Alternar modo claro u oscuro">
+        <button id="theme-btn" onclick="toggleTheme()" class="btn btn-sm sm:btn-md btn-ghost btn-circle text-base-content/70 hover:text-[#0066AD] transition-colors" title="Alternar modo oscuro / claro" aria-label="Alternar modo claro u oscuro">
           <span id="theme-icon"></span>
         </button>
       </div>
@@ -248,7 +248,7 @@ def main():
     <!-- Pestañas de Secciones Minimalistas -->
     <div class="max-w-4xl mx-auto px-4 pb-2.5 pt-1 overflow-x-auto no-scrollbar">
       <div class="flex items-center gap-1.5 min-w-max" id="tabs-secciones">
-        <button class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#26A62F] text-white shadow-xs tab-sec cursor-pointer" data-sec="Todas">Todas ({conteos['Todas']})</button>
+        <button class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#0066AD] text-white shadow-xs tab-sec cursor-pointer" data-sec="Todas">Todas ({conteos['Todas']})</button>
         <button class="px-3 py-1.5 rounded-lg text-xs font-medium text-base-content/70 hover:text-base-content hover:bg-base-200/60 tab-sec cursor-pointer" data-sec="Cantos Litúrgicos">Cantos Litúrgicos ({conteos['Cantos Litúrgicos']})</button>
         <button class="px-3 py-1.5 rounded-lg text-xs font-medium text-base-content/70 hover:text-base-content hover:bg-base-200/60 tab-sec cursor-pointer" data-sec="Varios">Varios ({conteos['Varios']})</button>
         <button class="px-3 py-1.5 rounded-lg text-xs font-medium text-base-content/70 hover:text-base-content hover:bg-base-200/60 tab-sec cursor-pointer" data-sec="Movimiento">Movimiento ({conteos['Movimiento']})</button>
@@ -257,12 +257,12 @@ def main():
 
       <!-- Subfiltros Litúrgicos -->
       <div class="flex flex-wrap gap-1 mt-2.5 pt-2 border-t border-base-200/70 hidden" id="subliturgia-container">
-        <button class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-[#26A62F] text-white cursor-pointer chip-sub" data-subcat="Todas">Todas las litúrgicas</button>
+        <button class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-[#0066AD] text-white cursor-pointer chip-sub" data-subcat="Todas">Todas las litúrgicas</button>
         {subchips_liturgia}
       </div>
 
       <!-- Nota de Bajadas -->
-      <div class="text-xs text-[#26A62F] font-medium mt-2 pt-1 border-t border-base-200/70 hidden" id="bajadas-nota">
+      <div class="text-xs text-[#0066AD] font-medium mt-2 pt-1 border-t border-base-200/70 hidden" id="bajadas-nota">
         Bajadas: agrupadas por año, próximamente a definir
       </div>
     </div>
@@ -705,7 +705,7 @@ def main():
         tabs.forEach(t => {{
           t.className = 'px-3 py-1.5 rounded-lg text-xs font-medium text-base-content/70 hover:text-base-content hover:bg-base-200/60 tab-sec cursor-pointer';
         }});
-        tab.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#26A62F] text-white shadow-xs tab-sec cursor-pointer';
+        tab.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#0066AD] text-white shadow-xs tab-sec cursor-pointer';
         currentSec = tab.getAttribute('data-sec');
 
         if (currentSec === 'Cantos Litúrgicos') {{
@@ -717,7 +717,7 @@ def main():
             c.className = 'px-2.5 py-1 rounded-md text-[11px] font-medium bg-base-200/60 text-base-content/70 hover:text-base-content cursor-pointer chip-sub';
           }});
           if (subChips[0]) {{
-            subChips[0].className = 'px-2.5 py-1 rounded-md text-[11px] font-semibold bg-[#26A62F] text-white cursor-pointer chip-sub';
+            subChips[0].className = 'px-2.5 py-1 rounded-md text-[11px] font-semibold bg-[#0066AD] text-white cursor-pointer chip-sub';
           }}
         }}
 
@@ -736,7 +736,7 @@ def main():
         subChips.forEach(c => {{
           c.className = 'px-2.5 py-1 rounded-md text-[11px] font-medium bg-base-200/60 text-base-content/70 hover:text-base-content cursor-pointer chip-sub';
         }});
-        chip.className = 'px-2.5 py-1 rounded-md text-[11px] font-semibold bg-[#26A62F] text-white cursor-pointer chip-sub';
+        chip.className = 'px-2.5 py-1 rounded-md text-[11px] font-semibold bg-[#0066AD] text-white cursor-pointer chip-sub';
         currentSub = chip.getAttribute('data-subcat');
         applyFilter();
       }});
@@ -749,13 +749,13 @@ def main():
       const icon = document.getElementById('theme-icon');
       if (icon) {{
         icon.innerHTML = t === 'dark'
-          ? '<svg class="w-5 h-5 text-[#26A62F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+          ? '<svg class="w-5 h-5 text-[#0066AD]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
           : '<svg class="w-5 h-5 text-base-content/80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
       }}
       const logo = document.getElementById('header-logo');
       if (logo) logo.src = t === 'dark' ? '/logos/mjp-white.png' : '/logos/mjp-black.png';
       const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute('content', t === 'dark' ? '#09090b' : '#26A62F');
+      if (meta) meta.setAttribute('content', t === 'dark' ? '#09090b' : '#0066AD');
     }}
 
     function toggleTheme() {{
