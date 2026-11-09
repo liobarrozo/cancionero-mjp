@@ -147,11 +147,13 @@ def main():
             </div>
 
             <div class="flex items-center gap-2">
-              <button class="btn btn-xs btn-ghost text-primary gap-1 font-semibold" onclick="openSongChordsModal({c['id']})">
-                🎸 Diagramas
+              <button class="btn btn-xs btn-ghost text-primary gap-1.5 font-semibold" onclick="openSongChordsModal({c['id']})">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="17" r="4"/><path d="M12 13V3M10 6h4M10 9h4"/></svg>
+                <span>Diagramas</span>
               </button>
-              <button class="btn btn-xs btn-primary gap-1 font-semibold" onclick="openLiveScrollModal({c['id']})">
-                ▶ En vivo / Scroll
+              <button class="btn btn-xs btn-primary gap-1.5 font-semibold" onclick="openLiveScrollModal({c['id']})">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>En vivo / Scroll</span>
               </button>
             </div>
           </div>
@@ -231,7 +233,7 @@ def main():
           />
         </div>
         <button id="theme-btn" onclick="toggleTheme()" class="btn btn-sm sm:btn-md btn-ghost btn-circle" title="Alternar modo oscuro / claro" aria-label="Alternar modo claro u oscuro">
-          <span id="theme-icon" class="text-lg">🌙</span>
+          <span id="theme-icon"></span>
         </button>
       </div>
     </div>
@@ -272,7 +274,9 @@ def main():
           <p class="text-xs text-base-content/70 mt-0.5" id="chord_modal_title">Diagramas</p>
         </div>
         <form method="dialog">
-          <button class="btn btn-sm btn-circle btn-ghost">✕</button>
+          <button class="btn btn-sm btn-circle btn-ghost" aria-label="Cerrar">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
         </form>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-[65vh] overflow-y-auto p-1" id="chord_modal_grid">
@@ -296,7 +300,9 @@ def main():
         <span class="text-xs text-base-content/60 font-medium" id="live_sub"></span>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="closeLiveScroll()" class="btn btn-sm btn-circle btn-ghost">✕</button>
+        <button onclick="closeLiveScroll()" class="btn btn-sm btn-circle btn-ghost" aria-label="Cerrar">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
     </div>
 
@@ -306,7 +312,7 @@ def main():
     <!-- Dock inferior con controles de Play, Velocidad y Tono -->
     <div class="bg-base-200/90 backdrop-blur-md border-t border-base-300 px-4 py-2.5 flex items-center justify-between gap-3 shadow-lg">
       <div class="flex items-center gap-2">
-        <button id="live_play_btn" onclick="toggleLivePlay()" class="btn btn-sm btn-circle btn-primary">▶</button>
+        <button id="live_play_btn" onclick="toggleLivePlay()" class="btn btn-sm btn-circle btn-primary" aria-label="Reproducir o pausar"></button>
         <div class="flex items-center gap-2 bg-base-100 px-3 py-1 rounded-full border border-base-300">
           <span class="text-xs font-semibold text-base-content/70">Vel:</span>
           <input type="range" min="1" max="10" value="3" id="live_speed_slider" class="range range-xs range-primary w-24 sm:w-32" oninput="updateLiveSpeed(this.value)" />
@@ -434,7 +440,7 @@ def main():
       container.scrollTop = 0;
 
       livePlaying = false;
-      document.getElementById('live_play_btn').textContent = '▶';
+      document.getElementById('live_play_btn').innerHTML = '<svg class="w-4 h-4 translate-x-0.5" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
       document.getElementById('live_scroll_modal').classList.remove('hidden');
     }}
 
@@ -446,7 +452,9 @@ def main():
 
     function toggleLivePlay() {{
       livePlaying = !livePlaying;
-      document.getElementById('live_play_btn').textContent = livePlaying ? '⏸' : '▶';
+      document.getElementById('live_play_btn').innerHTML = livePlaying
+        ? '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>'
+        : '<svg class="w-4 h-4 translate-x-0.5" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
       if (livePlaying) {{
         liveLastTime = null;
         liveAnimId = requestAnimationFrame(liveScrollLoop);
@@ -600,7 +608,11 @@ def main():
     // Modo oscuro / claro
     function updateThemeIcon(t) {{
       const icon = document.getElementById('theme-icon');
-      if (icon) icon.textContent = t === 'dark' ? '☀️' : '🌙';
+      if (icon) {{
+        icon.innerHTML = t === 'dark'
+          ? '<svg class="w-5 h-5 text-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+          : '<svg class="w-5 h-5 text-base-content/80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      }}
       const meta = document.querySelector('meta[name="theme-color"]');
       if (meta) meta.setAttribute('content', t === 'dark' ? '#1d232a' : '#285628');
     }}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { getChordDiagram } from '../utils/chordDiagrams';
+import { CloseIcon } from './Icons';
 
 export function GuitarChordSVG({ chordName, size = 120 }) {
   const diag = getChordDiagram(chordName);
@@ -144,7 +145,9 @@ export default function ChordModal({ isOpen, onClose, songTitle, chords = [] }) 
             <h3 className="font-bold text-lg text-base-content">Acordes de guitarra</h3>
             <p className="text-xs text-base-content/70 mt-0.5">{songTitle}</p>
           </div>
-          <button onClick={onClose} className="btn btn-sm btn-circle btn-ghost">✕</button>
+          <button onClick={onClose} className="btn btn-sm btn-circle btn-ghost" aria-label="Cerrar">
+            <CloseIcon className="w-4 h-4" />
+          </button>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-[65vh] overflow-y-auto p-1">

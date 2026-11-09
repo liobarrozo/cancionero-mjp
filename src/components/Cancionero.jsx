@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import datos from '../data/cancionero.json';
 import ChordModal from './ChordModal';
 import LiveScrollModal from './LiveScrollModal';
+import { SunIcon, MoonIcon, GuitarIcon, PlayIcon } from './Icons';
 import './Cancionero.css';
 
 const CHORDS_SHARP = ['DO', 'DO#', 'RE', 'RE#', 'MI', 'FA', 'FA#', 'SOL', 'SOL#', 'LA', 'SIb', 'SI'];
@@ -155,9 +156,9 @@ export default function Cancionero() {
               aria-label="Alternar modo oscuro o claro"
             >
               {theme === 'dark' ? (
-                <span className="text-lg">☀️</span>
+                <SunIcon className="w-5 h-5 text-warning" />
               ) : (
-                <span className="text-lg">🌙</span>
+                <MoonIcon className="w-5 h-5 text-base-content/80" />
               )}
             </button>
           </div>
@@ -335,18 +336,20 @@ export default function Cancionero() {
                     {uniqueChords.length > 0 && (
                       <button
                         onClick={() => setModalChordsSong({ titulo: cancion.titulo, acordes: transposedChords })}
-                        className="btn btn-xs btn-ghost text-primary gap-1 font-semibold"
+                        className="btn btn-xs btn-ghost text-primary gap-1.5 font-semibold"
                         title="Ver digitación de acordes"
                       >
-                        🎸 Diagramas
+                        <GuitarIcon className="w-3.5 h-3.5" />
+                        <span>Diagramas</span>
                       </button>
                     )}
                     <button
                       onClick={() => setLiveScrollSong(cancion)}
-                      className="btn btn-xs btn-primary gap-1 font-semibold"
+                      className="btn btn-xs btn-primary gap-1.5 font-semibold"
                       title="Abrir en pantalla completa con deslizamiento automático"
                     >
-                      ▶ En vivo / Scroll
+                      <PlayIcon className="w-3 h-3" />
+                      <span>En vivo / Scroll</span>
                     </button>
                   </div>
                 </div>

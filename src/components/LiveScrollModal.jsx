@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { SunIcon, MoonIcon, PlayIcon, PauseIcon, FullscreenIcon, CloseIcon } from './Icons';
 
 export default function LiveScrollModal({
   isOpen,
@@ -138,17 +139,22 @@ export default function LiveScrollModal({
             title={isDark ? 'Modo claro' : 'Modo oscuro'}
             aria-label="Alternar modo oscuro"
           >
-            {isDark ? '☀️' : '🌙'}
+            {isDark ? (
+              <SunIcon className="w-4 h-4 text-warning" />
+            ) : (
+              <MoonIcon className="w-4 h-4 text-base-content/80" />
+            )}
           </button>
           <button
             onClick={toggleNativeFullscreen}
             className="btn btn-sm btn-ghost btn-circle"
             title="Pantalla completa nativa"
+            aria-label="Pantalla completa"
           >
-            {isFullscreen ? '⤓' : '⤢'}
+            <FullscreenIcon isFullscreen={isFullscreen} className="w-4 h-4" />
           </button>
-          <button onClick={onClose} className="btn btn-sm btn-circle btn-ghost" title="Salir">
-            ✕
+          <button onClick={onClose} className="btn btn-sm btn-circle btn-ghost" title="Salir" aria-label="Cerrar">
+            <CloseIcon className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -241,8 +247,13 @@ export default function LiveScrollModal({
             onClick={() => setIsPlaying(p => !p)}
             className={`btn btn-sm btn-circle ${isPlaying ? 'btn-warning' : 'btn-primary'}`}
             title={isPlaying ? 'Pausar (Espacio)' : 'Deslizar (Espacio)'}
+            aria-label={isPlaying ? 'Pausar' : 'Deslizar'}
           >
-            {isPlaying ? '⏸' : '▶'}
+            {isPlaying ? (
+              <PauseIcon className="w-4 h-4" />
+            ) : (
+              <PlayIcon className="w-4 h-4 translate-x-0.5" />
+            )}
           </button>
 
           {/* Slider de Velocidad */}
