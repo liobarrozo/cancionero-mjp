@@ -6,11 +6,11 @@ const CHORDS_SHARP = ['DO', 'DO#', 'RE', 'RE#', 'MI', 'FA', 'FA#', 'SOL', 'SOL#'
 const CHORDS_FLAT  = ['DO', 'REb', 'RE', 'MIb', 'MI', 'FA', 'SOLb', 'SOL', 'LAb', 'LA', 'SIb', 'SI'];
 const CHORDS_ENG   = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'];
 
-function transposeChord(chord, steps) {
+function transposeSingleChord(chord, steps) {
   if (!chord || steps === 0) return chord;
-  const m = chord.match(/^(DO#?|RE#?|MI#?|FA#?|SOL#?|LA#?|SI#?|REb|MIb|SOLb|LAb|SIb|[A-G][#b]?)(.*)$/);
+  const m = chord.match(/^(DO#?|RE#?|MI#?|FA#?|SOL#?|LA#?|SI#?|REb|MIb|SOLb|LAb|SIb|[A-G][#b]?)(.*)$/i);
   if (!m) return chord;
-  const root = m[1];
+  const root = m[1].toUpperCase().replace('B', 'b');
   const suffix = m[2];
 
   let idx = CHORDS_SHARP.indexOf(root);
@@ -21,6 +21,14 @@ function transposeChord(chord, steps) {
   let newIdx = (idx + steps) % 12;
   if (newIdx < 0) newIdx += 12;
   return CHORDS_SHARP[newIdx] + suffix;
+}
+
+function transposeChordGroup(group, steps) {
+  if (!group || steps === 0) return group;
+  return group
+    .split(/(\s+)/)
+    .map(tok => (/^\s+$/.test(tok) ? tok : transposeSingleChord(tok, steps)))
+    .join('');
 }
 
 export default function Cancionero() {
@@ -87,7 +95,7 @@ export default function Cancionero() {
         <input
           type="text"
           className="buscador"
-          placeholder="Buscar por título, letra o código Oasis (ej: O.308, Al altar, pan)..."
+          placeholder="Buscar por título, letra o código Oasis (ej: O.308, Cristo joven, pan)..."
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
@@ -143,9 +151,9 @@ export default function Cancionero() {
                 <div className="cancion-cuerpo">
                   {cancion.lineas.map((linea, lIdx) => {
                     const textOnly = linea.segmentos.map(s => s.letra).join('').trim();
-                    const isMarker = textOnly === '[ESTRIBILLO]' || textOnly === 'ESTRIBILLO' || textOnly === '(x2)' || textOnly === '(x3)';
+                    const hasChords = linea.segmentos.some(s => (s.acorde || '').trim() !== '');
 
-                    if (isMarker) {
+                    if (!hasChords && (textOnly === '[ESTRIBILLO]' || textOnly === 'ESTRIBILLO' || textOnly === 'CORO')) {
                       return (
                         <div key={lIdx} className="renglon marcador">
                           {textOnly}
@@ -153,16 +161,42 @@ export default function Cancionero() {
                       );
                     }
 
+                    if (!hasChords) {
+                      return (
+                        <div key={lIdx} className="renglon sin-acordes">
+                          <span className="letra">{textOnly}</span>
+                        </div>
+                      );
+                    }
+
+                    if (linea.tipo === 'acordes') {
+                      return (
+                        <div key={lIdx} className="renglon tipo-solo-acordes">
+                          {linea.segmentos
+                            .filter(s => (s.acorde || '').trim() !== '')
+                            .map((s, sIdx) => (
+                              <span key={sIdx} className="acorde-inline">
+                                {transposeChordGroup(s.acorde.trim(), shift)}
+                              </span>
+                            ))}
+                        </div>
+                      );
+                    }
+
                     return (
-                      <div key={lIdx} className={`renglon ${linea.tipo === 'acordes' ? 'tipo-solo-acordes' : ''}`}>
+                      <div key={lIdx} className="renglon con-acordes">
                         {linea.segmentos.map((s, sIdx) => {
-                          const chord = s.acorde ? transposeChord(s.acorde, shift) : '';
+                          const chord = s.acorde ? transposeChordGroup(s.acorde.trim(), shift) : '';
+                          const offset = s.offset || 0;
                           return (
                             <span key={sIdx} className="bloque-acorde">
-                              {chord ? (
-                                <span className="acorde">{chord}</span>
-                              ) : (
-                                <span className="acorde-vacio">&nbsp;</span>
+                              {chord && (
+                                <span
+                                  className="acorde"
+                                  style={offset ? { left: `${offset}em` } : undefined}
+                                >
+                                  {chord}
+                                </span>
                               )}
                               <span className="letra">{s.letra || '\u00A0'}</span>
                             </span>

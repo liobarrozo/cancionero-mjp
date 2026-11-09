@@ -5,9 +5,8 @@ Genera cancionero_web_precise.html interactivo y autónomo (sin dependencias).
 Reproduce con fidelidad visual idéntica la tipografía y posición del PDF:
 - Fuente Google DM Sans (la misma tipografía del cancionero original).
 - Color de acordes verde #285628 idéntico al PDF.
-- Cada acorde posicionado directamente sobre su sílaba con flex vertical.
-- Transposición tonal (+1 / -1 semitono).
-- Buscador en tiempo real y filtros por categoría litúrgica.
+- Cada acorde anclado sobre su carácter con offset sub-carácter exacto (em) y sin alterar el kerning de las palabras.
+- Líneas de solo letra sin fila vacía de acordes (espaciado vertical idéntico al PDF).
 """
 
 import json
@@ -17,8 +16,10 @@ from pathlib import Path
 DATA_PATH = Path("cancionero_vite.json")
 OUT_HTML = Path("cancionero_web_precise.html")
 
+
 def escape(s):
     return html_mod.escape(str(s or ""), quote=False)
+
 
 def main():
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
@@ -26,57 +27,71 @@ def main():
     total = data["total_canciones"]
     total_acordes = data["total_acordes"]
 
-    # Ordenar categorías con orden litúrgico canónico
     orden_liturgico = [
         "Todas", "Entradas", "Penitenciales", "Gloria", "Aleluya",
         "Ofertorio", "Santo", "Padre nuestro", "Cordero",
         "Comunión", "Meditación", "Salida", "Varios", "Bajadas"
     ]
-    
+
     cats_presentes = set(c["categoria"] for c in canciones)
     cats_ordenadas = [c for c in orden_liturgico if c == "Todas" or c in cats_presentes]
     for c in sorted(cats_presentes):
         if c not in cats_ordenadas:
             cats_ordenadas.append(c)
 
-    # Botones chips
     chips_html = "".join(
         f'<button class="chip {"activo" if cat == "Todas" else ""}" data-cat="{escape(cat)}">{escape(cat)}</button>'
         for cat in cats_ordenadas
     )
 
-    # Render de canciones
     canciones_html = []
     for c in canciones:
         lineas_html = []
         for l in c["lineas"]:
             tipo = l.get("tipo", "letra")
             segs = l.get("segmentos", [])
-            
-            # Detectar marcadores como [ESTRIBILLO], (x2), etc.
+
             linea_txt = "".join(s.get("letra", "") for s in segs).strip()
-            es_marcador = linea_txt in ("[ESTRIBILLO]", "ESTRIBILLO", "CORO", "(x2)", "(x3)")
-            
-            if es_marcador:
+            tiene_acordes = any(s.get("acorde", "").strip() for s in segs)
+
+            if not tiene_acordes and linea_txt in ("[ESTRIBILLO]", "ESTRIBILLO", "CORO"):
                 lineas_html.append(f'<div class="renglon marcador">{escape(linea_txt)}</div>')
                 continue
-                
+
+            if not tiene_acordes:
+                lineas_html.append(
+                    f'<div class="renglon sin-acordes"><span class="letra">{escape(linea_txt)}</span></div>'
+                )
+                continue
+
+            if tipo == "acordes":
+                segs_html = [
+                    f'<span class="acorde-inline" data-chord="{escape(s.get("acorde", "").strip())}">{escape(s.get("acorde", "").strip())}</span>'
+                    for s in segs if s.get("acorde", "").strip()
+                ]
+                lineas_html.append('<div class="renglon tipo-solo-acordes">' + " ".join(segs_html) + '</div>')
+                continue
+
             segs_html = []
             for s in segs:
                 acorde = s.get("acorde", "").strip()
                 letra = s.get("letra", "")
-                
-                acorde_span = f'<span class="acorde" data-chord="{escape(acorde)}">{escape(acorde)}</span>' if acorde else '<span class="acorde-vacio">&nbsp;</span>'
-                letra_span = f'<span class="letra">{escape(letra)}</span>' if letra else '<span class="letra">&nbsp;</span>'
-                
+                offset = s.get("offset", 0.0) or 0.0
+                style_left = f' style="left:{offset}em;"' if offset else ''
+
+                acorde_span = (
+                    f'<span class="acorde" data-chord="{escape(acorde)}"{style_left}>{escape(acorde)}</span>'
+                    if acorde else ''
+                )
+                letra_span = f'<span class="letra">{escape(letra) if letra else "&nbsp;"}</span>'
                 segs_html.append(f'<span class="bloque-acorde">{acorde_span}{letra_span}</span>')
-                
-            lineas_html.append(f'<div class="renglon {"tipo-solo-acordes" if tipo == "acordes" else ""}">' + "".join(segs_html) + '</div>')
-            
+
+            lineas_html.append('<div class="renglon con-acordes">' + "".join(segs_html) + '</div>')
+
         badge_bajada = 'bajada' if c['categoria'] == 'Bajadas' or c.get('codigo_oasis') else ''
         oasis_badge = f'<span class="badge oasis">{escape(c["codigo_oasis"])}</span>' if c.get('codigo_oasis') else ''
         subtitulo_html = f'<div class="subtitulo">{escape(c["subtitulo"])}</div>' if c.get('subtitulo') else ''
-        
+
         canciones_html.append(f'''
         <article class="cancion" data-id="{c['id']}" data-cat="{escape(c['categoria'])}" data-tit="{escape(c['titulo'].lower())}" data-oasis="{escape((c.get('codigo_oasis') or '').lower())}">
           <header class="cancion-head">
@@ -90,7 +105,7 @@ def main():
               <span class="badge pag">pág. {c['pagina_origen']}</span>
             </div>
           </header>
-          
+
           <div class="transposer-bar">
             <span class="transpose-label">Tono:</span>
             <button class="btn-transpose" onclick="transposeSong({c['id']}, -1)">-1</button>
@@ -98,7 +113,7 @@ def main():
             <button class="btn-transpose" onclick="transposeSong({c['id']}, 1)">+1</button>
             <button class="btn-reset" onclick="resetTranspose({c['id']})">Reset</button>
           </div>
-          
+
           <div class="cancion-cuerpo">
             {"".join(lineas_html)}
           </div>
@@ -117,8 +132,8 @@ def main():
   <style>
     :root {{
       --font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
-      --chord-color: #285628; /* Verde exacto del PDF */
-      --lyric-color: #231f20; /* Color exacto de letra del PDF */
+      --chord-color: #285628;
+      --lyric-color: #231f20;
       --primary: #1e3a8a;
       --bg: #f8fafc;
       --card-bg: #ffffff;
@@ -161,7 +176,6 @@ def main():
       margin-top: 0.75rem;
     }}
 
-    /* Controles */
     .controls {{
       max-width: 900px;
       margin: 0 auto 1.5rem;
@@ -214,7 +228,6 @@ def main():
       border-color: #1e3a8a;
     }}
 
-    /* Grid de canciones */
     .grid {{
       max-width: 900px;
       margin: 0 auto;
@@ -242,7 +255,7 @@ def main():
     .cancion-titulo {{
       font-size: 1.35rem;
       font-weight: 700;
-      color: #0f172a;
+      color: #231f20;
       letter-spacing: -0.01em;
     }}
     .subtitulo {{
@@ -278,7 +291,6 @@ def main():
       color: #94a3b8;
     }}
 
-    /* Barra de transposición */
     .transposer-bar {{
       display: inline-flex;
       align-items: center;
@@ -287,7 +299,7 @@ def main():
       border: 1px solid #e2e8f0;
       border-radius: 0.4rem;
       padding: 0.2rem 0.6rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.85rem;
       font-size: 0.8rem;
     }}
     .transpose-label {{
@@ -314,62 +326,64 @@ def main():
       text-align: center;
     }}
 
-    /* Cuerpo musical: acordes exactamente sobre letras */
+    /* Cuerpo musical con proporción 1:1 respecto al PDF (DM Sans 12pt) */
     .cancion-cuerpo {{
+      font-family: var(--font-family);
+      font-size: 16px;
       display: flex;
       flex-direction: column;
-      gap: 0.2rem;
     }}
     .renglon {{
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      line-height: 1.15;
+      white-space: pre;
+    }}
+    .renglon.con-acordes {{
+      display: block;
+      line-height: 1.35;
+      margin-top: 0.1rem;
+    }}
+    .renglon.sin-acordes {{
+      display: block;
+      line-height: 1.5;
     }}
     .renglon.marcador {{
-      font-weight: 700;
-      font-size: 0.82rem;
-      color: #64748b;
-      margin: 0.5rem 0 0.2rem;
-      letter-spacing: 0.04em;
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--lyric-color);
+      line-height: 1.5;
+      margin-top: 0.35rem;
+    }}
+    .renglon.tipo-solo-acordes {{
+      display: flex;
+      gap: 0.85rem;
+      line-height: 1.5;
+      margin-top: 0.15rem;
     }}
     .bloque-acorde {{
-      display: inline-flex;
-      flex-direction: column;
+      display: inline-block;
+      position: relative;
+      padding-top: 1.35em;
       vertical-align: bottom;
     }}
-    .acorde {{
+    .acorde, .acorde-inline {{
       font-family: var(--font-family);
-      font-weight: 700;
+      font-weight: 600;
       color: var(--chord-color);
-      font-size: 0.82rem;
-      line-height: 1.1;
-      min-height: 1.1em;
-      white-space: pre;
+      font-size: 1em;
+      line-height: 1.2;
+      white-space: nowrap;
     }}
-    .acorde-vacio {{
-      font-size: 0.82rem;
-      line-height: 1.1;
-      min-height: 1.1em;
-      visibility: hidden;
-      white-space: pre;
+    .acorde {{
+      position: absolute;
+      top: 0.05em;
+      left: 0;
     }}
     .letra {{
       font-family: var(--font-family);
       font-weight: 400;
       color: var(--lyric-color);
-      font-size: 0.98rem;
+      font-size: 1em;
       line-height: 1.35;
       white-space: pre;
-    }}
-    .tipo-solo-acordes .acorde {{
-      font-size: 0.9rem;
-    }}
-    .no-results {{
-      text-align: center;
-      padding: 3rem;
-      color: #64748b;
-      font-size: 1.1rem;
     }}
   </style>
 </head>
@@ -385,7 +399,7 @@ def main():
   </header>
 
   <div class="controls">
-    <input type="text" id="buscador" class="search-box" placeholder="Buscar por título, letra o código Oasis (ej: O.308, Al altar, pan)...">
+    <input type="text" id="buscador" class="search-box" placeholder="Buscar por título, letra o código Oasis (ej: O.308, Cristo joven, pan)...">
     <div class="filtros" id="filtros-container">
       {chips_html}
     </div>
@@ -396,29 +410,29 @@ def main():
   </main>
 
   <script>
-    // Transposición musical
     const CHORDS_SHARP = ['DO', 'DO#', 'RE', 'RE#', 'MI', 'FA', 'FA#', 'SOL', 'SOL#', 'LA', 'SIb', 'SI'];
     const CHORDS_FLAT  = ['DO', 'REb', 'RE', 'MIb', 'MI', 'FA', 'SOLb', 'SOL', 'LAb', 'LA', 'SIb', 'SI'];
     const CHORDS_ENG   = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'];
 
-    function transposeChord(chord, steps) {{
+    function transposeSingleChord(chord, steps) {{
       if (!chord || steps === 0) return chord;
-      // Regex para separar raíz de sufijo
-      const m = chord.match(/^(DO#?|RE#?|MI#?|FA#?|SOL#?|LA#?|SI#?|REb|MIb|SOLb|LAb|SIb|[A-G][#b]?)(.*)$/);
+      const m = chord.match(/^(DO#?|RE#?|MI#?|FA#?|SOL#?|LA#?|SI#?|REb|MIb|SOLb|LAb|SIb|[A-G][#b]?)(.*)$/i);
       if (!m) return chord;
-      let root = m[1];
+      const root = m[1].toUpperCase().replace('B', 'b');
       const suffix = m[2];
-      
+
       let idx = CHORDS_SHARP.indexOf(root);
       if (idx === -1) idx = CHORDS_FLAT.indexOf(root);
       if (idx === -1) idx = CHORDS_ENG.indexOf(root);
       if (idx === -1) return chord;
-      
+
       let newIdx = (idx + steps) % 12;
       if (newIdx < 0) newIdx += 12;
-      
-      const newRoot = CHORDS_SHARP[newIdx];
-      return newRoot + suffix;
+      return CHORDS_SHARP[newIdx] + suffix;
+    }}
+
+    function transposeChordGroup(group, steps) {{
+      return group.split(/(\\s+)/).map(tok => /^\\s+$/.test(tok) ? tok : transposeSingleChord(tok, steps)).join('');
     }}
 
     const transposeState = {{}};
@@ -428,13 +442,12 @@ def main():
       const next = current + delta;
       transposeState[songId] = next;
       document.getElementById('trans-' + songId).textContent = (next > 0 ? '+' : '') + next;
-      
+
       const card = document.querySelector(`.cancion[data-id="${{songId}}"]`);
       if (!card) return;
-      const chords = card.querySelectorAll('.acorde');
-      chords.forEach(c => {{
+      card.querySelectorAll('[data-chord]').forEach(c => {{
         const original = c.getAttribute('data-chord');
-        c.textContent = transposeChord(original, next);
+        c.textContent = transposeChordGroup(original, next);
       }});
     }}
 
@@ -443,13 +456,11 @@ def main():
       document.getElementById('trans-' + songId).textContent = '0';
       const card = document.querySelector(`.cancion[data-id="${{songId}}"]`);
       if (!card) return;
-      const chords = card.querySelectorAll('.acorde');
-      chords.forEach(c => {{
+      card.querySelectorAll('[data-chord]').forEach(c => {{
         c.textContent = c.getAttribute('data-chord');
       }});
     }}
 
-    // Filtrado y búsqueda
     const chips = document.querySelectorAll('.chip');
     const cards = document.querySelectorAll('.cancion');
     const buscador = document.getElementById('buscador');
@@ -459,7 +470,6 @@ def main():
       const cat = activeChip ? activeChip.getAttribute('data-cat') : 'Todas';
       const q = buscador.value.trim().toLowerCase();
 
-      let visible = 0;
       cards.forEach(card => {{
         const cardCat = card.getAttribute('data-cat');
         const cardTit = card.getAttribute('data-tit');
@@ -469,12 +479,7 @@ def main():
         const matchCat = (cat === 'Todas') || (cardCat === cat) || (cat === 'Bajadas' && cardOasis);
         const matchSearch = !q || cardTit.includes(q) || cardOasis.includes(q) || textContent.includes(q);
 
-        if (matchCat && matchSearch) {{
-          card.style.display = '';
-          visible++;
-        }} else {{
-          card.style.display = 'none';
-        }}
+        card.style.display = (matchCat && matchSearch) ? '' : 'none';
       }});
     }}
 
@@ -493,6 +498,7 @@ def main():
 
     OUT_HTML.write_text(html_content, encoding="utf-8")
     print(f"HTML generado exitosamente en: {OUT_HTML.resolve()}")
+
 
 if __name__ == "__main__":
     main()
