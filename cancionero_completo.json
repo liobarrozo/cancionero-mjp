@@ -2322,9 +2322,8 @@
       "acordes": [
         "SOL",
         "RE",
-        "Mim",
-        "DO",
         "MIm",
+        "DO",
         "SOL7"
       ],
       "letra_chordpro": [
@@ -3895,11 +3894,10 @@
       "seccion": "Cantos Litúrgicos",
       "pagina_origen": 17,
       "acordes": [
-        "Mim",
+        "MIm",
         "RE",
         "SOL",
         "SI7",
-        "MIm",
         "DO",
         "LA",
         "RE7",
@@ -4738,6 +4736,7 @@
       "pagina_origen": 18,
       "acordes": [
         "RE",
+        "SIm",
         "SOL",
         "LA"
       ],
@@ -9237,7 +9236,7 @@
         "FA#",
         "SOL",
         "LA7",
-        "Mim"
+        "MIm"
       ],
       "letra_chordpro": [
         "[RE]Te prese[FA#]ntamos el [SOL]vino y el [RE]pan,",
@@ -10365,8 +10364,7 @@
         "REm",
         "SOL",
         "DO",
-        "MI7",
-        "Lam"
+        "MI7"
       ],
       "letra_chordpro": [
         "[LAm]Santo, [LA7]Santo, [REm]Santo",
@@ -22018,7 +22016,6 @@
         "SOL#7",
         "FA#",
         "Sim7",
-        "Sim",
         "SOL#"
       ],
       "letra_chordpro": [
@@ -29928,8 +29925,6 @@
         "SOL",
         "MIm",
         "LA",
-        "la",
-        "a",
         "MI",
         "FA"
       ],
@@ -30985,7 +30980,6 @@
         "LAm",
         "FA",
         "REm",
-        "Lam",
         "MIm"
       ],
       "letra_chordpro": [
@@ -36408,7 +36402,6 @@
         "MIm",
         "LA",
         "SIm",
-        "a",
         "MI"
       ],
       "letra_chordpro": [
@@ -45203,7 +45196,6 @@
         "LA",
         "SIm",
         "FA#m",
-        "Sim",
         "Fa#m"
       ],
       "letra_chordpro": [
@@ -55035,7 +55027,6 @@
         "SOL",
         "DO",
         "RE",
-        "Mim",
         "MIm",
         "LAm"
       ],
@@ -69755,7 +69746,6 @@
         "LAm",
         "SOL/SI",
         "DO",
-        "DO*",
         "DO9",
         "MIm",
         "RE",
@@ -76755,7 +76745,6 @@
       "seccion": "Varios",
       "pagina_origen": 123,
       "acordes": [
-        "acordes:",
         "SOL",
         "RE/FA#",
         "MIm",
@@ -88645,8 +88634,7 @@
         "MI",
         "DO#m",
         "LA",
-        "SI",
-        "mi"
+        "SI"
       ],
       "letra_chordpro": [
         "[MI]Quiero ser una joven ideal",
@@ -89877,6 +89865,7 @@
       "acordes": [
         "MI",
         "LA6",
+        "DO#m",
         "SI"
       ],
       "letra_chordpro": [
@@ -91287,7 +91276,6 @@
         "DO9",
         "SOL",
         "RE",
-        "Mim",
         "MIm"
       ],
       "letra_chordpro": [
@@ -92438,8 +92426,7 @@
       "acordes": [
         "SOL",
         "DO",
-        "a",
-        "mi",
+        "MI",
         "MIm",
         "SIm",
         "RE"
@@ -97522,8 +97509,7 @@
         "MI",
         "LA",
         "LA7",
-        "SIm",
-        "Mi"
+        "SIm"
       ],
       "letra_chordpro": [
         "[RE]Escuche una voz, [SOL]escuche una [RE]voz",
@@ -98047,9 +98033,8 @@
       "acordes": [
         "DO",
         "FA",
-        "Lam",
         "LAm",
-        "Rem",
+        "REm",
         "SOL"
       ],
       "letra_chordpro": [
@@ -101626,7 +101611,7 @@
       "acordes": [
         "DO#m",
         "MI",
-        "SI#",
+        "DO",
         "LA6",
         "LA",
         "SI",
@@ -103100,10 +103085,8 @@
         "MI",
         "LA5",
         "LA",
-        "SOL(A)",
         "RE6/FA#",
-        "SOL",
-        "A"
+        "SOL"
       ],
       "letra_chordpro": [
         "[INTRO:]Vivien[MI]do [SOL(A)]según tu[FA#m(A)]s manda[LA5]mient[(x2)]os    [LA]      [MI]         [SOL(A)]",
@@ -107481,7 +107464,6 @@
         "DO9",
         "RE",
         "DO",
-        "Mim",
         "MIm"
       ],
       "letra_chordpro": [
@@ -116214,10 +116196,9 @@
       "pagina_origen": 184,
       "acordes": [
         "FA",
-        "Do",
+        "DO",
         "MIm",
         "LAm",
-        "DO",
         "SOL"
       ],
       "letra_chordpro": [
@@ -120861,12 +120842,7 @@
         "RE",
         "LA",
         "LAsus2",
-        "MI",
-        "re",
-        "la",
-        "mi",
-        "sol",
-        "LA*"
+        "MI"
       ],
       "letra_chordpro": [
         "[SOL]En tanta oscuridad p[RE]erdida me siento,",

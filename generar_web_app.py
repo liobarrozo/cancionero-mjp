@@ -327,44 +327,170 @@ def main():
   </div>
 
   <script>
-    // Diccionario de acordes de guitarra para SVG
+    // Diccionario completo de acordes de guitarra para SVG
     const GUITAR_CHORDS = {{
+      // DO
       'DO': {{ frets: [-1, 3, 2, 0, 1, 0], baseFret: 1 }},
       'DO7': {{ frets: [-1, 3, 2, 3, 1, 0], baseFret: 1 }},
       'DOmaj7': {{ frets: [-1, 3, 2, 0, 0, 0], baseFret: 1 }},
       'DOm': {{ frets: [-1, 3, 5, 5, 4, 3], baseFret: 3, barre: 3 }},
+      'DOm7': {{ frets: [-1, 3, 5, 3, 4, 3], baseFret: 3, barre: 3 }},
+      'DO9': {{ frets: [-1, 3, 2, 3, 3, 3], baseFret: 1 }},
+      'DOadd9': {{ frets: [-1, 3, 2, 0, 3, 0], baseFret: 1 }},
       'DO#': {{ frets: [-1, 4, 6, 6, 6, 4], baseFret: 4, barre: 4 }},
       'DO#m': {{ frets: [-1, 4, 6, 6, 5, 4], baseFret: 4, barre: 4 }},
+      'DO#m7': {{ frets: [-1, 4, 6, 4, 5, 4], baseFret: 4, barre: 4 }},
+      'DO#7': {{ frets: [-1, 4, 6, 4, 6, 4], baseFret: 4, barre: 4 }},
+      'DO#dim': {{ frets: [-1, -1, 2, 3, 2, 3], baseFret: 1 }},
+      'DO/SI': {{ frets: [-1, 2, 2, 0, 1, 0], baseFret: 1 }},
+
+      // RE
       'RE': {{ frets: [-1, -1, 0, 2, 3, 2], baseFret: 1 }},
       'RE7': {{ frets: [-1, -1, 0, 2, 1, 2], baseFret: 1 }},
+      'REmaj7': {{ frets: [-1, -1, 0, 2, 2, 2], baseFret: 1 }},
       'REm': {{ frets: [-1, -1, 0, 2, 3, 1], baseFret: 1 }},
       'REm7': {{ frets: [-1, -1, 0, 2, 1, 1], baseFret: 1 }},
+      'REsus4': {{ frets: [-1, -1, 0, 2, 3, 3], baseFret: 1 }},
       'RE4': {{ frets: [-1, -1, 0, 2, 3, 3], baseFret: 1 }},
+      'REsus2': {{ frets: [-1, -1, 0, 2, 3, 0], baseFret: 1 }},
+      'RE9': {{ frets: [-1, -1, 0, 2, 1, 0], baseFret: 1 }},
+      'RE#': {{ frets: [-1, 6, 8, 8, 8, 6], baseFret: 6, barre: 6 }},
+      'RE#m': {{ frets: [-1, 6, 8, 8, 7, 6], baseFret: 6, barre: 6 }},
+      'RE#7': {{ frets: [-1, 6, 8, 6, 8, 6], baseFret: 6, barre: 6 }},
+      'RE#dim': {{ frets: [-1, -1, 1, 2, 1, 2], baseFret: 1 }},
+      'REb': {{ frets: [-1, 4, 6, 6, 6, 4], baseFret: 4, barre: 4 }},
+      'RE/FA#': {{ frets: [2, 0, 0, 2, 3, 2], baseFret: 1 }},
+      'RE6/FA#': {{ frets: [2, 0, 0, 2, 0, 2], baseFret: 1 }},
+      'RE/DO#': {{ frets: [-1, 4, 0, 2, 3, 2], baseFret: 1 }},
+
+      // MI
       'MI': {{ frets: [0, 2, 2, 1, 0, 0], baseFret: 1 }},
       'MI7': {{ frets: [0, 2, 0, 1, 0, 0], baseFret: 1 }},
+      'MImaj7': {{ frets: [0, 2, 1, 1, 0, 0], baseFret: 1 }},
       'MIm': {{ frets: [0, 2, 2, 0, 0, 0], baseFret: 1 }},
       'MIm7': {{ frets: [0, 2, 0, 0, 0, 0], baseFret: 1 }},
+      'MIsus4': {{ frets: [0, 2, 2, 2, 0, 0], baseFret: 1 }},
+      'MI9': {{ frets: [0, 2, 0, 1, 0, 2], baseFret: 1 }},
+      'MIb': {{ frets: [-1, 6, 8, 8, 8, 6], baseFret: 6, barre: 6 }},
+      'MIbm': {{ frets: [-1, 6, 8, 8, 7, 6], baseFret: 6, barre: 6 }},
+      'MIb/SIb': {{ frets: [-1, 1, 1, 3, 4, 3], baseFret: 1 }},
+
+      // FA
       'FA': {{ frets: [1, 3, 3, 2, 1, 1], baseFret: 1, barre: 1 }},
+      'FA7': {{ frets: [1, 3, 1, 2, 1, 1], baseFret: 1, barre: 1 }},
+      'FAmaj7': {{ frets: [-1, -1, 3, 2, 1, 0], baseFret: 1 }},
+      'FAm': {{ frets: [1, 3, 3, 1, 1, 1], baseFret: 1, barre: 1 }},
       'FA#': {{ frets: [2, 4, 4, 3, 2, 2], baseFret: 2, barre: 2 }},
       'FA#m': {{ frets: [2, 4, 4, 2, 2, 2], baseFret: 2, barre: 2 }},
-      'FAm': {{ frets: [1, 3, 3, 1, 1, 1], baseFret: 1, barre: 1 }},
+      'FA#7': {{ frets: [2, 4, 2, 3, 2, 2], baseFret: 2, barre: 2 }},
+      'FA#m7': {{ frets: [2, 4, 2, 2, 2, 2], baseFret: 2, barre: 2 }},
+      'FA#dim': {{ frets: [-1, -1, 1, 2, 1, 2], baseFret: 1 }},
+
+      // SOL
       'SOL': {{ frets: [3, 2, 0, 0, 0, 3], baseFret: 1 }},
       'SOL7': {{ frets: [3, 2, 0, 0, 0, 1], baseFret: 1 }},
+      'SOLmaj7': {{ frets: [3, 2, 0, 0, 0, 2], baseFret: 1 }},
       'SOLm': {{ frets: [3, 5, 5, 3, 3, 3], baseFret: 3, barre: 3 }},
+      'SOLm7': {{ frets: [3, 5, 3, 3, 3, 3], baseFret: 3, barre: 3 }},
+      'SOL9': {{ frets: [3, 2, 0, 2, 0, 1], baseFret: 1 }},
+      'SOLadd9': {{ frets: [3, 2, 0, 2, 0, 3], baseFret: 1 }},
+      'SOL#': {{ frets: [4, 6, 6, 5, 4, 4], baseFret: 4, barre: 4 }},
       'SOL#m': {{ frets: [4, 6, 6, 4, 4, 4], baseFret: 4, barre: 4 }},
+      'SOL#7': {{ frets: [4, 6, 4, 5, 4, 4], baseFret: 4, barre: 4 }},
+      'SOLb': {{ frets: [2, 4, 4, 3, 2, 2], baseFret: 2, barre: 2 }},
+      'SOL/SI': {{ frets: [-1, 2, 0, 0, 3, 3], baseFret: 1 }},
+      'SOL/DO': {{ frets: [-1, 3, 0, 0, 0, 3], baseFret: 1 }},
+
+      // LA
       'LA': {{ frets: [-1, 0, 2, 2, 2, 0], baseFret: 1 }},
+      'LA5': {{ frets: [-1, 0, 2, 2, -1, -1], baseFret: 1 }},
+      'LA6': {{ frets: [-1, 0, 2, 2, 2, 2], baseFret: 1 }},
       'LA7': {{ frets: [-1, 0, 2, 0, 2, 0], baseFret: 1 }},
+      'LA7sus': {{ frets: [-1, 0, 2, 0, 3, 0], baseFret: 1 }},
+      'LA9': {{ frets: [-1, 0, 2, 4, 2, 3], baseFret: 1 }},
+      'LAmaj7': {{ frets: [-1, 0, 2, 1, 2, 0], baseFret: 1 }},
       'LAm': {{ frets: [-1, 0, 2, 2, 1, 0], baseFret: 1 }},
       'LAm7': {{ frets: [-1, 0, 2, 0, 1, 0], baseFret: 1 }},
-      'LAmaj7': {{ frets: [-1, 0, 2, 1, 2, 0], baseFret: 1 }},
+      'LAsus4': {{ frets: [-1, 0, 2, 2, 3, 0], baseFret: 1 }},
+      'LAsus2': {{ frets: [-1, 0, 2, 2, 0, 0], baseFret: 1 }},
+      'LAsus9': {{ frets: [-1, 0, 2, 2, 0, 0], baseFret: 1 }},
+      'LA#': {{ frets: [-1, 1, 3, 3, 3, 1], baseFret: 1, barre: 1 }},
+      'LAb': {{ frets: [4, 6, 6, 5, 4, 4], baseFret: 4, barre: 4 }},
+      'LAm/SOL': {{ frets: [3, 0, 2, 2, 1, 0], baseFret: 1 }},
+
+      // SI
       'SI': {{ frets: [-1, 2, 4, 4, 4, 2], baseFret: 2, barre: 2 }},
       'SI7': {{ frets: [-1, 2, 1, 2, 0, 2], baseFret: 1 }},
       'SIm': {{ frets: [-1, 2, 4, 4, 3, 2], baseFret: 2, barre: 2 }},
-      'SIb': {{ frets: [-1, 1, 3, 3, 3, 1], baseFret: 1, barre: 1 }}
+      'SIm7': {{ frets: [-1, 2, 0, 2, 0, 2], baseFret: 1 }},
+      'SIsus4': {{ frets: [-1, 2, 4, 4, 5, 2], baseFret: 2, barre: 2 }},
+      'SIb': {{ frets: [-1, 1, 3, 3, 3, 1], baseFret: 1, barre: 1 }},
+      'SIbm': {{ frets: [-1, 1, 3, 3, 2, 1], baseFret: 1, barre: 1 }},
+      'SIb7': {{ frets: [-1, 1, 3, 1, 3, 1], baseFret: 1, barre: 1 }},
+      'SIb/RE': {{ frets: [-1, -1, 0, 3, 3, 1], baseFret: 1 }},
+      'SIm/SOL': {{ frets: [3, 2, 4, 4, 3, 2], baseFret: 1 }},
     }};
 
+    const ENG_TO_ESP_MAP = {{
+      'C': 'DO', 'D': 'RE', 'E': 'MI', 'F': 'FA', 'G': 'SOL', 'A': 'LA', 'B': 'SI'
+    }};
+
+    function normalizeChord(str) {{
+      if (!str) return '';
+      let s = str.trim().replace(/^[-+\[\(]+|[\]\)\:\,\.\*]+$/g, '');
+      if (s === 'Slm' || s === 'slm') return 'SIm';
+      if (s === 'SI#') return 'DO';
+      if (s === 'DOm#') return 'DO#m';
+      s = s.replace(/^(DO|RE|MI|FA|SOL|LA|SI)-$/i, '$1m');
+      s = s.replace(/°/g, 'dim');
+      const lower = s.toLowerCase();
+      const lMap = {{
+        'do': 'DO', 're': 'RE', 'mi': 'MI', 'fa': 'FA', 'sol': 'SOL', 'la': 'LA', 'si': 'SI',
+        'dom': 'DOm', 'rem': 'REm', 'mim': 'MIm', 'fam': 'FAm', 'solm': 'SOLm', 'lam': 'LAm', 'sim': 'SIm',
+        'fa#m': 'FA#m', 'do#m': 'DO#m', 'sol#m': 'SOL#m', 'la#m': 'LA#m', 're#m': 'RE#m'
+      }};
+      if (lMap[lower]) return lMap[lower];
+      const mEsp = s.match(/^(do|re|mi|fa|sol|la|si)(#|b)?(.*)$/i);
+      if (mEsp) {{
+        const root = mEsp[1].toUpperCase();
+        const acc = mEsp[2] ? (mEsp[2].toLowerCase() === 'b' ? 'b' : '#') : '';
+        let suf = mEsp[3] || '';
+        if (suf.startsWith('m') && !suf.startsWith('maj')) suf = 'm' + suf.slice(1);
+        s = root + acc + suf;
+      }}
+      const mEng = s.match(/^([A-G])(#|b)?(.*)$/);
+      if (mEng && ENG_TO_ESP_MAP[mEng[1]]) {{
+        const root = ENG_TO_ESP_MAP[mEng[1]];
+        const acc = mEng[2] || '';
+        let suf = mEng[3] || '';
+        if (suf.startsWith('m') && !suf.startsWith('maj')) suf = 'm' + suf.slice(1);
+        s = root + acc + suf;
+      }}
+      return s;
+    }}
+
+    function getChordInfo(raw) {{
+      const norm = normalizeChord(raw);
+      if (!norm) return null;
+      if (GUITAR_CHORDS[norm]) return {{ name: norm, ...GUITAR_CHORDS[norm] }};
+      if (norm.includes('/')) {{
+        const base = norm.split('/')[0];
+        if (GUITAR_CHORDS[base]) return {{ name: norm, ...GUITAR_CHORDS[base] }};
+      }}
+      if (norm.endsWith('4') && GUITAR_CHORDS[norm.replace(/4$/, 'sus4')]) {{
+        return {{ name: norm, ...GUITAR_CHORDS[norm.replace(/4$/, 'sus4')] }};
+      }}
+      const m = norm.match(/^(DO#?|RE#?|MI#?|FA#?|SOL#?|LA#?|SI#?|REb|MIb|SOLb|LAb|SIb)(m|maj7|7|sus4|dim)?/);
+      if (m) {{
+        const cand = m[1] + (m[2] || '');
+        if (GUITAR_CHORDS[cand]) return {{ name: norm, ...GUITAR_CHORDS[cand] }};
+        if (GUITAR_CHORDS[m[1]]) return {{ name: norm, ...GUITAR_CHORDS[m[1]] }};
+      }}
+      return null;
+    }}
+
     function renderChordSVG(name) {{
-      const d = GUITAR_CHORDS[name];
+      const d = getChordInfo(name);
       if (!d) return `<div class="p-2 bg-base-200 rounded-lg text-xs text-center"><span class="font-bold">${{name}}</span><br/>Sin diagrama</div>`;
       const frets = d.frets;
       const base = d.baseFret || 1;
@@ -389,7 +515,7 @@ def main():
           if (rel >= 1 && rel <= 5) {{
             const x = mx + i * ss;
             const y = my + (rel - 0.5) * fs;
-            return `<circle cx="${{x}}" cy="${{y}}" r="5.5" fill="#285628" stroke="#ffffff" stroke-width="1.5"/>`;
+            return `<circle cx="${{x}}" cy="${{y}}" r="5.5" fill="var(--color-chord, #285628)" stroke="#ffffff" stroke-width="1.5"/>`;
           }}
         }}
         return '';
@@ -400,7 +526,7 @@ def main():
         : `<text x="${{mx - 12}}" y="${{my + fs*0.7}}" text-anchor="middle" font-size="10" font-weight="bold" fill="#64748b">${{base}}ª</text>`;
 
       return `<div class="flex flex-col items-center p-2 bg-base-100 rounded-xl border border-base-200 shadow-xs">
-        <span class="font-bold text-xs text-primary mb-1">${{name}}</span>
+        <span class="font-bold text-xs text-primary mb-1">${{d.name || name}}</span>
         <svg width="${{w}}" height="${{h}}">${{topMarkers}}${{nut}}${{fretLines}}${{stringLines}}${{dots}}</svg>
       </div>`;
     }}

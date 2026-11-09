@@ -69,6 +69,36 @@ def is_chord_char(c):
     return c['color'] == 0x285628 and c['size'] >= 9.0
 
 
+SPURIOUS_TOKENS = {
+    'a', 'acordes:', 'acordes', 'de', 'el', 'en', 'la', 'un', 'y', 'se', 'te',
+    'tono', 'cuerda', 'guitarra:', 'intro:', 'fin:', 'final:', 'puente:', 'rasgueo:',
+    'inter:', 'interludio:', 'puede', 'las', 'sobre', 'junto', 'recitan', 'sube', 'solo'
+}
+
+def clean_chord_token(t):
+    if not t:
+        return None
+    s = re.sub(r'^[(\[]+|[)\].,:;*+-]+$', '', t.strip())
+    if not s or (s.lower() in SPURIOUS_TOKENS and s not in ('MI', 'RE', 'SOL', 'LA', 'FA', 'DO', 'SI')):
+        return None
+    if s == 'Slm': s = 'SIm'
+    if s in ('Mi', 'mi'): s = 'MI'
+    if s in ('Re', 're'): s = 'RE'
+    if s in ('Sol', 'sol'): s = 'SOL'
+    if s in ('La', 'la'): s = 'LA'
+    if s in ('Do', 'do'): s = 'DO'
+    if s in ('Fa', 'fa'): s = 'FA'
+    if s in ('Sim', 'sim'): s = 'SIm'
+    if s in ('Mim', 'mim'): s = 'MIm'
+    if s in ('Lam', 'lam'): s = 'LAm'
+    if s in ('Rem', 'rem'): s = 'REm'
+    if s == 'DOm#': s = 'DO#m'
+    if s == 'SI#': s = 'DO'
+    if re.match(r'^(DO|RE|MI|FA|SOL|LA|SI|[A-G])(#|b)?(m|M|dim|aug|sus|maj|min|add)?[0-9]*(\/[A-Z0-9#b]+)?$', s, re.I):
+        return s
+    return None
+
+
 def line_is_chords(l):
     ns = [c for c in l['chars'] if c['c'] not in (' ', '\t', '\n', '\r')]
     if not ns:
@@ -527,9 +557,9 @@ def main():
                 chords = extract_chord_tokens(line)
                 total_chords += len(chords)
                 for c in chords:
-                    c_txt = re.sub(r'^[(\[]+|[)\].,:;*+-]+$', '', c['text'].strip())
-                    if re.match(r'^(DO|RE|MI|FA|SOL|LA|SI|[A-G])(#|b)?(m|M|dim|aug|sus|maj|min|add)?[0-9]*(\/[A-Z0-9#b]+)?$', c_txt, re.I) and c_txt not in unique_chords:
-                        unique_chords.append(c_txt)
+                    c_clean = clean_chord_token(c['text'])
+                    if c_clean and c_clean not in unique_chords:
+                        unique_chords.append(c_clean)
 
                 next_is_paired_lyric = (
                     i + 1 < len(raw)
@@ -567,9 +597,9 @@ def main():
                     chords2 = extract_chord_tokens(raw[i + 1])
                     total_chords += len(chords2)
                     for c2 in chords2:
-                        c2_txt = c2['text'].strip()
-                        if c2_txt and c2_txt not in ('INTRO:', 'Fin:', '–', '-') and c2_txt not in unique_chords:
-                            unique_chords.append(c2_txt)
+                        c2_clean = clean_chord_token(c2['text'])
+                        if c2_clean and c2_clean not in unique_chords:
+                            unique_chords.append(c2_clean)
                     lyr1 = raw[i + 2]
                     if (
                         i + 3 < len(raw)
