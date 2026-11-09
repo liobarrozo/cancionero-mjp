@@ -33,8 +33,8 @@ export function GuitarChordSVG({ chordName, size = 120 }) {
   }
 
   return (
-    <div className="flex flex-col items-center p-2 bg-base-100 rounded-xl border border-base-200 shadow-sm">
-      <span className="font-bold text-sm text-primary mb-1">{diag.name}</span>
+    <div className="flex flex-col items-center p-2.5 bg-base-100 rounded-xl border border-base-200/90 shadow-none">
+      <span className="font-bold text-xs text-[#26A62F] mb-1">{diag.name}</span>
       <svg width={width} height={height} className="select-none">
         {/* Marcadores X y O arriba de las cuerdas */}
         {frets.map((f, i) => {
@@ -47,7 +47,7 @@ export function GuitarChordSVG({ chordName, size = 120 }) {
             );
           } else if (f === 0) {
             return (
-              <circle key={i} cx={x} cy={marginY - 12} r="4" fill="none" stroke="#22c55e" strokeWidth="1.5" />
+              <circle key={i} cx={x} cy={marginY - 12} r="4" fill="none" stroke="#26A62F" strokeWidth="1.5" />
             );
           }
           return null;
@@ -120,7 +120,7 @@ export function GuitarChordSVG({ chordName, size = 120 }) {
                   cx={x}
                   cy={y}
                   r="6"
-                  fill="var(--color-chord, #285628)"
+                  fill="#26A62F"
                   stroke="#ffffff"
                   strokeWidth="1.5"
                 />
@@ -139,11 +139,11 @@ export default function ChordModal({ isOpen, onClose, songTitle, chords = [] }) 
 
   return (
     <div className="modal modal-open">
-      <div className="modal-box max-w-2xl bg-base-100 p-6 rounded-2xl shadow-2xl">
+      <div className="modal-box max-w-xl bg-base-100 p-6 rounded-2xl shadow-xl border border-base-200">
         <div className="flex justify-between items-center mb-4 border-b border-base-200 pb-3">
           <div>
-            <h3 className="font-bold text-lg text-base-content">Acordes de guitarra</h3>
-            <p className="text-xs text-base-content/70 mt-0.5">{songTitle}</p>
+            <h3 className="font-bold text-base text-base-content">Acordes de guitarra</h3>
+            <p className="text-xs text-base-content/60 mt-0.5">{songTitle}</p>
           </div>
           <button onClick={onClose} className="btn btn-sm btn-circle btn-ghost" aria-label="Cerrar">
             <CloseIcon className="w-4 h-4" />
@@ -157,12 +157,12 @@ export default function ChordModal({ isOpen, onClose, songTitle, chords = [] }) 
         </div>
 
         <div className="modal-action mt-5 pt-3 border-t border-base-200 flex justify-end">
-          <button className="btn btn-primary btn-sm px-6" onClick={onClose}>
+          <button className="btn btn-sm px-6 bg-[#26A62F] hover:bg-[#1f8726] text-white border-none font-medium rounded-lg" onClick={onClose}>
             Entendido
           </button>
         </div>
       </div>
-      <div className="modal-backdrop bg-black/50 backdrop-blur-xs" onClick={onClose}></div>
+      <div className="modal-backdrop bg-black/40 backdrop-blur-xs" onClick={onClose}></div>
     </div>
   );
 }

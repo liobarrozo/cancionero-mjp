@@ -124,7 +124,9 @@ export default function LiveScrollModal({
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-bold tracking-tight text-base-content">{cancion.titulo}</h2>
             {cancion.codigo_oasis && (
-              <span className="badge badge-sm badge-success font-bold">{cancion.codigo_oasis}</span>
+              <span className="text-xs font-semibold text-[#26A62F] bg-[#26A62F]/10 border border-[#26A62F]/30 px-2 py-0.5 rounded-full">
+                {cancion.codigo_oasis}
+              </span>
             )}
           </div>
           {cancion.subtitulo && (
@@ -179,7 +181,7 @@ export default function LiveScrollModal({
 
             if (isMarker) {
               return (
-                <div key={lIdx} className={`font-bold text-sm tracking-widest text-primary/70 my-3 ${stanzaClass}`}>
+                <div key={lIdx} className={`font-bold text-xs tracking-wider text-[#26A62F] my-3 ${stanzaClass}`}>
                   {textOnly}
                 </div>
               );
@@ -195,7 +197,7 @@ export default function LiveScrollModal({
 
             if (linea.tipo === 'acordes') {
               return (
-                <div key={lIdx} className={`flex gap-4 my-1 text-success font-bold ${stanzaClass}`}>
+                <div key={lIdx} className={`flex gap-4 my-1 text-[#26A62F] font-bold ${stanzaClass}`}>
                   {linea.segmentos
                     .filter(s => (s.acorde || '').trim() !== '')
                     .map((s, sIdx) => (
@@ -218,7 +220,7 @@ export default function LiveScrollModal({
                     <span key={sIdx} className="inline-block relative pt-5 align-bottom">
                       {chord && (
                         <span
-                          className="absolute top-0 font-bold text-success text-[0.88em] leading-tight select-none"
+                          className="absolute top-0 font-bold text-[#26A62F] text-[0.88em] leading-tight select-none"
                           style={offset ? { left: `${offset}em` } : { left: 0 }}
                         >
                           {chord}
@@ -245,7 +247,7 @@ export default function LiveScrollModal({
           {/* Botón Play / Pause */}
           <button
             onClick={() => setIsPlaying(p => !p)}
-            className={`btn btn-sm btn-circle ${isPlaying ? 'btn-warning' : 'btn-primary'}`}
+            className={`btn btn-sm btn-circle text-white border-none ${isPlaying ? 'bg-[#1f8726]' : 'bg-[#26A62F] hover:bg-[#1f8726]'}`}
             title={isPlaying ? 'Pausar (Espacio)' : 'Deslizar (Espacio)'}
             aria-label={isPlaying ? 'Pausar' : 'Deslizar'}
           >
@@ -265,9 +267,9 @@ export default function LiveScrollModal({
               max="10"
               value={speed}
               onChange={(e) => setSpeed(Number(e.target.value))}
-              className="range range-xs range-primary w-24 sm:w-32"
+              className="range range-xs accent-[#26A62F] w-24 sm:w-32"
             />
-            <span className="text-xs font-bold w-4 text-center">{speed}x</span>
+            <span className="text-xs font-bold w-4 text-center text-[#26A62F]">{speed}x</span>
           </div>
         </div>
 
@@ -282,7 +284,7 @@ export default function LiveScrollModal({
             >
               -1
             </button>
-            <span className="btn btn-xs join-item pointer-events-none font-bold text-primary">
+            <span className="btn btn-xs join-item pointer-events-none font-bold text-[#26A62F]">
               {transposeShift > 0 ? `+${transposeShift}` : transposeShift}
             </span>
             <button
