@@ -1,171 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+:root {
+  --font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --chord-color: #285628; /* Verde idéntico al PDF original */
+  --lyric-color: #231f20; /* Color exacto de letra del PDF */
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
+}
+
 .cancionero-app {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  background: #f8fafc;
-  color: #1e293b;
-  margin: 0;
-  padding: 1.5rem 1rem;
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--lyric-color);
+  line-height: 1.5;
+  padding: 1.5rem 1rem 4rem;
+  min-height: 100vh;
 }
 
 .cancionero-header {
   text-align: center;
-  margin-bottom: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto 1.5rem;
 }
 
 .cancionero-header h1 {
-  font-size: 1.6rem;
-  margin: 0 0 0.25rem;
+  font-size: 2rem;
+  font-weight: 700;
   color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
 }
 
 .cancionero-header p {
   color: #64748b;
   font-size: 0.95rem;
-  margin: 0;
 }
 
+.stats-pill {
+  display: inline-flex;
+  gap: 1.5rem;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 0.75rem;
+}
+
+/* Controles */
 .cancionero-controls {
+  max-width: 900px;
+  margin: 0 auto 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-  margin-bottom: 1.25rem;
 }
 
 .buscador {
   width: 100%;
-  max-width: 520px;
-  padding: 0.65rem 1rem;
-  border-radius: 0.6rem;
+  max-width: 500px;
+  padding: 0.7rem 1.1rem;
+  border-radius: 0.75rem;
   border: 1px solid #cbd5e1;
   font-size: 1rem;
-  background: #fff;
+  font-family: var(--font-family);
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .buscador:focus {
   outline: none;
   border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .filtros {
   display: flex;
-  gap: 0.5rem;
   flex-wrap: wrap;
+  gap: 0.4rem;
   justify-content: center;
 }
 
 .chip {
-  padding: 0.35rem 0.9rem;
-  border-radius: 999px;
+  background: #ffffff;
   border: 1px solid #cbd5e1;
-  background: #fff;
+  color: #475569;
+  font-family: var(--font-family);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
   cursor: pointer;
-  font-size: 0.85rem;
-  color: #334155;
+  transition: all 0.15s ease;
+}
+
+.chip:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
 }
 
 .chip.activo {
-  background: #2563eb;
-  color: #fff;
-  border-color: #2563eb;
+  background: #1e3a8a;
+  color: #ffffff;
+  border-color: #1e3a8a;
 }
 
+/* Grid */
 .grid {
-  display: grid;
-  gap: 1rem;
-  max-width: 950px;
+  max-width: 900px;
   margin: 0 auto;
-}
-
-.cancion {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
-  padding: 1rem 1.25rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-}
-
-.cancion .titulo {
-  font-size: 1.25rem;
-  font-weight: 800;
-  margin: 0 0 0.5rem;
-  color: #0f172a;
-}
-
-.meta {
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cancion-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.85rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.cancion-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 0.75rem;
   margin-bottom: 0.75rem;
-  font-size: 0.8rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cancion-titulo {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.subtitulo {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+.cancion-badges {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
 }
 
 .badge {
-  padding: 0.15rem 0.55rem;
-  border-radius: 0.4rem;
-  background: #eff6ff;
-  color: #1d4ed8;
-  border: 1px solid #bfdbfe;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 0.35rem;
+  background: #f1f5f9;
+  color: #475569;
 }
 
 .badge.bajada {
   background: #fdf4ff;
-  color: #7c3aed;
-  border-color: #e9d5ff;
+  color: #86198f;
+  border: 1px solid #f5d0fe;
 }
 
-/* Acorde exactamente encima de la sílaba (coordenadas reales del PDF) */
-.letra-container {
-  position: relative;
+.badge.oasis {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.badge.pag {
+  color: #94a3b8;
+}
+
+/* Transposer */
+.transposer-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+.transpose-label {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.btn-transpose, .btn-reset {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.25rem;
+  padding: 0.15rem 0.45rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.btn-transpose:hover, .btn-reset:hover {
+  background: #e2e8f0;
+}
+
+.transpose-val {
+  font-weight: 700;
+  color: #1e3a8a;
+  min-width: 1.2rem;
+  text-align: center;
+}
+
+/* Acordes alineados sobre las sílabas */
+.cancion-cuerpo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 .renglon {
-  position: relative;
-  margin-bottom: 0.3rem;
-  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  line-height: 1.15;
 }
 
-.fila-acordes {
-  position: relative;
-  height: 1.1em;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: #7c3aed;
+.renglon.marcador {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0.5rem 0 0.2rem;
+  letter-spacing: 0.04em;
 }
 
-.fila-acordes .acorde {
-  position: absolute;
-  left: var(--x, 0)px;
-  top: 0;
-  white-space: nowrap;
+.bloque-acorde {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: bottom;
 }
 
-.fila-letra {
-  position: relative;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 1rem;
-  color: #334155;
-  line-height: 1.45;
+.acorde {
+  font-family: var(--font-family);
+  font-weight: 700;
+  color: var(--chord-color);
+  font-size: 0.82rem;
+  line-height: 1.1;
+  min-height: 1.1em;
+  white-space: pre;
 }
 
-.fila-letra .letra {
-  position: absolute;
-  left: var(--x, 0)px;
-  top: 0;
-  white-space: pre-wrap;
+.acorde-vacio {
+  font-size: 0.82rem;
+  line-height: 1.1;
+  min-height: 1.1em;
+  visibility: hidden;
+  white-space: pre;
+}
+
+.letra {
+  font-family: var(--font-family);
+  font-weight: 400;
+  color: var(--lyric-color);
+  font-size: 0.98rem;
+  line-height: 1.35;
+  white-space: pre;
+}
+
+.tipo-solo-acordes .acorde {
+  font-size: 0.9rem;
 }
 
 .vacio {
   text-align: center;
+  padding: 3rem;
   color: #64748b;
-  padding: 2.5rem;
-}
-
-@media (max-width: 600px) {
-  .cancionero-app {
-    padding: 1rem 0.5rem;
-  }
-  .cancionero-header h1 {
-    font-size: 1.3rem;
-  }
+  font-size: 1.1rem;
 }
