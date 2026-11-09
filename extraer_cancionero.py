@@ -375,6 +375,7 @@ def main():
                     continue
                 y0 = l['bbox'][1]
                 x0 = l['bbox'][0]
+                y1 = l['bbox'][3]
                 if is_page_num(spans[0], y0) or any(is_cat_span(s) for s in spans):
                     continue
                 col = 0 if x0 < 297 else 1
@@ -399,6 +400,7 @@ def main():
                     raw_page_lines.append({
                         'col': col,
                         'y0': y0,
+                        'y1': y1,
                         'x0': x0,
                         'spans': list(spans),
                         'chars': line_chars,
@@ -418,6 +420,7 @@ def main():
                 page_lines[-1]['spans'].extend(l['spans'])
                 page_lines[-1]['chars'].extend(l['chars'])
                 page_lines[-1]['chars'].sort(key=lambda c: c['x0'])
+                page_lines[-1]['y1'] = max(page_lines[-1]['y1'], l['y1'])
             else:
                 l['chars'].sort(key=lambda c: c['x0'])
                 page_lines.append(l)
@@ -493,6 +496,7 @@ def main():
         raw = s.pop('raw_lines')
         chordpro_lines = []
         structured_lines = []
+        unique_chords = []
 
         col_margins = {0: 42.52, 1: 300.47}
         for col_id in (0, 1):
@@ -500,14 +504,32 @@ def main():
             if col_xs:
                 col_margins[col_id] = min(col_xs)
 
+        prev_line_bottom = None
+        prev_line_col = None
+
         i = 0
         while i < len(raw):
             line = raw[i]
             col_x0 = col_margins.get(line['col'], 42.52)
 
+            # Detección de salto de estrofa por espacio vertical en PDF (dy >= 26pt o gap > 10pt)
+            salto_previo = False
+            if prev_line_bottom is not None and prev_line_col == line['col']:
+                gap_y = line['y0'] - prev_line_bottom
+                if gap_y > 10.0:
+                    salto_previo = True
+            elif prev_line_col is not None and prev_line_col != line['col']:
+                # Cambio de columna o página: si no está pegado al tope
+                if line['y0'] > 80.0:
+                    salto_previo = True
+
             if line_is_chords(line):
                 chords = extract_chord_tokens(line)
                 total_chords += len(chords)
+                for c in chords:
+                    c_txt = re.sub(r'^[(\[]+|[)\].,:;*+-]+$', '', c['text'].strip())
+                    if re.match(r'^(DO|RE|MI|FA|SOL|LA|SI|[A-G])(#|b)?(m|M|dim|aug|sus|maj|min|add)?[0-9]*(\/[A-Z0-9#b]+)?$', c_txt, re.I) and c_txt not in unique_chords:
+                        unique_chords.append(c_txt)
 
                 next_is_paired_lyric = (
                     i + 1 < len(raw)
@@ -526,8 +548,11 @@ def main():
                     chordpro_lines.append(c_str)
                     structured_lines.append({
                         'tipo': 'letra',
+                        'salto_previo': salto_previo,
                         'segmentos': segs,
                     })
+                    prev_line_bottom = lyr['y1']
+                    prev_line_col = lyr['col']
                     i += 2
                     continue
 
@@ -541,6 +566,10 @@ def main():
                 ):
                     chords2 = extract_chord_tokens(raw[i + 1])
                     total_chords += len(chords2)
+                    for c2 in chords2:
+                        c2_txt = c2['text'].strip()
+                        if c2_txt and c2_txt not in ('INTRO:', 'Fin:', '–', '-') and c2_txt not in unique_chords:
+                            unique_chords.append(c2_txt)
                     lyr1 = raw[i + 2]
                     if (
                         i + 3 < len(raw)
@@ -552,8 +581,10 @@ def main():
                         c_str1, segs1 = build_chordpro_and_segments(chords, lyr1['chars'], col_x0)
                         c_str2, segs2 = build_chordpro_and_segments(chords2, lyr2['chars'], col_x0)
                         chordpro_lines.extend([c_str1, c_str2])
-                        structured_lines.append({'tipo': 'letra', 'segmentos': segs1})
-                        structured_lines.append({'tipo': 'letra', 'segmentos': segs2})
+                        structured_lines.append({'tipo': 'letra', 'salto_previo': salto_previo, 'segmentos': segs1})
+                        structured_lines.append({'tipo': 'letra', 'salto_previo': False, 'segmentos': segs2})
+                        prev_line_bottom = lyr2['y1']
+                        prev_line_col = lyr2['col']
                         i += 4
                         continue
                     else:
@@ -564,7 +595,9 @@ def main():
                         combined = chords + chords2
                         c_str, segs = build_chordpro_and_segments(combined, lyr1['chars'], col_x0)
                         chordpro_lines.append(c_str)
-                        structured_lines.append({'tipo': 'letra', 'segmentos': segs})
+                        structured_lines.append({'tipo': 'letra', 'salto_previo': salto_previo, 'segmentos': segs})
+                        prev_line_bottom = lyr1['y1']
+                        prev_line_col = lyr1['col']
                         i += 3
                         continue
 
@@ -572,8 +605,11 @@ def main():
                 chordpro_lines.append(c_str)
                 structured_lines.append({
                     'tipo': 'acordes',
+                    'salto_previo': salto_previo,
                     'segmentos': build_standalone_chord_segments(chords, col_x0),
                 })
+                prev_line_bottom = line['y1']
+                prev_line_col = line['col']
                 i += 1
                 continue
             else:
@@ -583,10 +619,14 @@ def main():
                     chordpro_lines.append(txt)
                     structured_lines.append({
                         'tipo': 'verso',
+                        'salto_previo': salto_previo,
                         'segmentos': [{'acorde': '', 'letra': txt, 'offset': 0}],
                     })
+                prev_line_bottom = line['y1']
+                prev_line_col = line['col']
                 i += 1
 
+        s['acordes'] = unique_chords
         s['letra_chordpro'] = chordpro_lines
         s['lineas'] = structured_lines
 
@@ -621,7 +661,7 @@ def main():
     OUT_VITE.write_text(json.dumps(consolidado, ensure_ascii=False, indent=2), encoding="utf-8")
     OUT_VITE_SRC.parent.mkdir(parents=True, exist_ok=True)
     OUT_VITE_SRC.write_text(json.dumps(consolidado, ensure_ascii=False, indent=2), encoding="utf-8")
-    print("Archivos JSON actualizados con la taxonomía MJP.")
+    print("Archivos JSON actualizados con saltos de estrofa y acordes únicos.")
 
 
 if __name__ == "__main__":

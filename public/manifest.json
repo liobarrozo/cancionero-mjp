@@ -1,0 +1,18 @@
+{
+  "name": "Cancionero MJP",
+  "short_name": "Cancionero",
+  "description": "Cancionero MJP con acordes de alta precisión, categorías litúrgicas y funcionamiento offline.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8fafc",
+  "theme_color": "#285628",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

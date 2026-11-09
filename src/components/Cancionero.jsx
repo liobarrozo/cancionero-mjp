@@ -1,5 +1,7 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import datos from '../data/cancionero.json';
+import ChordModal from './ChordModal';
+import LiveScrollModal from './LiveScrollModal';
 import './Cancionero.css';
 
 const CHORDS_SHARP = ['DO', 'DO#', 'RE', 'RE#', 'MI', 'FA', 'FA#', 'SOL', 'SOL#', 'LA', 'SIb', 'SI'];
@@ -11,7 +13,7 @@ const LITURGICAS = [
   'Santo', 'Padre Nuestro', 'Cordero', 'Comunión', 'Meditación', 'Salida'
 ];
 
-function transposeSingleChord(chord, steps) {
+export function transposeSingleChord(chord, steps) {
   if (!chord || steps === 0) return chord;
   const m = chord.match(/^(DO#?|RE#?|MI#?|FA#?|SOL#?|LA#?|SI#?|REb|MIb|SOLb|LAb|SIb|[A-G][#b]?)(.*)$/i);
   if (!m) return chord;
@@ -28,7 +30,7 @@ function transposeSingleChord(chord, steps) {
   return CHORDS_SHARP[newIdx] + suffix;
 }
 
-function transposeChordGroup(group, steps) {
+export function transposeChordGroup(group, steps) {
   if (!group || steps === 0) return group;
   return group
     .split(/(\s+)/)
@@ -41,6 +43,10 @@ export default function Cancionero() {
   const [subLiturgia, setSubLiturgia] = useState('Todas');
   const [busqueda, setBusqueda] = useState('');
   const [transpositions, setTranspositions] = useState({});
+
+  // Estados para modales
+  const [modalChordsSong, setModalChordsSong] = useState(null); // { titulo, acordes }
+  const [liveScrollSong, setLiveScrollSong] = useState(null);
 
   const conteos = useMemo(() => {
     const counts = {
@@ -98,144 +104,233 @@ export default function Cancionero() {
   };
 
   return (
-    <div className="cancionero-app">
-      <header className="cancionero-header">
-        <h1>Cancionero MJP</h1>
-        <p>Categorías tradicionales · Tipografía DM Sans y acordes con alineación milimétrica</p>
-        <div className="stats-pill">
-          <span>{datos.total_canciones} canciones</span>
-          <span>{datos.total_acordes} acordes</span>
-          <span>Cantos Litúrgicos ({conteos['Cantos Litúrgicos']}) · Varios ({conteos['Varios']}) · Movimiento ({conteos['Movimiento']}) · Bajadas ({conteos['Bajadas']})</span>
+    <div className="min-h-screen bg-base-200/40 text-base-content pb-20">
+      {/* Barra superior con navegación y buscador */}
+      <header className="bg-base-100 border-b border-base-200 sticky top-0 z-30 shadow-xs">
+        <div className="max-w-4xl mx-auto px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-primary">Cancionero MJP</h1>
+              <p className="text-xs text-base-content/60 hidden sm:block">
+                {datos.total_canciones} canciones · {datos.total_acordes} acordes
+              </p>
+            </div>
+            <div className="badge badge-outline badge-sm sm:hidden font-semibold">
+              {cancionesFiltradas.length} cantos
+            </div>
+          </div>
+
+          <div className="w-full sm:w-80">
+            <input
+              type="text"
+              className="input input-sm sm:input-md input-bordered w-full rounded-xl bg-base-200/50 focus:bg-base-100"
+              placeholder="Buscar por título, letra, código O.xxx..."
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+            />
+          </div>
+        </div>
+
+        {/* Pestañas de Secciones */}
+        <div className="max-w-4xl mx-auto px-4 pb-2.5 pt-1 overflow-x-auto no-scrollbar">
+          <div className="flex gap-1.5 min-w-max">
+            <button
+              className={`btn btn-xs sm:btn-sm rounded-lg ${seccionActiva === 'Todas' ? 'btn-primary' : 'btn-ghost'}`}
+              onClick={() => handleSeccionClick('Todas')}
+            >
+              Todas ({conteos.Todas})
+            </button>
+            <button
+              className={`btn btn-xs sm:btn-sm rounded-lg ${seccionActiva === 'Cantos Litúrgicos' ? 'btn-primary' : 'btn-ghost'}`}
+              onClick={() => handleSeccionClick('Cantos Litúrgicos')}
+            >
+              Cantos Litúrgicos ({conteos['Cantos Litúrgicos']})
+            </button>
+            <button
+              className={`btn btn-xs sm:btn-sm rounded-lg ${seccionActiva === 'Varios' ? 'btn-primary' : 'btn-ghost'}`}
+              onClick={() => handleSeccionClick('Varios')}
+            >
+              Varios ({conteos['Varios']})
+            </button>
+            <button
+              className={`btn btn-xs sm:btn-sm rounded-lg ${seccionActiva === 'Movimiento' ? 'btn-primary' : 'btn-ghost'}`}
+              onClick={() => handleSeccionClick('Movimiento')}
+            >
+              Movimiento ({conteos['Movimiento']})
+            </button>
+            <button
+              className={`btn btn-xs sm:btn-sm rounded-lg ${seccionActiva === 'Bajadas' ? 'btn-primary' : 'btn-ghost'}`}
+              onClick={() => handleSeccionClick('Bajadas')}
+            >
+              Bajadas ({conteos['Bajadas']})
+            </button>
+          </div>
+
+          {/* Subfiltros Litúrgicos */}
+          {seccionActiva === 'Cantos Litúrgicos' && (
+            <div className="flex flex-wrap gap-1 mt-2 pt-2 border-t border-base-200">
+              <button
+                className={`badge badge-sm cursor-pointer ${subLiturgia === 'Todas' ? 'badge-primary' : 'badge-ghost'}`}
+                onClick={() => setSubLiturgia('Todas')}
+              >
+                Todas las litúrgicas
+              </button>
+              {LITURGICAS.map(cat => (
+                <button
+                  key={cat}
+                  className={`badge badge-sm cursor-pointer ${subLiturgia === cat ? 'badge-primary' : 'badge-ghost'}`}
+                  onClick={() => setSubLiturgia(cat)}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Nota de Bajadas */}
+          {seccionActiva === 'Bajadas' && (
+            <div className="text-xs text-secondary font-semibold mt-2 pt-1 border-t border-base-200">
+              Bajadas: agrupadas por año, próximamente a definir
+            </div>
+          )}
         </div>
       </header>
 
-      <div className="cancionero-controls">
-        <input
-          type="text"
-          className="buscador"
-          placeholder="Buscar por título, letra o código Oasis (ej: O.308, Cristo joven, pan)..."
-          value={busqueda}
-          onChange={(e) => setBusqueda(e.target.value)}
-        />
-
-        <div className="filtros-secciones">
-          <button
-            className={`tab-sec ${seccionActiva === 'Todas' ? 'activo' : ''}`}
-            onClick={() => handleSeccionClick('Todas')}
-          >
-            Todas ({conteos.Todas})
-          </button>
-          <button
-            className={`tab-sec ${seccionActiva === 'Cantos Litúrgicos' ? 'activo' : ''}`}
-            onClick={() => handleSeccionClick('Cantos Litúrgicos')}
-          >
-            Cantos Litúrgicos ({conteos['Cantos Litúrgicos']})
-          </button>
-          <button
-            className={`tab-sec ${seccionActiva === 'Varios' ? 'activo' : ''}`}
-            onClick={() => handleSeccionClick('Varios')}
-          >
-            Varios ({conteos['Varios']})
-          </button>
-          <button
-            className={`tab-sec ${seccionActiva === 'Movimiento' ? 'activo' : ''}`}
-            onClick={() => handleSeccionClick('Movimiento')}
-          >
-            Movimiento ({conteos['Movimiento']})
-          </button>
-          <button
-            className={`tab-sec ${seccionActiva === 'Bajadas' ? 'activo' : ''}`}
-            onClick={() => handleSeccionClick('Bajadas')}
-          >
-            Bajadas ({conteos['Bajadas']})
-          </button>
-        </div>
-
-        {seccionActiva === 'Cantos Litúrgicos' && (
-          <div className="filtros-subliturgia">
-            <button
-              className={`chip-sub ${subLiturgia === 'Todas' ? 'activo' : ''}`}
-              onClick={() => setSubLiturgia('Todas')}
-            >
-              Todas las litúrgicas
-            </button>
-            {LITURGICAS.map(cat => (
-              <button
-                key={cat}
-                className={`chip-sub ${subLiturgia === cat ? 'activo' : ''}`}
-                onClick={() => setSubLiturgia(cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {seccionActiva === 'Bajadas' && (
-          <div className="bajada-nota">
-            Bajadas: agrupadas por año, próximamente a definir
-          </div>
-        )}
-      </div>
-
-      <main className="grid">
+      {/* Grid de Canciones */}
+      <main className="max-w-4xl mx-auto px-4 mt-6 flex flex-col gap-5">
         {cancionesFiltradas.length === 0 ? (
-          <div className="vacio">No se encontraron canciones que coincidan con la búsqueda.</div>
+          <div className="card bg-base-100 p-12 text-center text-base-content/60 shadow-sm border border-base-200">
+            No se encontraron canciones que coincidan con la búsqueda.
+          </div>
         ) : (
           cancionesFiltradas.map((cancion) => {
             const shift = transpositions[cancion.id] || 0;
 
-            let badgeClass = 'liturgico';
+            let badgeClass = 'badge-info';
             let badgeLabel = `Litúrgico · ${cancion.categoria}`;
             if (cancion.seccion === 'Movimiento') {
-              badgeClass = 'movimiento';
+              badgeClass = 'badge-accent';
               badgeLabel = 'Movimiento';
             } else if (cancion.seccion === 'Bajadas') {
-              badgeClass = 'bajada';
+              badgeClass = 'badge-secondary';
               badgeLabel = 'Bajada';
             } else if (cancion.seccion === 'Varios') {
-              badgeClass = 'varios';
+              badgeClass = 'badge-ghost';
               badgeLabel = 'Varios';
             }
 
+            // Acordes transpuestos para la barra de acordes inicial
+            const uniqueChords = cancion.acordes || [];
+            const transposedChords = uniqueChords.map(c => transposeChordGroup(c, shift));
+
             return (
-              <article key={cancion.id} className="cancion-card">
-                <header className="cancion-head">
+              <article key={cancion.id} className="card bg-base-100 shadow-sm border border-base-200 p-5 sm:p-6 rounded-2xl">
+                {/* Cabecera de la canción */}
+                <div className="flex flex-wrap items-start justify-between gap-3 border-b border-base-200/80 pb-3">
                   <div>
-                    <h2 className="cancion-titulo">{cancion.titulo}</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-base-content tracking-tight">
+                      {cancion.titulo}
+                    </h2>
                     {cancion.subtitulo && (
-                      <div className="subtitulo">{cancion.subtitulo}</div>
+                      <p className="text-xs sm:text-sm text-base-content/60 font-medium mt-0.5">
+                        {cancion.subtitulo}
+                      </p>
                     )}
                   </div>
-                  <div className="cancion-badges">
-                    <span className={`badge ${badgeClass}`}>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className={`badge ${badgeClass} font-semibold text-xs`}>
                       {badgeLabel}
                     </span>
                     {cancion.codigo_oasis && (
-                      <span className="badge oasis">{cancion.codigo_oasis}</span>
+                      <span className="badge badge-success font-bold text-xs">
+                        {cancion.codigo_oasis}
+                      </span>
                     )}
-                    <span className="badge pag">pág. {cancion.pagina_origen}</span>
                   </div>
-                </header>
-
-                <div className="transposer-bar">
-                  <span className="transpose-label">Tono:</span>
-                  <button className="btn-transpose" onClick={() => handleTranspose(cancion.id, -1)}>-1</button>
-                  <span className="transpose-val">{shift > 0 ? `+${shift}` : shift}</span>
-                  <button className="btn-transpose" onClick={() => handleTranspose(cancion.id, 1)}>+1</button>
-                  {shift !== 0 && (
-                    <button className="btn-reset" onClick={() => handleResetTranspose(cancion.id)}>Reset</button>
-                  )}
                 </div>
 
-                <div className="cancion-cuerpo">
+                {/* Acordes utilizados al principio de la canción */}
+                {uniqueChords.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-1.5 mt-3 pt-1">
+                    <span className="text-xs font-semibold text-base-content/60 mr-1">Acordes:</span>
+                    {transposedChords.map((ch, chIdx) => (
+                      <button
+                        key={chIdx}
+                        onClick={() => setModalChordsSong({ titulo: cancion.titulo, acordes: transposedChords })}
+                        className="badge badge-sm badge-outline font-bold text-[#285628] hover:badge-primary transition-all cursor-pointer"
+                        title="Ver diagrama de digitación"
+                      >
+                        {ch}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Barra de herramientas: Tono, Diagramas y Pantalla Completa / Auto-scroll */}
+                <div className="flex flex-wrap items-center justify-between gap-2 my-3 p-2 bg-base-200/50 rounded-xl">
+                  {/* Transposición */}
+                  <div className="flex items-center gap-1">
+                    <span className="text-xs font-semibold text-base-content/60 mr-1">Tono:</span>
+                    <button
+                      onClick={() => handleTranspose(cancion.id, -1)}
+                      className="btn btn-xs btn-outline rounded-sm"
+                      title="Bajar medio tono"
+                    >
+                      -1
+                    </button>
+                    <span className="text-xs font-bold w-6 text-center text-primary">
+                      {shift > 0 ? `+${shift}` : shift}
+                    </span>
+                    <button
+                      onClick={() => handleTranspose(cancion.id, 1)}
+                      className="btn btn-xs btn-outline rounded-sm"
+                      title="Subir medio tono"
+                    >
+                      +1
+                    </button>
+                    {shift !== 0 && (
+                      <button
+                        onClick={() => handleResetTranspose(cancion.id)}
+                        className="btn btn-xs btn-ghost text-xs"
+                      >
+                        Reset
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Acciones principales */}
+                  <div className="flex items-center gap-2">
+                    {uniqueChords.length > 0 && (
+                      <button
+                        onClick={() => setModalChordsSong({ titulo: cancion.titulo, acordes: transposedChords })}
+                        className="btn btn-xs btn-ghost text-primary gap-1 font-semibold"
+                        title="Ver digitación de acordes"
+                      >
+                        🎸 Diagramas
+                      </button>
+                    )}
+                    <button
+                      onClick={() => setLiveScrollSong(cancion)}
+                      className="btn btn-xs btn-primary gap-1 font-semibold"
+                      title="Abrir en pantalla completa con deslizamiento automático"
+                    >
+                      ▶ En vivo / Scroll
+                    </button>
+                  </div>
+                </div>
+
+                {/* Letra y acordes con espaciado vertical milimétrico */}
+                <div className="cuerpo-cancion font-['DM_Sans',sans-serif] text-[15px] sm:text-[16px]">
                   {cancion.lineas.map((linea, lIdx) => {
                     const textOnly = linea.segmentos.map(s => s.letra).join('').trim();
                     const hasChords = linea.segmentos.some(s => (s.acorde || '').trim() !== '');
+                    const isMarker = !hasChords && (textOnly === '[ESTRIBILLO]' || textOnly === 'ESTRIBILLO' || textOnly === 'CORO');
 
-                    if (!hasChords && (textOnly === '[ESTRIBILLO]' || textOnly === 'ESTRIBILLO' || textOnly === 'CORO')) {
+                    const stanzaClass = linea.salto_previo ? 'mt-4 sm:mt-5' : '';
+
+                    if (isMarker) {
                       return (
-                        <div key={lIdx} className="renglon marcador">
+                        <div key={lIdx} className={`font-bold text-xs tracking-wider text-base-content/60 my-2 ${stanzaClass}`}>
                           {textOnly}
                         </div>
                       );
@@ -243,19 +338,19 @@ export default function Cancionero() {
 
                     if (!hasChords) {
                       return (
-                        <div key={lIdx} className="renglon sin-acordes">
-                          <span className="letra">{textOnly}</span>
+                        <div key={lIdx} className={`leading-relaxed text-base-content whitespace-pre ${stanzaClass}`}>
+                          {textOnly}
                         </div>
                       );
                     }
 
                     if (linea.tipo === 'acordes') {
                       return (
-                        <div key={lIdx} className="renglon tipo-solo-acordes">
+                        <div key={lIdx} className={`flex gap-3 my-0.5 text-[#285628] font-bold text-[0.9em] ${stanzaClass}`}>
                           {linea.segmentos
                             .filter(s => (s.acorde || '').trim() !== '')
                             .map((s, sIdx) => (
-                              <span key={sIdx} className="acorde-inline">
+                              <span key={sIdx}>
                                 {transposeChordGroup(s.acorde.trim(), shift)}
                               </span>
                             ))}
@@ -264,21 +359,23 @@ export default function Cancionero() {
                     }
 
                     return (
-                      <div key={lIdx} className="renglon con-acordes">
+                      <div key={lIdx} className={`block leading-relaxed whitespace-pre my-0.5 ${stanzaClass}`}>
                         {linea.segmentos.map((s, sIdx) => {
                           const chord = s.acorde ? transposeChordGroup(s.acorde.trim(), shift) : '';
                           const offset = s.offset || 0;
                           return (
-                            <span key={sIdx} className="bloque-acorde">
+                            <span key={sIdx} className="inline-block relative pt-4.5 align-bottom">
                               {chord && (
                                 <span
-                                  className="acorde"
-                                  style={offset ? { left: `${offset}em` } : undefined}
+                                  className="absolute top-0.5 font-bold text-[#285628] text-[0.84em] leading-none select-none"
+                                  style={offset ? { left: `${offset}em` } : { left: 0 }}
                                 >
                                   {chord}
                                 </span>
                               )}
-                              <span className="letra">{s.letra || '\u00A0'}</span>
+                              <span className="font-normal text-base-content text-[1em]">
+                                {s.letra || '\u00A0'}
+                              </span>
                             </span>
                           );
                         })}
@@ -291,6 +388,24 @@ export default function Cancionero() {
           })
         )}
       </main>
+
+      {/* Modal de diagramas de acordes */}
+      <ChordModal
+        isOpen={Boolean(modalChordsSong)}
+        onClose={() => setModalChordsSong(null)}
+        songTitle={modalChordsSong?.titulo}
+        chords={modalChordsSong?.acordes || []}
+      />
+
+      {/* Modal de modo en vivo con auto-scroll */}
+      <LiveScrollModal
+        isOpen={Boolean(liveScrollSong)}
+        onClose={() => setLiveScrollSong(null)}
+        cancion={liveScrollSong}
+        transposeShift={liveScrollSong ? (transpositions[liveScrollSong.id] || 0) : 0}
+        onTransposeChange={handleTranspose}
+        transposeChordFn={transposeChordGroup}
+      />
     </div>
   );
 }
