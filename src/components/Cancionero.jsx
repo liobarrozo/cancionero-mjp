@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useTheme } from '../hooks/useTheme';
 import Header from './Header';
 import NavigationFilter from './NavigationFilter';
+import InstallBanner from './InstallBanner';
 import SongCard from './SongCard';
 import ChordModal from './ChordModal';
 import LiveScrollModal from './LiveScrollModal';
@@ -165,6 +166,8 @@ export default function Cancionero({
           onSelectSubLiturgia={setSubLiturgia}
           conteos={conteos}
         />
+
+        <InstallBanner />
       </header>
 
       {/* Lista de canciones */}
