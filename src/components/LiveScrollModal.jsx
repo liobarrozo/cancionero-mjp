@@ -8,38 +8,59 @@ export default function LiveScrollModal({
   cancion,
   transposeShift = 0,
   onTransposeChange,
-  transposeChordFn
+  theme = 'light',
+  toggleTheme,
 }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [speed, setSpeed] = useState(3); // 1 a 10
+  const [speed, setSpeed] = useState(2); // 1 a 10 (1 = Pausa)
   const [fontSize, setFontSize] = useState(20); // px
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isDark, setIsDark] = useState(() => (typeof document !== 'undefined' ? document.documentElement.getAttribute('data-theme') === 'dark' : false));
-
-  const toggleTheme = () => {
-    const next = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('cancionero_theme', next);
-    const metaTheme = document.querySelector('meta[name="theme-color"]');
-    if (metaTheme) metaTheme.setAttribute('content', next === 'dark' ? '#1d232a' : '#285628');
-    setIsDark(!isDark);
-  };
+  const isDark = theme === 'dark';
 
   const scrollContainerRef = useRef(null);
   const animFrameIdRef = useRef(null);
   const lastTimeRef = useRef(null);
+  const scrollSubpixelRef = useRef(0);
+  const isAutoScrollingRef = useRef(false);
+  const resumeTimeoutRef = useRef(null);
   const userInteractingRef = useRef(false);
 
   // Reset scroll al abrir
   useEffect(() => {
     if (isOpen) {
       setIsPlaying(false);
+      setSpeed(2);
       lastTimeRef.current = null;
+      scrollSubpixelRef.current = 0;
+      userInteractingRef.current = false;
+      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
       if (scrollContainerRef.current) {
         scrollContainerRef.current.scrollTop = 0;
       }
     }
   }, [isOpen]);
+
+  const handleSpeedChange = (newSpeed) => {
+    const val = Math.max(1, Math.min(10, newSpeed));
+    setSpeed(val);
+    if (val === 1) {
+      setIsPlaying(false);
+    } else {
+      setIsPlaying(true);
+    }
+  };
+
+  const handleTogglePlay = () => {
+    setIsPlaying(prev => {
+      const next = !prev;
+      if (!next) {
+        setSpeed(1);
+      } else if (speed === 1) {
+        setSpeed(2);
+      }
+      return next;
+    });
+  };
 
   // Manejo de teclado (Space = toggle play, ESC = salir, flechas = velocidad)
   useEffect(() => {
@@ -48,21 +69,21 @@ export default function LiveScrollModal({
     const handleKeyDown = (e) => {
       if (e.code === 'Space') {
         e.preventDefault();
-        setIsPlaying(prev => !prev);
+        handleTogglePlay();
       } else if (e.code === 'Escape') {
         onClose();
       } else if (e.code === 'ArrowUp') {
         e.preventDefault();
-        setSpeed(s => Math.min(10, s + 1));
+        handleSpeedChange(speed + 1);
       } else if (e.code === 'ArrowDown') {
         e.preventDefault();
-        setSpeed(s => Math.max(1, s - 1));
+        handleSpeedChange(speed - 1);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, speed]);
 
   // Motor de Auto-Scroll con requestAnimationFrame suave
   useEffect(() => {
@@ -83,13 +104,15 @@ export default function LiveScrollModal({
 
       if (!userInteractingRef.current && scrollContainerRef.current) {
         const el = scrollContainerRef.current;
-        // Velocidad en píxeles por segundo: speed 1 = 12px/s, speed 10 = 100px/s
-        const pxPerSec = 10 + (speed - 1) * 10;
-        el.scrollTop += pxPerSec * delta;
+        const pxPerSec = (speed - 1) * 10;
+        scrollSubpixelRef.current += pxPerSec * delta;
+        isAutoScrollingRef.current = true;
+        el.scrollTop = scrollSubpixelRef.current;
 
         // Si llega al final de la canción, pausar
         if (el.scrollTop + el.clientHeight >= el.scrollHeight - 5) {
           setIsPlaying(false);
+          setSpeed(1);
           return;
         }
       }
@@ -113,6 +136,23 @@ export default function LiveScrollModal({
       document.exitFullscreen().catch(() => {});
       setIsFullscreen(false);
     }
+  };
+
+  const handleUserScroll = () => {
+    if (isAutoScrollingRef.current) {
+      isAutoScrollingRef.current = false;
+      return;
+    }
+    // Deslizamiento manual del usuario (hacia arriba o hacia abajo)
+    userInteractingRef.current = true;
+    if (scrollContainerRef.current) {
+      scrollSubpixelRef.current = scrollContainerRef.current.scrollTop;
+    }
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+    resumeTimeoutRef.current = setTimeout(() => {
+      userInteractingRef.current = false;
+      lastTimeRef.current = null;
+    }, 150);
   };
 
   if (!isOpen || !cancion) return null;
@@ -162,15 +202,40 @@ export default function LiveScrollModal({
         </div>
       </div>
 
-      {/* Contenedor del canto scrolleable */}
+      {/* Contenedor de la canción scrolleable */}
       <div
         ref={scrollContainerRef}
         className="flex-1 overflow-y-auto px-6 py-10 max-w-3xl mx-auto w-full"
         style={{ fontSize: `${fontSize}px` }}
-        onTouchStart={() => { userInteractingRef.current = true; }}
-        onTouchEnd={() => { setTimeout(() => { userInteractingRef.current = false; }, 400); }}
-        onMouseDown={() => { userInteractingRef.current = true; }}
-        onMouseUp={() => { setTimeout(() => { userInteractingRef.current = false; }, 400); }}
+        onScroll={handleUserScroll}
+        onTouchStart={() => {
+          userInteractingRef.current = true;
+          if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+        }}
+        onTouchEnd={() => {
+          if (scrollContainerRef.current) {
+            scrollSubpixelRef.current = scrollContainerRef.current.scrollTop;
+          }
+          if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+          resumeTimeoutRef.current = setTimeout(() => {
+            userInteractingRef.current = false;
+            lastTimeRef.current = null;
+          }, 150);
+        }}
+        onMouseDown={() => {
+          userInteractingRef.current = true;
+          if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+        }}
+        onMouseUp={() => {
+          if (scrollContainerRef.current) {
+            scrollSubpixelRef.current = scrollContainerRef.current.scrollTop;
+          }
+          if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+          resumeTimeoutRef.current = setTimeout(() => {
+            userInteractingRef.current = false;
+            lastTimeRef.current = null;
+          }, 150);
+        }}
       >
         <SongLyrics lineas={cancion.lineas} shift={transposeShift} isLiveMode={true} />
 
@@ -183,7 +248,7 @@ export default function LiveScrollModal({
         <div className="flex items-center gap-2">
           {/* Botón Play / Pause */}
           <button
-            onClick={() => setIsPlaying(p => !p)}
+            onClick={handleTogglePlay}
             className={`btn btn-sm btn-circle text-white border-none ${isPlaying ? 'bg-[#00528c]' : 'bg-[#0066AD] hover:bg-[#00528c]'}`}
             title={isPlaying ? 'Pausar (Espacio)' : 'Deslizar (Espacio)'}
             aria-label={isPlaying ? 'Pausar' : 'Deslizar'}
@@ -203,7 +268,7 @@ export default function LiveScrollModal({
               min="1"
               max="10"
               value={speed}
-              onChange={(e) => setSpeed(Number(e.target.value))}
+              onChange={(e) => handleSpeedChange(Number(e.target.value))}
               className="range range-xs accent-[#0066AD] w-24 sm:w-32"
             />
             <span className="text-xs font-bold w-4 text-center text-[#0066AD]">{speed}x</span>

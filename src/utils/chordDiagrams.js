@@ -140,24 +140,24 @@ export function normalizeChordName(chordStr) {
   const espMatch = str.match(/^(do|re|mi|fa|sol|la|si)(#|b)?(.*)$/i);
   if (espMatch) {
     const root = espMatch[1].toUpperCase();
-    const acc = espMatch[2] ? espMatch[2].toLowerCase() === 'b' ? 'b' : '#' : '';
+    const acc = espMatch[2] ? (espMatch[2].toLowerCase() === 'b' ? 'b' : '#') : '';
     let suffix = espMatch[3] || '';
     if (suffix.startsWith('m') && !suffix.startsWith('maj')) {
       suffix = 'm' + suffix.slice(1);
     }
     str = root + acc + suffix;
-  }
-
-  // Reemplazar raíz inglesa si aplica (ej: Am -> LAm, C#m -> DO#m)
-  const engMatch = str.match(/^([A-G])(#|b)?(.*)$/);
-  if (engMatch && ENG_TO_ESP[engMatch[1]]) {
-    const rootEsp = ENG_TO_ESP[engMatch[1]];
-    const acc = engMatch[2] || '';
-    let suffix = engMatch[3] || '';
-    if (suffix.startsWith('m') && !suffix.startsWith('maj')) {
-      suffix = 'm' + suffix.slice(1);
+  } else {
+    // Reemplazar raíz inglesa si aplica (ej: Am -> LAm, C#m -> DO#m)
+    const engMatch = str.match(/^([A-G])(#|b)?(.*)$/);
+    if (engMatch && ENG_TO_ESP[engMatch[1]]) {
+      const rootEsp = ENG_TO_ESP[engMatch[1]];
+      const acc = engMatch[2] || '';
+      let suffix = engMatch[3] || '';
+      if (suffix.startsWith('m') && !suffix.startsWith('maj')) {
+        suffix = 'm' + suffix.slice(1);
+      }
+      str = rootEsp + acc + suffix;
     }
-    str = rootEsp + acc + suffix;
   }
 
   return str;

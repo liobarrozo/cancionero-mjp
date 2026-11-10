@@ -62,4 +62,13 @@ body {
   background: #26A62F;
 }
 
+/* Ocultar barra de desplazamiento manteniendo scroll horizontal */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 

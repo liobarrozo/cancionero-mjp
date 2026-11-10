@@ -19,21 +19,16 @@ El objetivo del proyecto es extraer todas las canciones y acordes del PDF de 195
 
 ## 2. Archivos del proyecto
 
-| Archivo | Propósito |
-|---------|-----------|
-| `extraer_cancionero.py` | Pipeline determinista: extrae caracteres, bboxes y alinea acordes con precisión milimétrica |
-| `generar_web_app.py` | Genera `cancionero_web_precise.html` con visor interactivo y transposición tonal |
-| `cancionero_completo.json` | Base maestra de 288 canciones con ChordPro y segmentos estructurados |
-| `cancionero_vite.json` | JSON optimizado para React/Vite (en raíz) |
-| `src/data/cancionero.json` | Copia directa consumible por componentes dentro de `src/` |
-| `src/components/Cancionero.jsx` | Componente React para web app Vite con transposición y filtros |
-| `src/components/Cancionero.css` | Estilos con DM Sans de Google Fonts y renderizado vertical flex por sílaba |
-| `cancionero_web_precise.html` | HTML autónomo sin dependencias para visualizar y transponer en el navegador |
-| `CANCIONERO MJP - final imprimir.pdf` | Documento fuente original |
+| Directorio / Archivo | Propósito |
+|----------------------|-----------|
+| `src/data/cancionero.json` | Base maestra de 288 canciones estructuradas con acordes y metadatos |
+| `src/components/` | Componentes React (buscador, filtros, vista detalle, transposición, autoscroll) |
+| `src/utils/` | Utilidades para transposición tonal, diagramas de acordes y slugs de URLs |
+| `public/` | Assets PWA (manifest, service worker, iconos y logos del MJP) |
 
 ---
 
-## 3. Arquitectura y Solución de Posicionamiento
+## 3. Arquitectura y Renderizado
 
 ### ¿Por qué fallaba el enfoque anterior?
 1. **Aproximación monoespaciada incorrecta**: El PDF usa **DM Sans** (fuente proporcional), donde un espacio mide ~2.9 pt y una letra entre 7 y 10 pt. El pipeline anterior asumía ancho fijo de 5.5 pt por carácter para un LLM, causando que cada acorde se desplazara a la derecha.
@@ -70,24 +65,14 @@ El objetivo del proyecto es extraer todas las canciones y acordes del PDF de 195
 
 ## 5. Cómo probar y verificar
 
-### Opción 1: HTML autónomo (inmediato, sin servidores)
-Doble clic o en terminal:
 ```bash
-open cancionero_web_precise.html
+npm run dev
 ```
+
 Incluye:
 - Buscador por título, letra y código Oasis en vivo.
 - Filtros por categoría litúrgica.
+- Vista detallada de canción con URL compartible y código QR.
 - Transposición tonal en tiempo real (+1 / -1 semitonos con botón Reset).
-
-### Opción 2: Web App con Vite + React
-Importar en tu aplicación Vite:
-```jsx
-import Cancionero from './components/Cancionero';
-import './components/Cancionero.css';
-
-export default function App() {
-  return <Cancionero />;
-}
-```
-Los datos ya se encuentran en `src/data/cancionero.json`.
+- Modo autoscroll interactivo para tocar en vivo.
+- Soporte PWA offline con Service Worker.

@@ -1,9 +1,15 @@
-const CACHE_NAME = 'cancionero-mjp-v1';
+const CACHE_NAME = 'cancionero-mjp-v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icon.svg'
+  '/favicon.png',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/logos/escudo.png',
+  '/logos/Escudo MJP Color.png',
+  '/logos/mjp-white.png',
+  '/logos/mjp-black.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -31,6 +37,16 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
+  // Navegación SPA (para que subrutas como /cancion/:slug funcionen offline)
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request).catch(() => {
+        return caches.match('/index.html').then((res) => res || caches.match('/'));
+      })
+    );
+    return;
+  }
+
   // Cache first for fonts, assets and json data
   if (
     url.origin === location.origin ||
@@ -42,14 +58,14 @@ self.addEventListener('fetch', (event) => {
         if (cachedResponse) {
           // Revalidate in background
           fetch(event.request).then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
+            if (networkResponse && (networkResponse.status === 200 || networkResponse.type === 'opaque')) {
               caches.open(CACHE_NAME).then((cache) => cache.put(event.request, networkResponse));
             }
           }).catch(() => {});
           return cachedResponse;
         }
         return fetch(event.request).then((networkResponse) => {
-          if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+          if (!networkResponse || !(networkResponse.status === 200 || networkResponse.type === 'opaque')) {
             return networkResponse;
           }
           const responseToCache = networkResponse.clone();
